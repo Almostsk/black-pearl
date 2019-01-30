@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(City::class);
     }
+
+    public function code()
+    {
+        return $this->hasOne(Sms::class, 'user_id', 'id');
+    }
 }
