@@ -4,52 +4,54 @@ namespace App\Http\Controllers\Api;
 
 use Auth;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Repositories\SmsRepository;
-use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Api\SMS\Service\SmsService;
+use App\Http\Requests\SendSmsRequest;
+use App\Modules\Sms\Service\SmsService;
+use App\Modules\User\Service\UserService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Api\StartMobile\Service\SmsService as StartMobileService;
 
 class UserController extends Controller
 {
     /**
+     * @var StartMobileService
+     */
+    private $startMobileService;
+
+    /**
      * @var SmsService
      */
-    private $smsSendingService;
+    private $smsService;
 
     /**
-     * @var SmsRepository
+     * @var UserService
      */
-    private $smsRepository;
+    private $userService;
 
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    public function __construct(SmsService $smsService, SmsRepository $smsRepository, UserRepository $userRepository)
+    public function __construct(
+        StartMobileService $startMobileService, SmsService $smsService, UserService $userService
+    )
     {
-        $this->smsSendingService = $smsService;
-        $this->smsRepository = $smsRepository;
-        $this->userRepository = $userRepository;
+        $this->startMobileService = $startMobileService;
+        $this->smsService = $smsService;
+        $this->userService = $userService;
     }
 
-    public function sendSms(Request $request)
+    public function sendSms(SendSmsRequest $request)
     {
         try{
             $code = mt_rand(1000, 9999);
-            $userId = $this->userRepository->findUserIdByPhone($request->mobile_phone);
+            $userId = $this->userService->findUserIdByPhone($request->mobile_phone);
 
             // Saving to the database
-            $this->smsRepository->save([
+            $this->smsService->save([
                 'message_body' => $code,
                 'user_id' => $userId
             ]);
 
             // Sending a message
-            $response = $this->smsSendingService->sendMessage($code, $request->mobile_phone);
+            $response = $this->startMobileService->sendMessage($code, $request->mobile_phone);
 
             return response()->json([
                 'status' => $response,
@@ -65,25 +67,9 @@ class UserController extends Controller
         } catch (Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => $exception->getMessage()
+                'message' => 'Server error'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
     }
-
-    public function verifyCode(Request $request)
-    {
-        $userId = $this->userRepository->findUserIdByPhone('+' . $request->mobile_phone);
-
-        if ($request->code === $this->userRepository->getCodeSentOnMobile($userId)) {
-            Auth::loginUsingId($userId);
-        } else {
-            return response()->json([
-                'success' => 'false',
-                'message' => 'codes don`t match'
-            ]);
-        }
-
-    }
-
 }

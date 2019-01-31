@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Modules\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class BaseRepository
 {
@@ -41,9 +42,10 @@ class BaseRepository
      * Saves data to DB
      *
      * @param array $request
+     * @return Authenticatable $model
      */
     public function save(array $request)
     {
-        $this->model->create($request);
+        return $this->model->create($request);
     }
 }

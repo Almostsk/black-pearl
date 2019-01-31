@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Password of the User
+    |--------------------------------------------------------------------------
+    |
+    | This value is equal for everyone in terms of Authorization
+    | User can`t be authorized via phone + pass, just via code sent by SMS
+    | But password is needed to attempt a log IN
+    |
+    */
+
+    'user_password' => env('USER_PASSWORD', 'black_perl'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -165,7 +178,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...

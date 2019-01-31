@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\SMS\Repository;
+namespace App\Http\Api\StartMobile\Repository;
 
 use App\Http\Api\Core\Client;
 use Spatie\ArrayToXml\ArrayToXml;

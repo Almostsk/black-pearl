@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Api\SMS\Service;
+namespace App\Http\Api\StartMobile\Service;
 
-use App\Http\Api\SMS\Response\SmsResponse as Response;
-use App\Http\Api\SMS\Repository\SmsRepository;
+use App\Http\Api\StartMobile\Repository\SmsRepository;
+use App\Http\Api\StartMobile\Response\SmsResponse as Response;
 
 class SmsService
 {
