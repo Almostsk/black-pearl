@@ -19,17 +19,18 @@ class UserService
     }
 
     /**
-     * Generates response with token
+     * Generates JSON with response with token
      *
      * @param string $token
-     * @param array $additionalParams
+     * @param array $userData
      * @return \Illuminate\Http\JsonResponse
      */
-    public function respondWithToken(string $token, array $additionalParams = [])
+    public function sendUserDataWithToken(string $token, array $userData = [])
     {
-        return response()->json(array_merge($additionalParams, [
-            'token' => 'Bearer ' . $token
-        ]));
+        return response()->json([
+            'token' => 'Bearer ' . $token,
+            'user' => $userData
+        ]);
     }
 
     /**
