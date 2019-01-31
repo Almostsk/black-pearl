@@ -29,7 +29,20 @@
 export default {
     methods: {
         doSomething() {
-            console.log('click');
+            axios
+                .post('api/auth/send-sms', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }, 
+                    "mobile_phone": "+380997944169",
+                })
+                .then(responce => {
+                    console.log(responce);
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
         }
     },
 }
