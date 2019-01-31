@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Modules\User\Repository;
 
 use App\Models\User;
+use App\Modules\Core\BaseRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserRepository extends BaseRepository
@@ -41,5 +42,4 @@ class UserRepository extends BaseRepository
     {
         return $this->find($userId)->code->message_body;
     }
-
 }

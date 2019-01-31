@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\SMS\Response;
+namespace App\Http\Api\StartMobile\Response;
 
 
 class SmsResponse
