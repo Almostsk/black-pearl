@@ -19,21 +19,6 @@ class UserService
     }
 
     /**
-     * Generates JSON with response with token
-     *
-     * @param string $token
-     * @param array $userData
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function sendUserDataWithToken(string $token, array $userData = [])
-    {
-        return response()->json([
-            'token' => 'Bearer ' . $token,
-            'user' => $userData
-        ]);
-    }
-
-    /**
      * Gets the needed data for the gallery page
      *
      * @return mixed
