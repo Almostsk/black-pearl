@@ -8,6 +8,16 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//Libs
+@import '~css-reset-and-normalize-sass/scss/reset-and-normalize';
+@import '~fullpage-vue/src/fullpage.css';
+
+//components styles
+
+@import './components/common';
+@import './components/header';
+@import './components/main-page';
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
