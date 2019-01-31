@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Modules\User\Service\UserService;
-use Tymon\JWTAuth\Contracts\Providers\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
@@ -32,26 +34,35 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $userId = $this->userService->findUserIdByPhone($request->mobile_phone);
+        try{
+            $userId = $this->userService->findUserIdByPhone($request->mobile_phone);
 
-        if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
+            if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
 
-            if (!$token = auth('api')
-                ->attempt([
-                    'password' => config('app.user_password'),
-                    'mobile_phone' => $request->mobile_phone,
-                ])
-            ) {
-                return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
+                if (!$token = JWTAuth::attempt([
+                        'password' => config('app.user_password'),
+                        'mobile_phone' => '+' . $request->mobile_phone,
+                    ])
+                ) {
+                    return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
+                }
+                $userRes = new UserResource(auth()->user());
+                dd($this->sendUserDataWithToken($token)->getData());
+                return $this->sendUserDataWithToken($token);
+
+            } else {
+                return response()->json([
+                    'success' => 'false',
+                    'message' => 'codes don`t match'
+                ], Response::HTTP_NOT_FOUND);
             }
-            return $this->userService->respondWithToken($token);
-
-        } else {
+        } catch (ModelNotFoundException $notFoundException) {
             return response()->json([
                 'success' => 'false',
-                'message' => 'codes don`t match'
+                'message' => 'User not found'
             ], Response::HTTP_NOT_FOUND);
         }
+
     }
 
     /**
@@ -63,5 +74,19 @@ class AuthController extends Controller
     {
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Generates JSON with response with token
+     *
+     * @param string $token
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function sendUserDataWithToken(string $token)
+    {
+        return response()->json([
+            'token' => 'Bearer ' . $token,
+            'user' => new UserResource(auth()->user())
+        ]);
     }
 }
