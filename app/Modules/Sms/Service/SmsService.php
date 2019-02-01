@@ -15,4 +15,12 @@ class SmsService
     {
         $this->smsRepository = $smsRepository;
     }
+
+    /**
+     * @param array $params
+     */
+    public function save(array $params)
+    {
+        $this->smsRepository->save($params);
+    }
 }

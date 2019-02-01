@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use JWTAuth;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
-use App\Http\Resources\UserResource;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Modules\User\Service\UserService;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AuthController extends Controller
 {
@@ -41,12 +41,12 @@ class AuthController extends Controller
 
                 if (!$token = JWTAuth::attempt([
                         'password' => config('app.user_password'),
-                        'mobile_phone' => '+' . $request->mobile_phone,
+                        'mobile_phone' => $request->mobile_phone,
                     ])
                 ) {
                     return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
                 }
-                $userRes = new UserResource(auth()->user());
+
                 dd($this->sendUserDataWithToken($token)->getData());
                 return $this->sendUserDataWithToken($token);
 

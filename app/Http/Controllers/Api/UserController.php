@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
+use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Api\StartMobile\Service\SmsService as StartMobileService;
 
@@ -71,5 +72,12 @@ class UserController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    public function getOurStars()
+    {
+        return response()->json([
+            'users' => OurStarsResource::collection($this->userService->getStarsForMainPage())
+        ]);
     }
 }

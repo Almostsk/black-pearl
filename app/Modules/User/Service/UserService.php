@@ -75,4 +75,14 @@ class UserService
 
         return $this->userRepository->save($request->all());
     }
+
+    /**
+     * Gets last three records from users table for 'our stars' block ( main page)
+     *
+     * @return mixed
+     */
+    public function getStarsForMainPage()
+    {
+        return $this->userRepository->getThreeStars();
+    }
 }
