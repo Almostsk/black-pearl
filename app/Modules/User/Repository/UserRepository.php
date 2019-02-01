@@ -35,6 +35,16 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * Returns a collection of data (or an empty collection)
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function all()
+    {
+        return $this->model->with('city')->get();
+    }
+
+    /**
      * @param int $userId
      * @return string
      */

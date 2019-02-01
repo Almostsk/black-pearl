@@ -18,6 +18,11 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    public function all()
+    {
+        return $this->userRepository->all();
+    }
+
     /**
      * Gets the needed data for the gallery page
      *
