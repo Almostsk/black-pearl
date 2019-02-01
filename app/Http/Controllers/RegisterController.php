@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
+use Log;
+use Exception;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Auth\RegisterRequest;
 
@@ -33,10 +34,19 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $token = auth()->login(
-            $this->userService->save($request)
-        );
+        try {
+            $this->userService->save($request);
 
-        return $this->userService->sendUserDataWithToken($token, new UserResource(auth()->user()));
+            return response()->json([
+                'success' => true,
+            ]);
+
+        } catch(Exception $exception) {
+            Log::warning($exception->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Server error'
+            ]);
+        }
     }
 }

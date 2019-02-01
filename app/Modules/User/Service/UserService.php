@@ -18,6 +18,11 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    public function all()
+    {
+        return $this->userRepository->all();
+    }
+
     /**
      * Gets the needed data for the gallery page
      *
@@ -74,5 +79,15 @@ class UserService
         }
 
         return $this->userRepository->save($request->all());
+    }
+
+    /**
+     * Gets last three records from users table for 'our stars' block ( main page)
+     *
+     * @return mixed
+     */
+    public function getStarsForMainPage()
+    {
+        return $this->userRepository->getThreeStars();
     }
 }
