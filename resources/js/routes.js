@@ -1,10 +1,19 @@
-import Example from './components/ExampleComponent.vue';
+import Home from './components/Home.vue';
+import Login from './components/Login.vue';
 
 export const routes = [
     { 
         path: '/', 
-        component: Example, 
-        name: 'Example',
+        component: Home, 
+        name: 'Home',
+        meta:{
+            web:true
+        } 
+    },
+    { 
+        path: '/login', 
+        component: Login, 
+        name: 'Login',
         meta:{
             web:true
         } 

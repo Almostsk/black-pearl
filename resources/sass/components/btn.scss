@@ -1,0 +1,25 @@
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 15px; 
+}
+.btn {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    font-family: $secondFont;
+    font-size: 24px;
+    line-height: 50px;
+    &.gold {
+        background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
+    }
+    &.violet {
+        background-color: #591478;
+    }
+}
