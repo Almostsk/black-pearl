@@ -83,7 +83,7 @@ class UserService
         } else {
             // participating only in black pearl
             $request->merge([
-                'is_profile_moderated' => true,
+                'status' => 3,
                 'password' => config('app.user_password')
             ]);
         }
