@@ -24,6 +24,16 @@ class UserService
     }
 
     /**
+     * Get Users that have not been moderated yet (for admin panel)
+     *
+     * @return mixed
+     */
+    public function getNotModeratedUsers()
+    {
+        return $this->userRepository->getNotModeratedUsers();
+    }
+
+    /**
      * Gets the needed data for the gallery page
      *
      * @return mixed
@@ -89,5 +99,16 @@ class UserService
     public function getStarsForMainPage()
     {
         return $this->userRepository->getThreeStars();
+    }
+
+    /**
+     * Find user with ID
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function find(int $id)
+    {
+        return $this->userRepository->find($id);
     }
 }
