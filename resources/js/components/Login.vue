@@ -21,7 +21,7 @@
                 </form>
                 <form action="POST" class="popup-form" v-if="codeForm">
                     <the-mask   class="popup-input"
-                                mask="###-##-##" 
+                                mask="####-####-####" 
                                 type="text" 
                                 placeholder="Код підтвердження*"/>
                     <v-btn
