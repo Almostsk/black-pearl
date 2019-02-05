@@ -75,9 +75,6 @@
                         <div class="page-content page-4-content">
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-1.png" alt="">
-                            </div>
-                            <div class="page-4-item">
-                                <img class="page-4-ico" src="/img/main/page-4-ico-2.png" alt="">
                                 <span class="page-4-item-title">1.Реєструй</span>
                                 <p class="page-4-item-text">код з упаковки
                                     «Черный Жемчуг» на сайті
@@ -86,10 +83,30 @@
                                 </p>
                             </div>
                             <div class="page-4-item">
+                                <img class="page-4-ico" src="/img/main/page-4-ico-2.png" alt="">
+                                <span class="page-4-item-title">2.Вигравай</span>
+                                <p class="page-4-item-text">
+                                    прикрасу з чорною
+                                    перлиною щодня 
+                                </p>
+                            </div>
+                            <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-3.png" alt="">
+                                <span class="page-4-item-title">3.Додай</span>
+                                <p class="page-4-item-text">
+                                    своє фото та розкажи,
+                                    що надихає тебе
+                                    залишатись молодою
+                                    та красивою 
+                                </p>
                             </div>
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-4.png" alt="">
+                                <span class="page-4-item-title">4.Отримай</span>
+                                <p class="page-4-item-text">
+                                    шанс стати зіркою рекламної
+                                    кампанії «Черный Жемчуг» 
+                                </p>
                             </div>
                         </div>
                         <v-btn
@@ -100,6 +117,36 @@
                     </div>
                 </div>
                 <div class="page-5 page">
+                    <div class="page-5-content">
+                        <h2 class="title">Наші зірки</h2>
+                        <div class="page-5-stars">
+                            <div class="page-5-star">
+                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
+                                <span class="page-5-star-name">Іваненченко Тетяна</span>
+                                <span class="page-5-star-city">м. Харків</span>
+                            </div>
+                            <div class="page-5-star">
+                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
+                                <span class="page-5-star-name">Іваненченко Тетяна</span>
+                                <span class="page-5-star-city">м. Харків</span>
+                            </div>
+                            <div class="page-5-star">
+                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
+                                <span class="page-5-star-name">Іваненченко Тетяна</span>
+                                <span class="page-5-star-city">м. Харків</span>
+                            </div>
+                        </div>
+                        <v-btn
+                            text="До галереї"
+                            link="/gallery"
+                            color="gold"
+                        />
+                        <v-btn
+                            text="Правила акції"
+                            link="/rules"
+                            color="violet"
+                        />
+                    </div>
                     <v-footer/>
                 </div>
             </div>
@@ -135,6 +182,21 @@
                 moveNext() {
                     this.$refs.example.$fullpage.moveNext(); //Move to the next page
                 }
+        },
+        beforeMount() {
+            axios
+                .get('api/stars', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }
+                })
+                .then(responce => {
+                    console.log(responce);
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
         },
         mounted() {
             console.log('Component mounted.')
