@@ -122,6 +122,11 @@ return [
                     'text'    => 'Переможці',
                     'url'     => '/admin/winners',
                     'icon_color' => 'aqua',
+                ],
+                [
+                    'text'    => 'Не промодеровані',
+                    'url'     => '/admin/moderate',
+                    'icon_color' => 'red',
                 ]
             ],
         ]

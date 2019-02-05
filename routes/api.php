@@ -17,11 +17,11 @@ Route::post('register', 'RegisterController@register');
 
 Route::post('login', 'AuthController@login');
 Route::get('stars', 'Api\UserController@getOurStars');
-
+Route::post('send-sms', 'Api\UserController@sendSms');
 Route::group(['middleware' => 'jwt.auth', 'prefix' => 'auth'], function ($router) {
 
 
-    Route::post('send-sms', 'Api\UserController@sendSms');
+
     Route::post('logout', 'AuthController@logout');
 
 });

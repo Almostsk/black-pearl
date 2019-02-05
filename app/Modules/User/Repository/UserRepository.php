@@ -67,4 +67,21 @@ class UserRepository extends BaseRepository
             ->take(3)
             ->get();
     }
+
+    /**
+     * Get Users that have not been moderated yet (for admin panel)
+     *
+     * @return mixed
+     */
+    public function getNotModeratedUsers()
+    {
+        return $this->model->where('is_profile_moderated', false)->get();
+    }
+
+    public function getUsersForExport()
+    {
+        return $this->model
+            ->select('id', 'name', 'surname', 'mobile_phone', 'created_at', 'is_profile_moderated')
+            ->get();
+    }
 }
