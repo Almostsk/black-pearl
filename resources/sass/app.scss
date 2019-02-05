@@ -14,8 +14,11 @@
 
 //components styles
 
+@import './components/popup';
 @import './components/common';
 @import './components/header';
+@import './components/footer';
+@import './components/btn';
 @import './components/main-page';
 
 .navbar-laravel {
