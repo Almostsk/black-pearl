@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'city' => $this->city->name,
             'mobile_phone' => $this->mobile_phone,
             'is_mobile_verified' => $this->is_mobile_verified,
-            'is_profile_moderated' => $this->is_profile_moderated,
+            'status' => $this->status->name,
             'can_be_brand_face' => $this->can_be_brand_face,
             'about_me' => $this->about_me,
             'avatar' => $this->avatar,

@@ -1,15 +1,15 @@
 @extends('admin.app')
 
-@section('title', 'Усі користувачі')
+@section('title', 'Наші зірки')
 
 @section('content_header')
     @include('partials.alerts')
-    <h1>Усі користувачі</h1>
+    <h1>Наші зірки</h1>
 @stop
 
 @section('content')
     <hr>
-    <a href="{{ route('download_all_users') }}" class="btn btn-success">Експорт усіх користувачів</a>
+    <a href="{{ route('download_stars') }}" class="btn btn-success">Експорт усіх зірок</a>
     <hr>
     <table class="table" id="dataTable">
         <thead>

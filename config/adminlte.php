@@ -118,17 +118,29 @@ return [
                     'url'  => '/admin/users',
                     'icon_color' => 'green',
                 ],
-                [
+                /*[
                     'text'    => 'Переможці',
                     'url'     => '/admin/winners',
                     'icon_color' => 'aqua',
-                ],
+                ],*/
                 [
                     'text'    => 'Не промодеровані',
                     'url'     => '/admin/moderate',
                     'icon_color' => 'red',
+                ],
+                [
+                    'text'    => 'Стати зіркою',
+                    'url'     => '/admin/users/stars'
+                ],
+                [
+                    'text'    => 'Коди на данний момент',
+                    'url'     => '/admin/users/codes'
                 ]
-            ],
+            ]
+        ],
+        [
+            'text'    => 'Перейти на сайт',
+            'url'     => '/',
         ]
     ],
 

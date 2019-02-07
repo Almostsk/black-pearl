@@ -18,6 +18,7 @@ Route::post('register', 'RegisterController@register');
 Route::post('login', 'AuthController@login');
 Route::get('stars', 'Api\UserController@getOurStars');
 Route::post('send-sms', 'Api\UserController@sendSms');
+Route::get('cities', 'Api\CityController@index');
 Route::group(['middleware' => 'jwt.auth', 'prefix' => 'auth'], function ($router) {
 
 

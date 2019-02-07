@@ -24,12 +24,15 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //'name'         => 'required|max:255',
-            //'surname'      => 'required|max:255',
-            //'city_id'      => 'required|numeric|min:1',
-            //'mobile_phone' => 'required|max:255',
-            //'about_me'     => 'sometimes|required',
-            //'avatar'       => 'sometimes|required',
+            'name'         => 'required|max:255',
+            'surname'      => 'required|max:255',
+            'city_id'      => 'required|numeric|min:1',
+            'mobile_phone' => 'required|max:255',
+            'about_me'     => 'sometimes|required',
+            'avatar'       => 'sometimes|required',
+
+            // validating code to attach it to user later
+            'code'         => 'required|max:190',
         ];
     }
 }

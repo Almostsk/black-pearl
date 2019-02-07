@@ -11028,6 +11028,116 @@ optgroup {
   font-weight: bold;
 }
 
+.popup-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(/images/page-1-bg.png?4ce9d8ed646ea7a6422d69c95524b149) center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-overlay {
+  background-color: #390d52;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 500;
+  opacity: 0.7;
+}
+
+.popup-content-wrapper {
+  position: absolute;
+  z-index: 700;
+  width: 450px;
+  height: auto;
+  padding: 5px;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+}
+
+.popup-content {
+  width: 100%;
+  height: 100%;
+  background-color: #390d52;
+  border-radius: 10px;
+  padding: 30px 5%;
+}
+
+.popup-content .btn-wrapper {
+  width: 60%;
+}
+
+.popup-content .btn-wrapper .btn {
+  color: #390d52;
+  font-size: 18px;
+  border-radius: 25px;
+}
+
+.popup-title {
+  font-family: "Merriweather";
+  font-size: 24px;
+  letter-spacing: 0.6px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-input {
+  margin-top: 25px;
+  height: 45px;
+  width: 60%;
+  border-radius: 20px;
+  border-color: #c7a150;
+  background-color: transparent;
+  padding: 5px 10px;
+  font-family: "Roboto";
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #fffeff;
+}
+
+.popup-input:focus {
+  outline: none;
+}
+
+.popup-input::-webkit-input-placeholder {
+  color: #fffeff;
+}
+
+.popup-input:-ms-input-placeholder {
+  color: #fffeff;
+}
+
+.popup-input::-ms-input-placeholder {
+  color: #fffeff;
+}
+
+.popup-input::placeholder {
+  color: #fffeff;
+}
+
+.register-btn {
+  display: block;
+  margin-top: 30px;
+  font-family: "Roboto";
+  font-size: 16px;
+  text-decoration: underline;
+  color: #fffeff;
+}
+
+.register-btn:hover {
+  color: #fffeff;
+}
+
 .page-container {
   position: absolute;
   left: 0;
@@ -11062,21 +11172,377 @@ optgroup {
   font-weight: 400;
 }
 
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  background-image: linear-gradient(to bottom, #ddacf0, #e1c2f8, #e7d7fc, #f1ecff, #ffffff);
+}
+
+.footer-text,
+.footer-link {
+  font-family: "Roboto";
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.footer-link {
+  cursor: pointer;
+  text-decoration: underline;
+  margin-right: 15px;
+}
+
+.footer-link:hover {
+  color: black;
+}
+
+.footer-container {
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+  padding: 20px 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  width: 33%;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-center {
+  text-align: center;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-right-container {
+  float: right;
+}
+
+.footer-social {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.footer-social-ico {
+  margin-right: 15px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-bottom.footer-link {
+  display: inline-block;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 50px;
+  border-radius: 20px;
+  font-family: "Roboto";
+  font-size: 24px;
+  line-height: 50px;
+}
+
+.btn.gold {
+  background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
+}
+
+.btn.violet {
+  background-color: #591478;
+  color: #ffffff;
+}
+
 .main {
   width: 100%;
   height: 100vh;
 }
 
+.page {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 5% 10%;
+}
+
+.page .title {
+  color: black;
+  font-size: 48px;
+  text-align: center;
+  font-family: "Merriweather";
+  font-weight: 400;
+}
+
+.page .title.violet {
+  color: #571375;
+}
+
+.page-content {
+  width: 100%;
+  height: 85%;
+}
+
+.page-wrapper {
+  width: 100%;
+}
+
+.page-text {
+  color: black;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 35px;
+  margin-bottom: 30px;
+}
+
 .page-1 {
-  background-color: violet;
+  background: url(/images/page-1-bg.png?4ce9d8ed646ea7a6422d69c95524b149) center no-repeat;
+  background-size: cover;
+}
+
+.page-1-block {
+  width: 33%;
+  height: 100%;
+}
+
+.page-1-left {
+  background: url(/images/journal.png?97f662a273ed71aa44677372f39ba463) left no-repeat;
+  background-size: 100%;
+  -webkit-transform: translateX(-10%);
+          transform: translateX(-10%);
+}
+
+.page-1-right {
+  background: url(/images/coulomb.png?b67eff3f017c322e113847ff7ddc3376) left no-repeat;
+  background-size: 100%;
+  -webkit-transform: translateX(10%);
+          transform: translateX(10%);
+}
+
+.page-1-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5% 0;
+}
+
+.page-1-center .main-logo {
+  width: 60%;
+}
+
+.page-1-center .main-title {
+  color: #fefefe;
+  font-family: Roboto;
+  font-size: 34px;
+  line-height: 1.2em;
+  font-weight: 300;
+  text-align: center;
 }
 
 .page-2 {
-  background-color: red;
+  background-color: transparent;
+}
+
+.page-2-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-2-content .page-2-left {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-2-content .page-2-right {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-2-content .page-2-right .btn-wrapper {
+  justify-content: flex-start;
+}
+
+.page-2-content .page-2-right .btn {
+  margin: 0;
 }
 
 .page-3 {
-  background-color: blue;
+  background-color: transparent;
+}
+
+.page-3-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-3-left {
+  width: 30%;
+  height: 100%;
+}
+
+.page-3-left {
+  background: url(/images/page3-coulomb.png?7f2fe27361598875d4e49187c456c142) top center no-repeat;
+  background-size: 50%;
+}
+
+.page-3-right {
+  background: url(/images/page3-journal.png?9f88bd5a5c0764236c516c08b6f89382) bottom center no-repeat;
+  background-size: 100%;
+}
+
+.page-3-center {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.page-3-center .page-text:first-child {
+  margin-top: 5%;
+  width: 60%;
+  display: block;
+  align-self: flex-start;
+}
+
+.page-3-center .page-text:last-child {
+  width: 60%;
+  display: block;
+  align-self: flex-end;
+}
+
+.page-3-right {
+  width: 30%;
+  height: 100%;
+}
+
+.page-4 {
+  background-color: transparent;
+}
+
+.page-4-content {
+  display: flex;
+  align-items: center;
+}
+
+.page-4-item {
+  text-align: center;
+  width: 25%;
+  height: 70%;
+  padding: 30px 5%;
+}
+
+.page-4-item-title {
+  display: inline-block;
+  text-align: center;
+  color: #571375;
+  font-family: "Merriweather";
+  font-size: 24px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.page-4-item-text {
+  color: black;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.page-4-ico {
+  width: 100%;
+  height: auto;
+}
+
+.page-5 {
+  background-color: #ffffff;
+}
+
+.page-5-content {
+  height: calc( 100% - 150px );
+  width: 80%;
+}
+
+.page-5-content .btn-wrapper {
+  margin-top: 15px;
+}
+
+.page-5-stars {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-5-star {
+  width: 30%;
+  height: auto;
+}
+
+.page-5-star-photo {
+  width: 100%;
+  height: auto;
+}
+
+.page-5-star-name {
+  margin-top: 15px;
+  display: block;
+  font-size: 18px;
+  color: #000;
+  font-family: "Roboto";
+}
+
+.page-5-star-city {
+  display: block;
+  font-size: 14px;
+  color: #000;
+  font-family: "Roboto";
 }
 
 .navbar-laravel {

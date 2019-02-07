@@ -111,4 +111,25 @@ class UserService
     {
         return $this->userRepository->find($id);
     }
+
+    /**
+     * Updating the user
+     *
+     * @param Request $request
+     * @param int $id
+     */
+    public function update(Request $request, int $id)
+    {
+        $this->userRepository->update($request->all(), $id);
+    }
+
+    public function getWinners()
+    {
+
+    }
+
+    public function getUsersStars()
+    {
+        return $this->userRepository->getUsersStars();
+    }
 }

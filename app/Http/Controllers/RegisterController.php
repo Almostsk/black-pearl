@@ -4,26 +4,29 @@ namespace App\Http\Controllers;
 
 use Log;
 use Exception;
+use App\Modules\Code\Service\CodeService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
-    /**
-     * @var UserService
-     */
+    /** @var UserService */
     private $userService;
+
+    /** @var CodeService */
+    private $codeService;
 
     /**
      * Create a new controller instance.
      *
      * @param UserService $userService
-     * @return void
+     * @param CodeService $codeService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, CodeService $codeService)
     {
         $this->middleware('guest');
         $this->userService = $userService;
+        $this->codeService = $codeService;
     }
 
     /**
@@ -35,10 +38,23 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
-            $this->userService->save($request);
+
+            if ($this->codeService->isCodeValid($request->code)) {
+                $user = $this->userService->save($request);
+                $codeId = $this->codeService->getIdByCode($request->code);
+
+                $this->codeService->update([
+                    'user_id' => $user->id,
+                ], $codeId);
+
+                return response()->json([
+                    'success' => true
+                ]);
+            }
 
             return response()->json([
-                'success' => true,
+                'success' => false,
+                'message' => 'Invalid code'
             ]);
 
         } catch(Exception $exception) {

@@ -13,16 +13,13 @@ class StatusTableSeeder extends Seeder
     {
         DB::table('statuses')->insert([
             [
-                'status_code' => 'on_moderation',
-                'status_name' => 'На модерації'
+                'name' => 'На модерації'
             ],
             [
-                'status_code' => 'blocked',
-                'status_name' => 'Заблокований'
+                'name' => 'Заблокований'
             ],
             [
-                'status_code' => 'active',
-                'status_name' => 'Активний'
+                'name' => 'Активний'
             ],
         ]);
     }
