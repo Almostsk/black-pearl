@@ -6,6 +6,7 @@ use Session;
 use App\Exports\UsersExport;
 use App\Exports\UsersStarsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersWithCodeExport;
 use App\Http\Controllers\Controller;
 use App\Modules\User\Service\UserService;
 use App\Modules\Status\Service\StatusService;
@@ -80,8 +81,8 @@ class UserController extends Controller
 
     public function usersCodes()
     {
-        return view('admin.users.index', [
-            'users' => $this->userService->getNotModeratedUsers()
+        return view('admin.users.users_codes', [
+            'users' => $this->userService->getUsersWithCodes()
         ]);
     }
 
@@ -111,8 +112,8 @@ class UserController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function exportCodes()
+    public function exportUsersWithCode()
     {
-        return Excel::download(new UsersExport(), 'codes_' . date("y_m_d_h_i_s") . '.xlsx');
+        return Excel::download(new UsersWithCodeExport(), 'codes_' . date("y_m_d_h_i_s") . '.xlsx');
     }
 }

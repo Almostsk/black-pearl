@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Repository;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Modules\Core\BaseRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,17 +14,17 @@ class UserRepository extends BaseRepository
         parent::__construct($user);
     }
 
-    protected function getOnModerationStatus()
+    public function getOnModerationStatus()
     {
         return User::STATUS_ON_MODERATION;
     }
 
-    protected function getBannedStatus()
+    public function getBannedStatus()
     {
         return User::STATUS_BANNED;
     }
 
-    protected function getAcceptedStatus()
+    public function getAcceptedStatus()
     {
         return User::STATUS_ACCEPTED;
     }
@@ -117,5 +118,15 @@ class UserRepository extends BaseRepository
             ['status_id', $this->getAcceptedStatus()],
             ['can_be_brand_face', true]
         ])->with('status')->get();
+    }
+
+    public function getUsersWithCodes()
+    {
+        return $this->model
+            ->whereHas('codes', function ($query){
+                $query->where('expires_at', '>', Carbon::now());
+            })
+            ->distinct()
+            ->get();
     }
 }

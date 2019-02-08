@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
                 'status_id' => 3,
                 'can_be_brand_face' => true,
                 'about_me' => 'Я Даша',
-                'avatar' => '/',
+                'avatar' => '',
                 'password' => bcrypt(config('app.user_password')),
             ],
             [

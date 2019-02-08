@@ -2,6 +2,7 @@
 
 namespace App\Modules\Code\Service;
 
+use Carbon\Carbon;
 use App\Modules\Code\Repository\CodeRepository;
 
 class CodeService
@@ -21,7 +22,9 @@ class CodeService
      */
     public function update(array $params, int $id)
     {
-        return $this->codeRepository->update($params, $id);
+        return $this->codeRepository->update(array_merge($params, [
+            'expires_at' => Carbon::now()->addDays(1)
+        ]), $id);
     }
 
     /**
@@ -45,6 +48,6 @@ class CodeService
      */
     public function getIdByCode(string $code)
     {
-        return $this->getIdByCode($code);
+        return $this->codeRepository->getIdByCode($code);
     }
 }

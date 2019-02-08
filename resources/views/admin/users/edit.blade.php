@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+    <div class="col-md-8">
     {!! Form::open(['route' => ['users.update', 'id' => $user->id], 'method' => 'PUT']) !!}
 
     {{ Form::label('name', 'Name') }}
@@ -27,6 +28,14 @@
     <hr>
     {{ Form::submit('Save changes', ['class' => 'btn btn-success']) }}
     {!! Form::close() !!}
+    </div>
+    <div class="col-md-3"><hr>
+        @if($user->avatar)
+            <img src="{{asset('storage/' . $user->avatar)}}" height="400" width="400">
+        @else
+            <img src="{{asset('img/no-image.png')}}" height="300" width="300">
+        @endif
+    </div>
 @stop
 
 @section('js')

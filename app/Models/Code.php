@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Code extends Model
 {
     protected $fillable = [
-        'code_name', 'user_id'
+        'code_name', 'user_id', 'expires_at'
     ];
 
     public function user()
