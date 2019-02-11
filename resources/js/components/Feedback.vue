@@ -5,31 +5,33 @@
         ></div>
         <div class="popup-content-wrapper">
             <div class="popup-content">
-                <h2 class="popup-title">Будь ласка, авторизуйтесь</h2>
-                <form action="POST" class="popup-form" v-if="getCodeForm">
+                <h2 class="popup-title">Зворотній зв'язок</h2>
+                <form action="POST" class="popup-form">
+                    <input 
+                        type="text" 
+                        name="name" 
+                        class="popup-input"
+                        placeholder="Ваше ім'я">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        class="popup-input"
+                        placeholder="Email">
                     <the-mask   class="popup-input"
                                 mask="(###)###-##-##" 
                                 type="tel" 
-                                placeholder="Номер телефону*"
+                                placeholder="Номер телефону"
                                 v-model="phone_number"
                                 />
+                    <input 
+                        type="text" 
+                        name="message" 
+                        class="popup-input"
+                        placeholder="Ваше повідомлення">
                     <v-btn  
                             @click.native="getCode"
-                            text="Відправити код"
-                            color="gold"/>
-                    <a href="/register" class="register-btn">
-                        Зареєструватись
-                    </a>
-                </form>
-                <form action="POST" class="popup-form" v-if="codeForm">
-                    <the-mask   class="popup-input"
-                                mask="####-####-####" 
-                                type="text" 
-                                placeholder="Код підтвердження*"/>
-                    <v-btn
                             text="Відправити"
                             color="gold"/>
-
                 </form>
             </div>
         </div>
@@ -52,7 +54,7 @@ export default {
            codeForm: false,
            getCodeForm: true,
            phone_number: '',
-           displayPopup: false,
+           displayPopup: true,
        }
    }, 
    watch: {
@@ -68,7 +70,7 @@ export default {
        },
        hidePopup() {
            this.displayPopup = false;
-           
+
        }
    }
 }

@@ -1,0 +1,210 @@
+.register-page {
+    margin-top: 200px;
+    width: 100%;
+    .footer {
+        position: static;
+    }
+}
+.register-content {
+    margin-top: 55px;
+}
+.register-top {
+    position: relative;
+    padding: 30px 0 0 0;
+    border-bottom: 3px solid #e4c16e;
+    // border-image:  linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+}
+.register-input-container {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+}
+.register-row {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.register-input {
+    width: 23%;
+    padding: 0 10px;
+    font-family: $secondFont;
+    text-align: center;
+    color: #591478;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #eee7f1;
+    outline: none;
+    font-weight: 600;
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        font-weight: 600;
+        color: #591478;
+        letter-spacing: 2px;
+    }
+}
+.register-page-btn {
+    background-color: #591478;
+    color: #ffffff;
+}
+.register-checkbox-container {
+    width: 23%;
+    height: 40px;
+    .pretty.p-default:not(.p-fill) input:checked ~ .state.p-primary-o label:after {
+        background-color: #591478 !important;
+    }
+    .state {
+        label {
+            text-indent: 0;
+            width: 40px;
+            height: 40px;
+            &::before {
+                width: 40px;
+                height: 40px;
+                background-color: #eee7f1;
+                border: none;
+                top: 0;
+            }
+            &::after {
+                width: 40px;
+                height: 40px;
+                top: 0;
+            }
+        }
+    }
+    .register-checkbox-text {
+        display: inline-block;
+        height: 40px;
+        vertical-align: top;
+        font-family: $secondFont;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .checkbox-link {
+        color: #111111;
+        text-decoration: underline;
+    }
+
+}
+
+
+.register-bottom {
+    width: 80%;
+    margin: 0 auto;
+}
+.register-star {
+    width: 100%;
+    margin-top: 30px;
+}
+.register-star-title-container {
+    span {
+        display: block;
+        margin-top: 15px;
+        font-family: $secondFont;
+        font-size: 18px;
+        line-height: 1.33;
+        letter-spacing: 0.5px;
+        text-align: left;
+        color: #000000;
+    }
+}
+.register-star-title {
+    font-family: $thirdFont;
+    font-size: 24px;
+    letter-spacing: 0.6px;
+    text-align: left;
+    color: #591478;
+}
+.register-star-form {
+    width: 100%;
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.register-quote {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 70%;
+    padding: 60px 20%;
+    background-color: #f0e8f4;
+    &::before {
+        content: '1';
+        display: block;
+        position: absolute;
+        font-size: 24px;
+        font-family: $thirdFont;
+        text-align: center;
+        line-height: 40px;
+        top: -20px;
+        left: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #591478;
+        color: #ffffff;
+    }
+}
+.register-quote-text {
+    margin: 0 auto;
+    font-family: $secondFont;
+    font-size: 20px;
+    line-height: 2.19;
+    text-align: left;
+    color: #000000;
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -60px;
+        top: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-open.png') center no-repeat;
+        background-size: contain;
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -60px;
+        bottom: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-close.png') center no-repeat;
+        background-size: contain;
+    }
+}
+.register-photo {
+    display: flex;
+    position: relative;
+    width: 25%;
+    background-color: #f0e8f4;
+    &::before {
+        content: '2';
+        display: block;
+        position: absolute;
+        font-size: 24px;
+        font-family: $thirdFont;
+        text-align: center;
+        line-height: 40px;
+        top: -20px;
+        left: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #591478;
+        color: #ffffff;
+    }
+    &::after {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+}

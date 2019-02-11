@@ -1,0 +1,114 @@
+.cabinet-page {
+    margin-top: 200px;
+    width: 100%;
+    .footer {
+        position: static;
+    }
+}
+.cabinet-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.cabinet-top {
+    position: relative;
+    padding: 30px 0;
+    border-bottom: 3px solid #e4c16e;
+    // border-image:  linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+}
+.cabinet-info-block {
+    width: 60%;
+}
+.cabinet-main-info {
+    margin-bottom: 15px;
+}
+.cabinet-name {
+    font-family: $thirdFont;
+    font-size: 24px;
+    text-align: left;
+    color: #591478;
+    margin-bottom: 10px;
+}
+.cabinet-city {
+    font-family: $secondFont;
+    font-size: 18px;
+    line-height: 1.33;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 5px;
+}
+.cabinet-phone {
+    font-family: $secondFont;
+    font-size: 18px;
+    line-height: 1.33;
+    text-align: left;
+    color: #000000;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+.cabinet-code-title {
+    font-family: $thirdFont;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #591478;
+    margin-bottom: 10px;
+}
+.cabinet-code-item {
+    display: inline-block;
+    width: 33%;
+    margin-top: 5px;
+    font-family: $secondFont;
+    font-size: 18px;
+    text-align: left;
+    color: #000000;
+}
+.cabinet-reg-codes {
+    width: 40%;
+}
+.reg-codes-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    width: 80%;
+    padding: 30px;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+    .code-input {
+        width: 60%;
+        padding: 10px;
+        margin-bottom: 30px;
+        font-family: $secondFont;
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: #591478;
+        background-color: transparent;
+        border-radius: 30px;
+        border:1px solid #6d1991; 
+        &::placeholder {
+            text-align: center;
+            color: #591478; 
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    .cabinet-page-btn {
+        width: 60%;
+        padding: 15px 10px;
+        font-family: $secondFont;
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: #ffffff;
+        background-color: #591478;
+        border-radius: 30px;
+        border: none;
+    }
+}

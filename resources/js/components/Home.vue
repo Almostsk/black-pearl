@@ -14,6 +14,7 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
+                            @click.prevent.native="showPopup()"
                         />
                     </div>
                     <div class="page-1-block page-1-right"></div>
@@ -152,6 +153,9 @@
             </div>
             <!-- <button @click="moveNext">next</button> -->
         </div>
+        <v-login
+            :showPopup.sync="Popup"
+        ></v-login>
     </div>
 </template>
 
@@ -160,12 +164,14 @@
     import Header from './Header.vue';
     import Footer from './Footer.vue';
     import Btn from './btn.vue';
+    import Login from './Login.vue';
 
     export default {
         components: {
             'v-header': Header,
             'v-footer': Footer,
             'v-btn': Btn,
+            'v-login': Login,
         },
         data: function() {
             return {
@@ -175,12 +181,16 @@
                     duration: 500,
                     beforeChange: function (prev, next) {},
                     afterChange: function (prev, next) {}
-                }
+                },
+                Popup: false,
             }
         },
         methods: {
                 moveNext() {
                     this.$refs.example.$fullpage.moveNext(); //Move to the next page
+                },
+                showPopup() {
+                    this.Popup = true
                 }
         },
         beforeMount() {
@@ -200,6 +210,6 @@
         },
         mounted() {
             console.log('Component mounted.')
-        }
+        },
     }
 </script>
