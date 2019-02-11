@@ -36,6 +36,14 @@
             <img src="{{asset('img/no-image.png')}}" height="300" width="300">
         @endif
     </div>
+    <div class="col-md-10 col-offset-1">
+        <h1>Переможець</h1>
+        <ul>
+            @foreach( $user->prizes as $prize )
+                <li>{{ $prize->name }}</li>
+            @endforeach
+        </ul>
+    </div>
 @stop
 
 @section('js')

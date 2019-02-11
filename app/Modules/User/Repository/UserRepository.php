@@ -146,4 +146,16 @@ class UserRepository extends BaseRepository
 
         return $user;
     }
+
+    public function getAllWinners()
+    {
+        return $this->model->whereHas('prizes')->get();
+    }
+
+    public function getWinnerOfPrize(int $prizeId)
+    {
+        return $this->model->whereHas('prizes', function($query) use ($prizeId) {
+            $query->where('prize_id', $prizeId);
+        })->get();
+    }
 }

@@ -57,10 +57,16 @@ class UserController extends Controller
      */
     public function winners()
     {
-        /*dd($this->userService->getWinners());
         return view('admin.users.index', [
             'users' => $this->userService->getWinners()
-        ]);*/
+        ]);
+    }
+
+    public function winnersOfPrize($prizeId)
+    {
+        return view('admin.users.index', [
+            'users' => $this->userService->getPrizeWinners($prizeId)
+        ]);
     }
 
     /**
