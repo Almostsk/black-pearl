@@ -17,7 +17,36 @@
 .header-item {
     cursor: pointer;
     color: black;
-    font-family: $mainFont;
+    font-family: $RobotoMedium;
     font-size: 18px;
     font-weight: 400;
+}
+.header-link {
+    color: black;
+    font-family: $RobotoMedium;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+}
+.header-hat {
+    height: 150px;
+    width: 100%;
+    margin-bottom: -10px;
+    background: url('../img/header-hat.png') center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        height: 80%;
+        width: auto;
+    }
+}
+.header-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5000;
 }

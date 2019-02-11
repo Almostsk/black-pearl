@@ -13,6 +13,12 @@
                     <a class="footer-link" href="#">
                         http://www.blackpearl.com.ua 
                     </a>
+                    <v-btn
+                            class="feedback"
+                            text="Зворотній зв'язок"
+                            link="/feedback"
+                            color="violet"
+                    />
                 </div>
                 <div class="footer-right">
                     <div class="footer-right-container">
@@ -38,7 +44,12 @@
 </template>
 
 <script>
+
+    import Btn from './btn.vue';
+
 export default {
-    
+            components: {
+            'v-btn': Btn
+        },
 }
 </script>
