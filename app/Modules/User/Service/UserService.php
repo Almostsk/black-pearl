@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Service;
 
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Modules\User\Repository\UserRepository;
@@ -167,5 +168,22 @@ class UserService
         Storage::disk('local')->put($filename, file_get_contents($request->file('avatar')));
 
         return $filename;
+    }
+
+    public function authorizeAdmin(array $params)
+    {
+        if (Auth::attempt([
+                'mobile_phone' => $params['mobile_phone'],
+                'password' => $params['password'],
+            ])) {
+            $user = $this->userRepository->getUserIfAdmin($params['mobile_phone']);
+
+            if ($user) {
+                Auth::loginUsingId($user->id);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

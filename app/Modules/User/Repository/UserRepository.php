@@ -129,4 +129,21 @@ class UserRepository extends BaseRepository
             ->distinct()
             ->get();
     }
+
+    /**
+     * Checks whether this user exists and has admin role
+     *
+     * @param $mobile_phone
+     * @return bool | user
+     */
+    public function getUserIfAdmin($mobile_phone)
+    {
+        $user = $this->model->where('mobile_phone', '=', $mobile_phone)->first();
+
+        if ($user == null || $user->is_admin == false) {
+            return false;
+        }
+
+        return $user;
+    }
 }

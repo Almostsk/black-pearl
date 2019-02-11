@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\User\Service\UserService;
 use App\Modules\Status\Service\StatusService;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Http\Requests\Admin\AuthorizeAdminRequest;
 
 class UserController extends Controller
 {
@@ -115,5 +116,16 @@ class UserController extends Controller
     public function exportUsersWithCode()
     {
         return Excel::download(new UsersWithCodeExport(), 'codes_' . date("y_m_d_h_i_s") . '.xlsx');
+    }
+
+    public function authorizeAdmin(AuthorizeAdminRequest $request)
+    {
+        $isAdmin = $this->userService->authorizeAdmin($request->all());
+
+        if ($isAdmin) {
+            return redirect()->route('users.index');
+        }
+
+        return redirect('/');
     }
 }
