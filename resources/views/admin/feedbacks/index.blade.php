@@ -17,7 +17,7 @@
             <th scope="col">Ім'я</th>
             <th scope="col">Email</th>
             <th scope="col">Телефон</th>
-            <th scope="col">Редагувати</th>
+            <th scope="col">Проглянути</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
                 <td>{{ $feedback->email }}</td>
                 <td>{{ $feedback->mobile_phone }}</td>
                 <td>
-                    <a href="{{ route('feedbacks.edit', ['id' => $feedback->id]) }}"
+                    <a href="{{ route('feedbacks.show', ['id' => $feedback->id]) }}"
                        class="btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>

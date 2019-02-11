@@ -85,13 +85,13 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
 
     'logout_url' => 'logout',
 
     'logout_method' => null,
 
-    'login_url' => 'login',
+    'login_url' => '/admin/auth',
 
     'register_url' => 'register',
 
@@ -118,11 +118,6 @@ return [
                     'url'  => '/admin/users',
                     'icon_color' => 'green',
                 ],
-                /*[
-                    'text'    => 'Переможці',
-                    'url'     => '/admin/winners',
-                    'icon_color' => 'aqua',
-                ],*/
                 [
                     'text'    => 'Не промодеровані',
                     'url'     => '/admin/moderate',
@@ -135,6 +130,45 @@ return [
                 [
                     'text'    => 'Коди на данний момент',
                     'url'     => '/admin/users/codes'
+                ]
+            ]
+        ],
+        [
+            'text'    => 'Переможці',
+            'icon' => 'file',
+            'submenu' => [
+                [
+                    'text' => 'Усі переможці',
+                    'url'  => '/admin/winners/',
+                    'icon_color' => 'green',
+                ],
+                [
+                    'text' => 'Чорна перлина',
+                    'url'  => '/admin/winners/' . \App\Models\Prize::BLACK_PERL
+                ],
+                [
+                    'text'    => 'Обличчя рекламної кампанії',
+                    'url'     => '/admin/winners/' . \App\Models\Prize::ADD_FACE
+                ]
+            ]
+        ],
+        [
+            'text'    => 'Фід бек',
+            'icon' => 'file',
+            'submenu' => [
+                [
+                    'text' => 'Неопрацьовані',
+                    'url'  => '/admin/feedbacks/active',
+                    'icon_color' => 'green',
+                ],
+                [
+                    'text' => 'Усі',
+                    'url'  => '/admin/feedbacks',
+                ],
+                [
+                    'text'    => 'Опрацьовані',
+                    'url'     => '/admin/feedbacks/inactive',
+                    'icon_color' => 'red',
                 ]
             ]
         ],
