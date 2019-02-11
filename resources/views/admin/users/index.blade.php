@@ -3,6 +3,7 @@
 @section('title', 'Усі користувачі')
 
 @section('content_header')
+    @include('partials.alerts')
     <h1>Усі користувачі</h1>
 @stop
 
@@ -18,7 +19,7 @@
             <th scope="col">Прізвище</th>
             <th scope="col">Телефон</th>
             <th scope="col">Дата реєстрації</th>
-            <th scope="col">Профіль промодеровано</th>
+            <th scope="col">Статус</th>
             <th scope="col">Модерувати</th>
         </tr>
         </thead>
@@ -30,7 +31,7 @@
                 <td>{{ $user->surname }}</td>
                 <td>{{ $user->mobile_phone }}</td>
                 <td>{{ $user->created_at }}</td>
-                <td>{{ $user->is_profile_moderated == 1 ? 'Так' : 'Ні'}}</td>
+                <td>{{ $user->status->name }}</td>
                 <td>
                     <a href="{{ route('users.edit', ['id' => $user->id]) }}"
                        class="btn btn-primary btn-xs">

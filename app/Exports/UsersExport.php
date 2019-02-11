@@ -13,7 +13,8 @@ class UsersExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return User::select('id', 'name', 'surname', 'mobile_phone', 'created_at', 'is_profile_moderated')
+        return User::join('statuses', 'statuses.id', '=', 'users.id')
+            ->select('users.id', 'users.name', 'users.surname', 'users.mobile_phone', 'users.created_at', 'statuses.name AS status_name')
             ->get();
     }
 
@@ -25,8 +26,7 @@ class UsersExport implements FromCollection, WithHeadings
             'Прізвище',
             'Телефон',
             'Дата реєстрації',
-            'Профіль промодеровано',
-            'Модерувати'
+            'Статус'
         ];
     }
 }

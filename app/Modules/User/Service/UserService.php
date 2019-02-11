@@ -2,7 +2,9 @@
 
 namespace App\Modules\User\Service;
 
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Modules\User\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -74,21 +76,35 @@ class UserService
      */
     public function save(Request $request)
     {
-        if ($request->has('avatar') && $request->has('about_me')) {
+        $params = array_merge($request->all(), [
+            'password' => bcrypt(config('app.user_password'))
+        ]);
+
+        if ($request->hasFile('avatar') && $request->has('about_me')) {
             // is a participant in brand face
-            $request->merge([
-                'can_be_brand_face' => false,
-                'password' => config('app.user_password')
-            ]);
-        } else {
-            // participating only in black pearl
-            $request->merge([
-                'status' => 3,
-                'password' => config('app.user_password')
-            ]);
+
+            $filename = $this->storeAvatar($request);
+
+            return $this->userRepository->save(array_merge($params, [
+                'avatar' => $filename,
+                'can_be_brand_face' => true
+            ]));
+        } elseif ($request->hasFile('avatar')) {
+            // participating only in black pearl but has avatar
+
+            $filename = $this->storeAvatar($request);
+
+            return $this->userRepository->save(array_merge($params, [
+                'status_id' => $this->userRepository->getAcceptedStatus(),
+                'avatar' => $filename
+            ]));
         }
 
-        return $this->userRepository->save($request->all());
+        // participating only in black pearl
+        return $this->userRepository->save(array_merge($params, [
+            'status_id' => $this->userRepository->getAcceptedStatus()
+        ]));
+
     }
 
     /**
@@ -110,5 +126,64 @@ class UserService
     public function find(int $id)
     {
         return $this->userRepository->find($id);
+    }
+
+    /**
+     * Updating the user
+     *
+     * @param Request $request
+     * @param int $id
+     */
+    public function update(Request $request, int $id)
+    {
+        $this->userRepository->update($request->all(), $id);
+    }
+
+    public function getWinners()
+    {
+
+    }
+
+    public function getUsersStars()
+    {
+        return $this->userRepository->getUsersStars();
+    }
+
+    public function getUsersWithCodes()
+    {
+        return $this->userRepository->getUsersWithCodes();
+    }
+
+    /**
+     * Saving avatar logic
+     *
+     * @param Request $request
+     * @return string
+     */
+    private function storeAvatar(Request $request): string
+    {
+        $filename = 'public/' . hash('md5', time() . uniqid());
+        $filename .= '.' . $request->file('avatar')->getClientOriginalExtension();
+
+        Storage::disk('local')->put($filename, file_get_contents($request->file('avatar')));
+
+        return $filename;
+    }
+
+    public function authorizeAdmin(array $params)
+    {
+        if (Auth::attempt([
+                'mobile_phone' => $params['mobile_phone'],
+                'password' => $params['password'],
+            ])) {
+            $user = $this->userRepository->getUserIfAdmin($params['mobile_phone']);
+
+            if ($user) {
+                Auth::loginUsingId($user->id);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

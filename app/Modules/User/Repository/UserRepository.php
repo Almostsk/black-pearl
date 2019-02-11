@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Repository;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Modules\Core\BaseRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,11 +14,26 @@ class UserRepository extends BaseRepository
         parent::__construct($user);
     }
 
+    public function getOnModerationStatus()
+    {
+        return User::STATUS_ON_MODERATION;
+    }
+
+    public function getBannedStatus()
+    {
+        return User::STATUS_BANNED;
+    }
+
+    public function getAcceptedStatus()
+    {
+        return User::STATUS_ACCEPTED;
+    }
+
     public function getDataForTheGallery()
     {
         return $this->model
             ->where([
-                ['is_profile_moderated', true],
+                ['status_id', $this->getAcceptedStatus()],
                 ['can_be_brand_face', true]
             ])
             ->select('name', 'surname', 'history', 'avatar')
@@ -41,7 +57,7 @@ class UserRepository extends BaseRepository
      */
     public function all()
     {
-        return $this->model->with('city')->get();
+        return $this->model->with('city', 'status')->get();
     }
 
     /**
@@ -75,13 +91,59 @@ class UserRepository extends BaseRepository
      */
     public function getNotModeratedUsers()
     {
-        return $this->model->where('is_profile_moderated', false)->get();
+        return $this->model
+            ->where('status_id', $this->getOnModerationStatus())->get();
     }
 
     public function getUsersForExport()
     {
         return $this->model
-            ->select('id', 'name', 'surname', 'mobile_phone', 'created_at', 'is_profile_moderated')
+            ->select('id', 'name', 'surname', 'mobile_phone', 'created_at', 'status')
             ->get();
+    }
+
+    public function update(array $params, int $id)
+    {
+        $this->model->find($id)->update($params);
+    }
+
+    public function getAllWith(array $params)
+    {
+        return $this->model->with($params)->get();
+    }
+
+    public function getUsersStars()
+    {
+        return $this->model->where([
+            ['status_id', $this->getAcceptedStatus()],
+            ['can_be_brand_face', true]
+        ])->with('status')->get();
+    }
+
+    public function getUsersWithCodes()
+    {
+        return $this->model
+            ->whereHas('codes', function ($query){
+                $query->where('expires_at', '>', Carbon::now());
+            })
+            ->distinct()
+            ->get();
+    }
+
+    /**
+     * Checks whether this user exists and has admin role
+     *
+     * @param $mobile_phone
+     * @return bool | user
+     */
+    public function getUserIfAdmin($mobile_phone)
+    {
+        $user = $this->model->where('mobile_phone', '=', $mobile_phone)->first();
+
+        if ($user == null || $user->is_admin == false) {
+            return false;
+        }
+
+        return $user;
     }
 }

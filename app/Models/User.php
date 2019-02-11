@@ -10,6 +10,10 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    const STATUS_ON_MODERATION = 1;
+    const STATUS_BANNED = 2;
+    const STATUS_ACCEPTED = 3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'city_id',
         'mobile_phone',
         'is_mobile_verified',
-        'is_profile_moderated',
+        'status_id',
         'can_be_brand_face',
         'about_me',
         'avatar',
@@ -30,6 +34,8 @@ class User extends Authenticatable implements JWTSubject
         'created_at',
         'updated_at'
     ];
+
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -61,5 +67,15 @@ class User extends Authenticatable implements JWTSubject
     public function code()
     {
         return $this->hasOne(Sms::class, 'user_id', 'id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function prizes()
+    {
+        return $this->belongsToMany(Prize::class, 'user_prize', 'user_id', 'prize_id');
     }
 }
