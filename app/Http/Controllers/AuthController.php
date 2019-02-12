@@ -35,7 +35,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         try{
-            $userId = $this->userService->findUserIdByPhone($request->mobile_phone);
+            /*$userId = $this->userService->findUserIdByPhone($request->mobile_phone);
 
             if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
 
@@ -47,7 +47,6 @@ class AuthController extends Controller
                     return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
                 }
 
-                dd($this->sendUserDataWithToken($token)->getData());
                 return $this->sendUserDataWithToken($token);
 
             } else {
@@ -55,7 +54,18 @@ class AuthController extends Controller
                     'success' => 'false',
                     'message' => 'codes don`t match'
                 ], Response::HTTP_NOT_FOUND);
+            }*/
+
+            if (!$token = JWTAuth::attempt([
+                'password' => config('app.user_password'),
+                'mobile_phone' => $request->mobile_phone,
+            ])
+            ) {
+                return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
             }
+
+            return $this->sendUserDataWithToken($token);
+
         } catch (ModelNotFoundException $notFoundException) {
             return response()->json([
                 'success' => 'false',
