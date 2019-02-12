@@ -68,7 +68,8 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
-
+    'slack_webhook_url' => env('SLACK_WEBHOOK_URL',
+        'https://hooks.slack.com/services/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'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
