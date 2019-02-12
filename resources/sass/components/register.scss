@@ -25,6 +25,54 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+    .v-selectpage {
+        width: 23%;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        background-color: #eee7f1;
+        outline: none;
+        .sp-input {
+            //Sorry
+            background: transparent !important;
+            height: 40px !important;
+            text-align: center !important;
+            padding: 0 !important;
+            line-height: 40px !important;
+            border: none !important;
+            font-family: $secondFont !important;
+            color: #591478 !important;
+            font-weight: 600 !important;
+            .sp-placeholder {
+                font-weight: 600 !important;
+                color: #591478 !important;
+                letter-spacing: 2px !important; 
+            } 
+        }
+        .sg-clear {
+            top: 25%;
+            height: auto;
+            padding: 0;
+        }
+    }
+}
+.v-dropdown-container {
+    .sp-header {
+        position: relative;
+        button {
+            top: -3px;
+        }
+        &::before {
+            content: 'Оберіть місто зі списку';
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+        h3 {
+            opacity: 0 !important;
+            position: relative;
+        }
+    }
 }
 .register-input {
     width: 23%;
@@ -152,11 +200,6 @@
 }
 .register-quote-text {
     margin: 0 auto;
-    font-family: $secondFont;
-    font-size: 20px;
-    line-height: 2.19;
-    text-align: left;
-    color: #000000;
     position: relative;
     &::before {
         content: '';
@@ -180,9 +223,33 @@
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
     }
+    textarea {
+        width: 600px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 149px;
+        background: transparent;
+        box-sizing: border-box;
+        overflow: hidden;
+        border: none;
+        resize: none;
+        font-family: $secondFont;
+        font-size: 20px;
+        line-height: 2.19;
+        text-align: left;
+        color: #000000;
+        &::placeholder {
+            color: #000000;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
 }
 .register-photo {
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     width: 25%;
     background-color: #f0e8f4;
@@ -190,6 +257,7 @@
         content: '2';
         display: block;
         position: absolute;
+        z-index: 50;
         font-size: 24px;
         font-family: $thirdFont;
         text-align: center;
@@ -206,5 +274,63 @@
         content: "";
         display: block;
         padding-top: 100%;
+    }
+    .register-photo-text {
+        font-family: $secondFont;
+        color: #111111;
+        font-weight: 600;
+    }
+    .cropped-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        &[src=""] {
+            opacity: 0;
+        }
+    }
+}
+.popup-image-crop {
+    .upload-file-container {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .upload-file-button {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+    .upload-file-label {
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 24px;
+        font-family: $mainFont;
+        span {
+            text-decoration: underline;
+        }
+    }
+    .crop-image-container {
+        width: 400px;
+        height: 300px;
+        border: 1px solid gray;
+        display: inline-block;
+    }
+    .crop-image-canvas {
+        img[src=""] {
+            opacity: 0;
+         }
+    }
+    .crop-popup-text {
+        margin: 15px 0;
+        color: #ffffff;
+        font-size: 24px;
+        font-family: $mainFont;
+    }
+    .crop-image-button {
+        height: 40px;
+        width: 250px;
+        line-height: 40px;
     }
 }

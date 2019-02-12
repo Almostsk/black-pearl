@@ -7,15 +7,13 @@ import Login from './components/Login.vue';
 import Feedback from './components/Feedback.vue';
 import RulesPopup from './components/RulesPopup.vue';
 import Rules from './components/Rules.vue';
+import Winners from './components/Winners.vue';
 
 export const routes = [
     { 
-        path: '/404', 
+        path: '*', 
         component: Page404, 
         name: '404',
-        meta:{
-            web:true
-        } 
     },
     { 
         path: '/', 
@@ -37,6 +35,14 @@ export const routes = [
         path: '/gallery', 
         component: Gallery, 
         name: 'Gallery',
+        meta:{
+            web:true
+        } 
+    },
+    { 
+        path: '/winners', 
+        component: Winners, 
+        name: 'Winners',
         meta:{
             web:true
         } 
