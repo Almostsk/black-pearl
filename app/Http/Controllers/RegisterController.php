@@ -61,7 +61,7 @@ class RegisterController extends Controller
             Log::warning($exception->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Server error'
+                'message' => $exception->getMessage()
             ]);
         }
     }
