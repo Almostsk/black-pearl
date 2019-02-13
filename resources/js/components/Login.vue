@@ -1,7 +1,7 @@
 <template>
-    <div class="popup-container" v-if="displayPopup">
+    <div class="popup-container">
         <div class="popup-overlay"
-            @click="hidePopup()"
+            @click="$emit('close')"
         ></div>
         <div class="popup-content-wrapper">
             <div class="popup-content">
@@ -55,21 +55,12 @@ export default {
            displayPopup: false,
        }
    }, 
-   watch: {
-       showPopup() {
-           this.displayPopup = !this.displayPopup
-       }
-   },
    methods: {
        getCode: function() {
            console.log(this.phone_number);
            this.codeForm = !this.codeForm
            this.getCodeForm = !this.getCodeForm
        },
-       hidePopup() {
-           this.displayPopup = false;
-           
-       }
    }
 }
 </script>
