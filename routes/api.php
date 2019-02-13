@@ -10,6 +10,8 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
 
 Route::post('feedback/create', 'Api\FeedbackController@store');
 Route::group(['middleware' => 'api'], function () {
+    Route::get('stars', 'Api\UserController@getOurStars');
+    Route::get('gallery', 'Api\UserController@getGallery');
     Route::post('register', 'RegisterController@register');
     Route::post('login', 'AuthController@login');
     Route::get('cities', 'Api\CityController@index');

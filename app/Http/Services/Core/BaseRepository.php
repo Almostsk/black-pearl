@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Api\Core;
+namespace App\Http\Services\Core;
 
-use App\Http\Api\Core\Client;
+use App\Http\Services\Core\Client;
 
 class BaseRepository
 {

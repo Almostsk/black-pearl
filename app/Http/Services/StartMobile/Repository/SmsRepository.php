@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Api\StartMobile\Repository;
+namespace App\Http\Services\StartMobile\Repository;
 
-use App\Http\Api\Core\Client;
 use Spatie\ArrayToXml\ArrayToXml;
-use App\Http\Api\Core\BaseRepository;
+use App\Http\Services\Core\Client;
+use App\Http\Services\Core\BaseRepository;
 
 class SmsRepository extends BaseRepository
 {

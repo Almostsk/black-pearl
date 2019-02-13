@@ -141,7 +141,12 @@ class UserService
 
     public function getWinners()
     {
+        return $this->userRepository->getAllWinners();
+    }
 
+    public function getPrizeWinners(int $prizeId)
+    {
+        return $this->userRepository->getWinnerOfPrize($prizeId);
     }
 
     public function getUsersStars()
@@ -168,6 +173,11 @@ class UserService
         Storage::disk('local')->put($filename, file_get_contents($request->file('avatar')));
 
         return $filename;
+    }
+
+    public function getGalleryUsers()
+    {
+        return $this->userRepository->getDataForTheGallery();
     }
 
     public function authorizeAdmin(array $params)

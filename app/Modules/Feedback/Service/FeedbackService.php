@@ -26,4 +26,24 @@ class FeedbackService
     {
         return $this->feedbackRepository->save($params);
     }
+
+    public function getActiveFeedbacks()
+    {
+        return $this->feedbackRepository->getActiveFeedbacks();
+    }
+
+    public function getInactiveFeedbacks()
+    {
+        return $this->feedbackRepository->getInactiveFeedbacks();
+    }
+
+    public function find($id)
+    {
+        return $this->feedbackRepository->find($id);
+    }
+
+    public function deactivate(int $id)
+    {
+        return $this->feedbackRepository->deactivate($id);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\StartMobile\Response;
+namespace App\Http\Services\StartMobile\Response;
 
 
 class SmsResponse
@@ -64,7 +64,7 @@ class SmsResponse
     }
 
     /**
-     * @param string $status
+     * @param string $statusMessage
      */
     public function setStatusMessage(string $statusMessage): void
     {

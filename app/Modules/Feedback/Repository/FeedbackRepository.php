@@ -14,6 +14,29 @@ class FeedbackRepository extends BaseRepository
 
     public function getAllForIndexPage()
     {
-        return $this->model->select('id', 'name', 'email', 'mobile_phone')->get();
+        return $this->model->select('id', 'active', 'name', 'email', 'mobile_phone')->get();
+    }
+
+    public  function getActiveFeedbacks()
+    {
+        return $this->model
+            ->select('id', 'active', 'name', 'email', 'mobile_phone')
+            ->where('active', true)
+            ->get();
+    }
+
+    public function getInactiveFeedbacks()
+    {
+        return $this->model
+            ->select('id', 'active', 'name', 'email', 'mobile_phone')
+            ->where('active', false)
+            ->get();
+    }
+
+    public function deactivate(int $id)
+    {
+        return $this->model->find($id)->update([
+            'active' => false
+        ]);
     }
 }
