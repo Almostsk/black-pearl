@@ -36,7 +36,7 @@ class UserRepository extends BaseRepository
                 ['status_id', $this->getAcceptedStatus()],
                 ['can_be_brand_face', true]
             ])
-            ->select('name', 'surname', 'history', 'avatar')
+            ->select('id', 'name', 'surname', 'about_me', 'avatar')
             ->get();
     }
 
