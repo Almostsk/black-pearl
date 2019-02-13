@@ -207,15 +207,23 @@ export default {
         },
         methods: {
             sendReg() {
-                let formData = {
+                const formData = {
                     name : this.name,
                     surname: this.surname,
                     city_id: this.city_id,
                     mobile_phone: '+38' + this.mobile_phone,
                     code: this.code,
-                    avatar: this.cropImg,
-                    about_me: this.about_me
+                    avatar: '',
+                    about_me: this.about_me,
                 };
+
+                    fetch(this.cropImg)
+                         .then(res => res.blob())
+                         .then(blob => {
+                            //  const fd = new FormData();
+                             const file = new File([blob], "filename.png");
+                             formData.append('avatar', file);
+                         })
 
                 if (!this.check_rules) {
                     this.$refs.check_rules.$el.classList.add("alert-input");
@@ -229,6 +237,7 @@ export default {
                 }
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
+
                     axios
                         .post('api/register', 
                             formData
@@ -296,10 +305,13 @@ export default {
                 }
             },
             cropImage() {
+
+
                 // get image data for post processing, e.g. upload or setting image src
                 this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
                 let filePhoto = new Image();
                 filePhoto.src = this.cropImg;
+                
                 this.avatar = filePhoto;
                 this.popupImage = false;
             },

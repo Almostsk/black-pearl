@@ -1,10 +1,10 @@
 <template>
-    <div class="main">
-        <v-header>
-
+    <div class="main" ref="home">
+        <v-header
+        >
         </v-header>
         <div class="fullpage-container">
-            <div class="fullpage-wp" v-fullpage="opts" ref="example">
+            <div class="fullpage-wp" v-fullpage="opts" ref="fullpage">
                 <div class="page-1 page">
                     <div class="page-1-block page-1-left"></div>
                     <div class="page-1-block page-1-center">
@@ -14,7 +14,7 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
-                            @click.prevent.native="showPopup()"
+                            @click.prevent.native="moveTo(2)"
                         />
                     </div>
                     <div class="page-1-block page-1-right"></div>
@@ -37,6 +37,7 @@
                                     text="Взяти участь"
                                     link="/login"
                                     color="gold"
+                                    @click.prevent.native="showPopup()"
                                 />
                             </div>
                         </div>
@@ -67,6 +68,7 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
+                            @click.prevent.native="showPopup()"
                         />
                     </div>
                 </div>
@@ -114,6 +116,7 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
+                            @click.prevent.native="showPopup()"
                         />
                     </div>
                 </div>
@@ -121,20 +124,10 @@
                     <div class="page-5-content">
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
-                            <div class="page-5-star">
-                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
-                                <span class="page-5-star-name">Іваненченко Тетяна</span>
-                                <span class="page-5-star-city">м. Харків</span>
-                            </div>
-                            <div class="page-5-star">
-                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
-                                <span class="page-5-star-name">Іваненченко Тетяна</span>
-                                <span class="page-5-star-city">м. Харків</span>
-                            </div>
-                            <div class="page-5-star">
-                                <img class="page-5-star-photo" src="/img/main/star-1.png" alt="">
-                                <span class="page-5-star-name">Іваненченко Тетяна</span>
-                                <span class="page-5-star-city">м. Харків</span>
+                            <div class="page-5-star" v-for="star in stars" :key="star.id">
+                                <img class="page-5-star-photo" :src="star.avatar"   alt="avatar">
+                                <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
+                                <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
                         </div>
                         <v-btn
@@ -154,7 +147,8 @@
             <!-- <button @click="moveNext">next</button> -->
         </div>
         <v-login
-            :showPopup.sync="Popup"
+            v-if="Popup"
+            @close="Popup = false"
         ></v-login>
     </div>
 </template>
@@ -182,15 +176,20 @@
                     beforeChange: function (prev, next) {},
                     afterChange: function (prev, next) {}
                 },
+                pageNum: 0,
                 Popup: false,
+                stars: []
             }
         },
         methods: {
                 moveNext() {
-                    this.$refs.example.$fullpage.moveNext(); //Move to the next page
+                    this.$refs.fullpage.$fullpage.moveNext(); //Move to the next page
+                },
+                moveTo: function(index) {
+                    this.$refs.fullpage.$fullpage.moveTo(index, true);
                 },
                 showPopup() {
-                    this.Popup = true
+                    this.Popup = true;
                 }
         },
         beforeMount() {
@@ -202,7 +201,8 @@
                         }
                 })
                 .then(responce => {
-                    console.log(responce);
+                    console.log(responce.data.users);
+                    this.stars = responce.data.users;
                 })
                 .catch(e => {
                     this.errors.push(e)

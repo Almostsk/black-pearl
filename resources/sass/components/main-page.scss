@@ -202,14 +202,16 @@
 }
 .page-5-star-name {
     margin-top: 15px;
+    letter-spacing: .5px;
     display: block;
     font-size: 18px;
+    line-height: 1.2;
     color: $black;
-    font-family: $secondFont;
+    font-family: $RobotoMedium;
 }
 .page-5-star-city {
     display: block;
     font-size: 14px;
     color: $black;
-    font-family: $secondFont;
+    font-family: $RobotoMedium;
 }

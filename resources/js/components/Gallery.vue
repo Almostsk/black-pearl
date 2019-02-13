@@ -119,6 +119,7 @@ export default {
             },
             imgUrl: 'img/main/star-1.png',
             galleryInfo: true,
+            // galleryWomen,
         }
     },
     methods: {
@@ -127,6 +128,22 @@ export default {
             console.log(event.target.src);
         }
     },
+    beforeMount() {
+            axios
+                .get('api/stars', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }
+                })
+                .then(responce => {
+                    console.log(responce.data.users);
+                    this.stars = responce.data.users;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+    }
     
 }
 </script>

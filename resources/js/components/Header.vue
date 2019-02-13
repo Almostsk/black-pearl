@@ -9,10 +9,10 @@
                    <router-link class="header-link" to="/">Сама собі зірка</router-link>
                 </li>
                 <li class="header-item">
-                    Призи
+                    <router-link class="header-link" to="/">Призи</router-link>
                 </li>
                 <li class="header-item">
-                    Як взяти участь
+                    <router-link class="header-link" to="/">Як взяти участь</router-link>
                 </li>
                 <li class="header-item">
                     <router-link class="header-link" to="/gallery">Галерея</router-link>
@@ -35,7 +35,7 @@
 export default {
     props: {
         displayHat: false,
-        activeItem: ''
+        activeItem: '',
     },
     data() {
         return {
@@ -58,7 +58,8 @@ export default {
                 .catch(e => {
                     this.errors.push(e)
                 })
-        }
+        },
     },
+
 }
 </script>
