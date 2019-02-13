@@ -1,6 +1,6 @@
 <template>
-    <div class="popup-container" v-if="displayPopup">
-        <div class="popup-overlay" @click="hidePopup()"></div>
+    <div class="popup-container">
+        <div class="popup-overlay"  @click="$emit('closeRules')"></div>
         <div class="popup-content-wrapper rules-popup">
             <div class="popup-content ">
                 <div class="popup-rules-container">
@@ -203,7 +203,10 @@
                 </div>
                 <v-btn
                     text="Я погоджуюсь"
-                    color="gold"/>
+                    color="gold"
+                    @click.native.prevent="$emit('closeRules')"
+                    />
+                    
             </div>
         </div>
     </div>
@@ -217,21 +220,11 @@ export default {
     components: {
        'v-btn': Btn
    },
-   props : {
-       showPopup: false,
-   },
    data() {
        return {
            codeForm: false,
            getCodeForm: true,
            phone_number: '',
-           displayPopup: true,
-       }
-   }, 
-   methods: {
-       hidePopup() {
-           this.displayPopup = false;
-
        }
    }
 }

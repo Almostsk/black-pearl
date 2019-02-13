@@ -5,6 +5,9 @@
     //Footer 200 and header 60
     height: calc(100vh - 260px);
     margin-top: 60px;
+    @include laptop() {
+        height: calc(100vh - 225px);
+    }
 }
 .gallery-top, .gallery-bottom {
     width: 80%;
@@ -17,6 +20,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include laptop() {
+        padding: 10px 0;
+    }
 }
 .gallery-photo {
     position: relative;
@@ -46,18 +52,28 @@
     line-height: 1.5;
     letter-spacing: 0.8px;
     text-align: left;
+    @include laptop() {
+        font-size: 24px;
+    }
 }
 .gallery-city {
     font-family: $secondFont;
     font-size: 25px;
     line-height: 1.5;
     letter-spacing: 0.6px;
+    @include laptop() {
+        font-size: 18px;
+    }
 }
 .gallery-quote {
     margin-top: 30px;
     width: 100%;
     padding: 60px 20%;
     background-color: #f0e8f4;
+    @include laptop() {
+        margin-top: 10px;
+        padding: 15px 20%;
+    }
 }
 .gallery-quote-text {
     font-family: $secondFont;
@@ -66,6 +82,9 @@
     text-align: left;
     color: #000000;
     position: relative;
+    @include laptop() {
+        font-size: 14px;
+    }
     &::before {
         content: '';
         display: block;
@@ -76,6 +95,12 @@
         height: 40px;
         background: url('../img/quote-open.png') center no-repeat;
         background-size: contain;
+        @include laptop() {
+            left: -30px;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+        }
     }
     &::after {
         content: '';
@@ -87,6 +112,12 @@
         height: 40px;
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
+        @include laptop() {
+            right: 30px;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+        }
     }
 }
 .gallery-little-star {
@@ -105,6 +136,10 @@
     text-align: center;
     color: #111111;
     margin-bottom: 30px;
+    @include laptop() {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
 }
 .gallery-slider {
     height: 70%;
@@ -116,6 +151,7 @@
     align-items: center;
 }
 .slider-img-container {
+    cursor: pointer;
     position: relative;
     height: 100%;
     width: auto;
