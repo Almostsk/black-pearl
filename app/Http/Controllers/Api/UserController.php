@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\User\UserResource;
 use Auth;
 use Exception;
 use Illuminate\Http\Response;
@@ -10,9 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
+use App\Http\Resources\User\GalleryResource;
 use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Api\StartMobile\Service\SmsService as StartMobileService;
+use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
 
 class UserController extends Controller
 {
@@ -85,7 +85,7 @@ class UserController extends Controller
     public function getGallery()
     {
         return response()->json([
-            'users' => UserResource::collection($this->userService->getGalleryUsers())
+            'users' => GalleryResource::collection($this->userService->getGalleryUsers())
         ]);
     }
 }
