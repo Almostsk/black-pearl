@@ -1,8 +1,5 @@
 .winners-page {
     width: 100%;
-    .footer {
-        position: relative;
-    }
 }
 .winners-title {
     margin-top: 210px;
@@ -11,6 +8,9 @@
     letter-spacing: 1.2px;
     text-align: center;
     color: #571375;
+    @include laptop() {
+        margin-top: 140px;
+    }
 }
 .winners-container {
     width: 80%;
