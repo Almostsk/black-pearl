@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\User\UserResource;
 use Auth;
 use Exception;
 use Illuminate\Http\Response;
@@ -78,6 +79,13 @@ class UserController extends Controller
     {
         return response()->json([
             'users' => OurStarsResource::collection($this->userService->getStarsForMainPage())
+        ]);
+    }
+
+    public function getGallery()
+    {
+        return response()->json([
+            'users' => UserResource::collection($this->userService->getGalleryUsers())
         ]);
     }
 }

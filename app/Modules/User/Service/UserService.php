@@ -175,6 +175,11 @@ class UserService
         return $filename;
     }
 
+    public function getGalleryUsers()
+    {
+        return $this->userRepository->getDataForTheGallery();
+    }
+
     public function authorizeAdmin(array $params)
     {
         if (Auth::attempt([
