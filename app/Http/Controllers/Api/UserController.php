@@ -12,7 +12,7 @@ use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Api\StartMobile\Service\SmsService as StartMobileService;
+use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
 
 class UserController extends Controller
 {
