@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
+use App\Http\Resources\User\CabinetResource;
 use App\Http\Resources\User\GalleryResource;
 use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -91,6 +92,16 @@ class UserController extends Controller
     {
         return response()->json([
             'users' => GalleryResource::collection($this->userService->getGalleryUsers())
+        ]);
+    }
+
+    /**
+     * Gets personal info for current user for the cabinet
+     */
+    public function getCabinet()
+    {
+        return response()->json([
+            'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
         ]);
     }
 }
