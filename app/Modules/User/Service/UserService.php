@@ -209,6 +209,9 @@ class UserService
     {
         $ids = Session::get('viewed');
 
-        return $this->userRepository->getWithIds($ids);
+        if (count($ids) > 0) {
+            return $this->userRepository->getWithIds($ids);
+        }
+        return collect();
     }
 }

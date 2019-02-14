@@ -38,6 +38,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        Session::push('viewed', $id);
+
         return view('admin.users.edit', [
             'user' => $this->userService->find($id),
             'statuses' => $this->statusService->pluckIdWithName()

@@ -124,6 +124,10 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
+                    'text' => 'Переглянуті раніше',
+                    'url'  => '/admin/users/recent'
+                ],
+                [
                     'text'    => 'Стати зіркою',
                     'url'     => '/admin/users/stars'
                 ],
