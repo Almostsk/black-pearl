@@ -8,23 +8,18 @@
                 <div class="cabinet-container">
                     <div class="cabinet-info-block">
                         <div class="cabinet-main-info">
-                            <p class="cabinet-name">Маринова Марина</p>
-                            <p class="cabinet-city">м. Київ</p>
+                            <p class="cabinet-name">{{ user.Name }}  {{ user.Surname }}</p>
+                            <p class="cabinet-city">м. {{ user.City }}</p>
                             <the-mask   class="cabinet-phone"
-                                mask="(###)###-##-##" 
+                                mask="+##(###)###-##-##" 
                                 type="tel" 
-                                value="0988917446"
+                                :value="user.Mobile_phone"
                                 readonly
                             />
                         </div>
                         <div class="cabinet-code-info">
                             <p class="cabinet-code-title">Зареєстровані коди</p>
-                            <span class="cabinet-code-item">56451321</span>
-                            <span class="cabinet-code-item">56451322</span>
-                            <span class="cabinet-code-item">56451323</span>
-                            <span class="cabinet-code-item">56451324</span>
-                            <span class="cabinet-code-item">56451325</span>
-                            <span class="cabinet-code-item">56451326</span>
+                            <span class="cabinet-code-item" v-for="code in user.Codes" :key="code.Id">{{ code.Name }}</span>
                         </div>
                     </div>
                     <div class="cabinet-reg-codes">
@@ -39,23 +34,23 @@
                     </div>
                 </div>
             </div>
-            <div class="cabinet-bottom" v-if="!isStar">
+            <div class="cabinet-bottom" v-if="user.Can_be_brand_face == 1 ">
                     <div class="register-star-title-container">
                         <h1 class="register-star-title">ВИ БЕРЕТЕ УЧАСТЬ У КОНКУРСІ «САМА СОБІ ЗІРКА»</h1>
                         <!-- <span>Тоді візьміть участь у творчому конкурсі «Сама собі зірка»</span> -->
                     </div>
                     <div class="register-star-form">
                         <div class="cabinet-quote">
-                            <span class="cabinet-quote-text">Розкажіть про свою сцену чи аудиторію, <br>
-                                що Вас надихає бути привабливою
+                            <span class="cabinet-quote-text">
+                                {{ user.About_me }}
                             </span>
                         </div>
                         <div class="register-photo">
-                            <img  class="cropped-photo" :src="cropImg">
+                            <img  class="cropped-photo" :src="user.Avatar">
                         </div>
                     </div>                    
             </div>
-            <div class="register-bottom" v-if="isStar">
+            <div class="register-bottom" v-if="user.Can_be_brand_face !== 1 ">
                 <div class="register-star">
                     <div class="register-star-title-container">
                         <h1 class="register-star-title">БАЖАЄТЕ СТАТИ ЗІРКОЮ РЕКЛАМНОЇ КАМПАНІЇ «ЧЕРНЫЙ ЖЕМЧУГ»? </h1>
@@ -138,16 +133,10 @@ export default {
         },
         data() {
             return {
+                user: {},
                 packCode: '',
-                name : '',
-                surname: '',
-                city_id: '',
-                mobile_phone: '',
-                mobile_code: '',
                 about_me: '',
                 avatar: '',
-                isStar: true,
-                code: '',
                 popupImage: false,
                 imgSrc: '',
                 cropImg: '',
@@ -196,6 +185,22 @@ export default {
             hideCropPopup() {
                 this.popupImage = false;
             }
+        },
+        beforeMount() {
+            axios
+                .get('api/cabinet', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }
+                })
+                .then(responce => {
+                    console.log(responce.data);
+                    this.user = responce.data.user;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
         },
 }
 </script>

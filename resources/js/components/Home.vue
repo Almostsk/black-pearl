@@ -210,9 +210,6 @@
                 .catch(e => {
                     this.errors.push(e)
                 })
-        },
-        mounted() {
-            console.log('Component mounted.')
-        },
+        }
     }
 </script>
