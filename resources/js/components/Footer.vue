@@ -18,6 +18,7 @@
                             text="Зворотній зв'язок"
                             link="/feedback"
                             color="violet"
+                            @click.native.prevent="feedbackShow"
                     />
                 </div>
                 <div class="footer-right">
@@ -35,21 +36,57 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <a href="#" class="footer-link">Правила використання сайту</a>
+                <span  class="footer-link"
+                    @click="rulesShow()"
+                    @closeRules="rules = false"
+                 >Правила використання сайту</span>
                 <a href="#" class="footer-link">Політика cookie</a>
                 <a href="#" class="footer-link">Політика про персональні дані</a>
             </div>
         </div>
+        <v-feedback 
+            v-if="feedback"
+            @close="feedback = false"
+            />
+        <v-rules-pop
+            v-if="rules"
+            @closeRules="rules = false"
+        />
+  
     </div>
 </template>
 
 <script>
 
     import Btn from './btn.vue';
+    import Feedback from './Feedback.vue';
+    import RulesPopup from './RulesPopup.vue';
 
 export default {
             components: {
-            'v-btn': Btn
+            'v-btn': Btn,
+            'v-feedback': Feedback,
+            'v-rules-pop': RulesPopup
+        },
+        data() {
+            return {
+                feedback: false,
+                rules: false
+            }
+        },
+        methods: {
+            feedbackShow() {
+                this.feedback = true;
+            },
+            feedbackClose () {
+                this.feedback = false;
+            }, 
+            rulesShow() {
+                this.rules = true;
+            },
+            rulesClose () {
+                this.rules = false;
+            } 
         },
 }
 </script>

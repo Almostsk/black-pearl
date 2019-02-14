@@ -39,6 +39,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include laptop() {
+        height: 80px;
+    }
     img {
         height: 80%;
         width: auto;

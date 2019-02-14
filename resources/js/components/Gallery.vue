@@ -9,12 +9,12 @@
                 </div>
                 <div class="gallery-info" v-if="galleryInfo">
                     <div class="gallery-personal-info">
-                        <span class="gallery-name">Маринова Марина</span>
-                        <span class="gallery-city">м. Київ</span>
+                        <span class="gallery-name">{{ starName }} {{ starSurname }}</span>
+                        <span class="gallery-city">м. {{ starCity }}</span>
                     </div>
                     <div class="gallery-quote">
-                        <p class="gallery-quote-text">Моя аудиторія – це мої покупці. Вони спонукають бути красивою 
-                            та привабливою щодня. Це моє найбільше натхнення!
+                        <p class="gallery-quote-text">
+                            {{ starInfo }}
                         </p>
                     </div>
                 </div>
@@ -22,67 +22,12 @@
             <div class="gallery-bottom">
                 <h3 class="gallery-title">Інші жінки</h3>
                 <swiper class="gallery-slider" :options="swiperOption">
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" @click.prevent="chooseStar($event)" src="img/main/star-1.png" alt="">
+                    <swiper-slide class="gallery-slide" v-for="woman in galleryWomen" :key="woman.id">
+                        <div class="slider-img-container" @click.prevent="chooseStar($event, woman)">
+                            <img class="gallery-slide-image" :src="woman.Avatar" alt="">
                             <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
                         </div>
                     </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" @click.prevent="chooseStar($event)" src="img/main/star-2.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-1.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-2.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-1.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-2.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-1.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-2.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-1.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <swiper-slide class="gallery-slide">
-                        <div class="slider-img-container">
-                            <img class="gallery-slide-image" src="img/main/star-1.png" alt="">
-                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
-                        </div>                        
-                    </swiper-slide>
-                    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
                 </swiper>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
@@ -117,16 +62,47 @@ export default {
                     prevEl: '.swiper-button-prev'
                 }
             },
-            imgUrl: 'img/main/star-1.png',
+            galleryWomen: [],
+            imgUrl: '',
+            starName: '',
+            starCity: '',
+            starSurname: '',
+            starInfo: '',
             galleryInfo: true,
         }
     },
     methods: {
-        chooseStar(event) {
+        chooseStar(event, item) {
             this.imgUrl = event.target.src;
-            console.log(event.target.src);
+            this.starName = item.Name;
+            // this.starCity = item.City;
+            this.starInfo = item.AboutMe;
+            this.starSurname = item.Surname;
+            console.log(event.currentTarget);
+
         }
     },
+    beforeMount() {
+            axios
+                .get('api/gallery', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }
+                })
+                .then(responce => {
+                    console.log(responce);
+                    this.galleryWomen = responce.data.users;
+                    this.imgUrl = responce.data.users[0].Avatar;
+                    this.starName = responce.data.users[0].Name;
+                    // this.starCity = responce.data.users[0].City;
+                    this.starInfo = responce.data.users[0].AboutMe;
+                    this.starSurname = responce.data.users[0].Surname;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+    }
     
 }
 </script>
