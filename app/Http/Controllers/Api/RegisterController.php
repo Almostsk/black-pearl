@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Log;
 use Exception;
+use App\Http\Controllers\Controller;
 use App\Modules\Code\Service\CodeService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Auth\RegisterRequest;

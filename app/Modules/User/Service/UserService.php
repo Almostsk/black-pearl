@@ -4,6 +4,7 @@ namespace App\Modules\User\Service;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Modules\User\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -202,5 +203,12 @@ class UserService
         $userId = Auth::user()->id;
 
         return $this->userRepository->getDataForPersonalCabinet($userId);
+    }
+
+    public function getRecentlyViewed()
+    {
+        $ids = Session::get('viewed');
+
+        return $this->userRepository->getWithIds($ids);
     }
 }

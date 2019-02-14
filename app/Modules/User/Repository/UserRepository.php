@@ -167,4 +167,16 @@ class UserRepository extends BaseRepository
     {
         return $this->model->with('codes', 'city')->find($userId);
     }
+
+    /**
+     * @param array $ids
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getWithIds(array $ids)
+    {
+        return $this->model
+            ->whereIn('id', $ids)
+            ->select('id', 'name', 'surname', 'city_id', 'mobile_phone', 'status_id')
+            ->get();
+    }
 }
