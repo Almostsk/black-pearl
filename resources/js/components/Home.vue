@@ -1,6 +1,9 @@
 <template>
     <div class="main" ref="home">
         <v-header
+             @goTo1="moveTo(1)"
+             @goTo2="moveTo(2)"
+             @goTo3="moveTo(3)"
         >
         </v-header>
         <div class="fullpage-container">
