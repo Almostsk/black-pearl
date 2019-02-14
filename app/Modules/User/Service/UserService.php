@@ -168,11 +168,14 @@ class UserService
      */
     private function storeAvatar(Request $request): string
     {
-        $filename = 'public/' . hash('md5', time() . uniqid());
-        $filename .= '.' . $request->file('avatar')->getClientOriginalExtension();
+        $filename = '/public/' . hash('md5', time() . uniqid());
+        $filename .= '.png';
 
-        Storage::disk('local')->put($filename, file_get_contents($request->file('avatar')));
-
+        Storage::put($filename, file_get_contents($request->file('avatar')));
+        dd([
+            'file' => file_get_contents($request->file('avatar')),
+            'filename' => $filename
+        ]);
         return $filename;
     }
 
