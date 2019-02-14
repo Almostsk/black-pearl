@@ -55,11 +55,16 @@ class UserController extends Controller
             // Sending a message
             $response = $this->startMobileService->sendMessage($code, $request->mobile_phone);
 
-            return response()->json([
-                'status' => $response,
-                //'message' => $response->getStatusMessage()
-            ], Response::HTTP_OK);
+            if ($response->getStatus() == 'Accepted') {
+                return response()->json([
+                    'success' => true
+                ], Response::HTTP_OK);
+            }
 
+            return response()->json([
+                'success' => false,
+                'message' => 'Message service error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
 
         } catch(ModelNotFoundException $notFoundHttpException) {
             return response()->json([
