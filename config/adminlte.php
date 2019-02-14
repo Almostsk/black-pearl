@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'dashboard_url' => '/',
+    'dashboard_url' => '/admin/users',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'admin/logout',
 
     'logout_method' => null,
 
@@ -122,6 +122,10 @@ return [
                     'text'    => 'Не промодеровані',
                     'url'     => '/admin/moderate',
                     'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Переглянуті раніше',
+                    'url'  => '/admin/users/recent'
                 ],
                 [
                     'text'    => 'Стати зіркою',

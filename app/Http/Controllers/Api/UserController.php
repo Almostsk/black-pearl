@@ -6,7 +6,7 @@ use Auth;
 use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SendSmsRequest;
+use App\Http\Requests\Api\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Resources\User\CabinetResource;

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use JWTAuth;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Modules\User\Service\UserService;
 use App\Http\Resources\User\UserResource;

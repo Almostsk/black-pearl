@@ -4,6 +4,7 @@ namespace App\Modules\User\Service;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Modules\User\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -167,10 +168,9 @@ class UserService
      */
     private function storeAvatar(Request $request): string
     {
-        $filename = 'public/' . hash('md5', time() . uniqid());
-        $filename .= '.' . $request->file('avatar')->getClientOriginalExtension();
+        $filename = hash('md5', time() . uniqid()) . '.png';
 
-        Storage::disk('local')->put($filename, file_get_contents($request->file('avatar')));
+        Storage::put('/public/' . $filename, file_get_contents($request->file('avatar')));
 
         return $filename;
     }
@@ -202,5 +202,15 @@ class UserService
         $userId = Auth::user()->id;
 
         return $this->userRepository->getDataForPersonalCabinet($userId);
+    }
+
+    public function getRecentlyViewed()
+    {
+        $ids = Session::get('viewed');
+
+        if (count($ids) > 0) {
+            return $this->userRepository->getWithIds($ids);
+        }
+        return collect();
     }
 }
