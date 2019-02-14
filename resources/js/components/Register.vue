@@ -69,7 +69,7 @@
                                 <textarea  
                                     name="about-me" 
                                     placeholder="Розкажіть про свою сцену чи аудиторію, що Вас надихає бути привабливою"
-                                    maxlength="150"
+                                    maxlength="180"
                                     v-model="about_me"
                                     ></textarea>
                             </div>
@@ -176,7 +176,7 @@ export default {
                     alert: false,
                     popupImage: false,
                     imgSrc: '',
-                    cropImg: '',
+                    cropImg: ''
             }
         },
         validations: {
@@ -207,23 +207,45 @@ export default {
         },
         methods: {
             sendReg() {
-                const formData = {
+                let formData = {
                     name : this.name,
                     surname: this.surname,
                     city_id: this.city_id,
-                    mobile_phone: '+38' + this.mobile_phone,
+                    mobile_phone: '38' + this.mobile_phone,
                     code: this.code,
-                    avatar: '',
                     about_me: this.about_me,
                 };
 
-                    fetch(this.cropImg)
-                         .then(res => res.blob())
-                         .then(blob => {
-                            //  const fd = new FormData();
-                             const file = new File([blob], "filename.png");
-                             formData.append('avatar', file);
-                         })
+
+                let testData = new FormData();
+
+                function dataURItoBlob(dataURI) {
+                    // convert base64 to raw binary data held in a string
+                    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+                    var byteString = atob(dataURI.split(',')[1]);
+
+                    // separate out the mime component
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                    // write the bytes of the string to an ArrayBuffer
+                    var ab = new ArrayBuffer(byteString.length);
+                    var ia = new Uint8Array(ab);
+                    for (var i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+
+                    //Old Code
+                    //write the ArrayBuffer to a blob, and you're done
+                    //var bb = new BlobBuilder();
+                    //bb.append(ab);
+                    //return bb.getBlob(mimeString);
+
+                    //New Code
+                    return new Blob([ab], {type: mimeString});
+
+
+                }
+
 
                 if (!this.check_rules) {
                     this.$refs.check_rules.$el.classList.add("alert-input");
@@ -238,12 +260,32 @@ export default {
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
+                    const filePhoto = dataURItoBlob(this.cropImg);
+                    let fd = new FormData(document.forms[0]);
+                    let xhr = new XMLHttpRequest();
+
+                    this.avatar = filePhoto;
+
+                    testData.append("avatar", filePhoto);
+
+                    for (const key in formData) {
+                            console.log(key);
+                            console.log(formData[key]);
+                            testData.append(key + "", formData[key]);
+                    }
+
+                    // xhr.open('POST', '/', true);
+                    // xhr.send(fd);
+
                     axios
                         .post('api/register', 
-                            formData
+                            testData
                         )
                         .then(responce => {
                             console.log(responce);
+                            if (responce.data.success) {
+                                this.$router.push("cabinet");
+                            }
                         })
                         .catch(e => {
                             this.errors.push(e)
@@ -306,13 +348,15 @@ export default {
             },
             cropImage() {
 
-
                 // get image data for post processing, e.g. upload or setting image src
                 this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
-                let filePhoto = new Image();
-                filePhoto.src = this.cropImg;
+
+
+                // let filePhoto = new Image();
+                // filePhoto.src = this.cropImg;
                 
-                this.avatar = filePhoto;
+                
+                // this.avatar = filePhoto;
                 this.popupImage = false;
             },
             cropPopup() {
