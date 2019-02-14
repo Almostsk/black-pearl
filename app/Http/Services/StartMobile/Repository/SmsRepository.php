@@ -3,7 +3,6 @@
 namespace App\Http\Services\StartMobile\Repository;
 
 use Spatie\ArrayToXml\ArrayToXml;
-use App\Http\Services\Core\Client;
 use App\Http\Services\Core\BaseRepository;
 
 class SmsRepository extends BaseRepository
@@ -34,7 +33,7 @@ class SmsRepository extends BaseRepository
      *
      * @var mixed
      */
-    private $source = 'TEST_NUMBER';
+    private $source = 'BLACK PEARL';
 
     /**
      * Phone number the message has to be sent to
@@ -64,7 +63,22 @@ class SmsRepository extends BaseRepository
      */
     private $encoding = 'plain';
 
-    protected $hostUrl = 'http://bulk.startmobile.com.ua/clients.php';
+    /**
+     * Host of the URL
+     *
+     * @var string
+     */
+    protected $hostUrl = 'https://dmuraviova:H5Fur6WY@bulk.startmobile.ua/clients.php';
+
+    /**
+     * @var string
+     */
+    private $login = 'dmuraviova';
+
+    /**
+     * @var string
+     */
+    private $password = 'H5Fur6WY';
 
     /**
      * @return string
@@ -83,6 +97,22 @@ class SmsRepository extends BaseRepository
         $this->serviceId = $serviceId;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function getLogin(): string
+    {
+        return $this->login;
+    }
+
+    /**
+     * @return string
+     */
+    private function getPassword(): string
+    {
+        return $this->password;
     }
 
     /**
@@ -230,7 +260,7 @@ class SmsRepository extends BaseRepository
                 '_attributes' => [
                     'id'        => $this->getServiceId(),
                     //'start'     => $this->getStartTime(),
-                    'validity'  => $this->getValidity(),
+                    //'validity'  => $this->getValidity(),
                     'source'    => $this->getSource(),
                 ]
             ],
@@ -238,7 +268,7 @@ class SmsRepository extends BaseRepository
             'body' => [
                 '_attributes' => [
                     'content-type' => $this->getContentType(),
-                    'encoding'     => $this->getNumberTo()
+                    'encoding'     => $this->getEncoding()
                 ],
                 '_value' => $this->getMessageBody()
             ]
@@ -259,25 +289,24 @@ class SmsRepository extends BaseRepository
 
     public function sendSms()
     {
-        return $this->execute($this->buildXML(), $this->hostUrl, 'dmuraviova', 'H5Fur6WY');
+        return $this->execute($this->buildXML(), $this->hostUrl);
     }
 
-    public function execute($data, $url, $login, $pwd)
+    public function execute($data, $url)
     {
-        $credent = sprintf('Authorization:%s',base64_encode($login.":".$pwd) );
-        $params=[
-            'http'=>
-                ['method'=>'POST', 'content'=>$data, 'header'=>$credent]
-        ];
-        $ctx = stream_context_create($params);
-        $fp=@fopen($url, 'rb', FALSE, $ctx);
-        if ($fp){
-            $response = @stream_get_contents($fp);
-        }else
-        {
-            $response = false;
-        }
-        return $response;
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml;charset=utf-8;'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: text/xml'));
+        curl_setopt($ch, CURLOPT_USERPWD, $this->getLogin().":".$this->getPassword());
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $return = curl_exec($ch);
+        curl_close($ch);
+
+        return $return;
     }
 
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
+use App\Http\Resources\User\CabinetResource;
 use App\Http\Resources\User\GalleryResource;
 use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -55,11 +56,16 @@ class UserController extends Controller
             // Sending a message
             $response = $this->startMobileService->sendMessage($code, $request->mobile_phone);
 
-            return response()->json([
-                'status' => $response,
-                //'message' => $response->getStatusMessage()
-            ], Response::HTTP_OK);
+            if ($response->getStatus() == 'Accepted') {
+                return response()->json([
+                    'success' => true
+                ], Response::HTTP_OK);
+            }
 
+            return response()->json([
+                'success' => false,
+                'message' => 'Message service error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
 
         } catch(ModelNotFoundException $notFoundHttpException) {
             return response()->json([
@@ -86,6 +92,16 @@ class UserController extends Controller
     {
         return response()->json([
             'users' => GalleryResource::collection($this->userService->getGalleryUsers())
+        ]);
+    }
+
+    /**
+     * Gets personal info for current user for the cabinet
+     */
+    public function getCabinet()
+    {
+        return response()->json([
+            'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
         ]);
     }
 }

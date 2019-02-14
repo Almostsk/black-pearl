@@ -14,14 +14,19 @@ class SmsService
         $this->smsRepository = $smsRepository;
     }
 
-    public function sendMessage(int $code, string $number)
+    /**
+     * @param int $code
+     * @param string $number
+     * @return Response
+     */
+    public function sendMessage(int $code, string $number): Response
     {
         $this->smsRepository
-            ->setNumberTo('+' . $number)
+            ->setNumberTo($number)
             ->setMessageBody($code);
 
         $response = $this->smsRepository->sendSms();
-        return $response;
-        //return new Response($response->getBody()->getContents());
+
+        return new Response($response);
     }
 }

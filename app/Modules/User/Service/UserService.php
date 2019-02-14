@@ -196,4 +196,11 @@ class UserService
 
         return false;
     }
+
+    public function getDataForPersonalCabinet()
+    {
+        $userId = Auth::user()->id;
+
+        return $this->userRepository->getDataForPersonalCabinet($userId);
+    }
 }

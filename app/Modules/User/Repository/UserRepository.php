@@ -158,4 +158,13 @@ class UserRepository extends BaseRepository
             $query->where('prize_id', $prizeId);
         })->get();
     }
+
+    /**
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getDataForPersonalCabinet(int $userId)
+    {
+        return $this->model->with('codes', 'city')->find($userId);
+    }
 }

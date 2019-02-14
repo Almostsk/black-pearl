@@ -32,7 +32,7 @@ class SmsResponse
     {
         $xml = simplexml_load_string($xml);
 
-        if ($status = $xml['status']['state']){
+        if ($status = $xml->state){
             $this->setStatus($status);
             $this->setStatusMessage(config('sms.statuses.' . $status));
         }
