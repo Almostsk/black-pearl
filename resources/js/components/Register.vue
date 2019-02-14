@@ -261,9 +261,6 @@ export default {
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
                     const filePhoto = dataURItoBlob(this.cropImg);
-                    let fd = new FormData(document.forms[0]);
-                    let xhr = new XMLHttpRequest();
-
                     this.avatar = filePhoto;
 
                     testData.append("avatar", filePhoto);
