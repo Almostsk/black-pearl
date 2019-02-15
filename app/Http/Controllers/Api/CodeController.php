@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Modules\Code\Service\CodeService;
@@ -28,19 +29,27 @@ class CodeController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $updated = $this->codeService->update([
-            'code_name' => $request->name
-        ], $id);
+        if (Auth::user()) {
+            $updated = $this->codeService->update([
+                'user_id' => Auth::user()->id
+            ], $id);
 
-        if ($updated) {
+            if ($updated) {
+                return response()->json([
+                    'success' => true
+                ], Response::HTTP_NOT_FOUND);
+            }
+
             return response()->json([
-                'success' => true
-            ], Response::HTTP_NOT_FOUND);
+                'success' => false,
+                'message' => 'Server error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Server error'
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            'message' => 'User not found'
+        ], Response::HTTP_NOT_FOUND);
+
     }
 }
