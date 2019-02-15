@@ -28,6 +28,15 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function logIn()
+    {
+        if (Auth::user() == null) {
+            return view('admin.authorize');
+        }
+
+        return redirect()->route('admin_home');
+    }
+
     public function logout()
     {
         // clearing the session with viewed users

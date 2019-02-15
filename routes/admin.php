@@ -2,7 +2,7 @@
 
 Route::group(['middleware' => ['api']], function () {
 
-    Route::get('/auth', 'AdminController@logIn')->name('log_in');
+    Route::get('/auth', 'AuthController@logIn')->name('log_in');
     Route::post('/authorize', 'AuthController@authorizeAdmin')->name('authorize');
 
 });
