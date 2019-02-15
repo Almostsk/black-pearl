@@ -18,7 +18,7 @@ class WinnersResource extends JsonResource
             'Id'      => $this->id,
             'Name'    => $this->name,
             'Surname' => $this->surname,
-            'Date'    => $this->updated_at
+            'Date'    => $this->updated_at ? $this->updated_at->toDateString() : ''
         ];
     }
 }
