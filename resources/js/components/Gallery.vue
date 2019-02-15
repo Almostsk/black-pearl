@@ -75,7 +75,7 @@ export default {
         chooseStar(event, item) {
             this.imgUrl = event.target.src;
             this.starName = item.Name;
-            // this.starCity = item.City;
+            this.starCity = item.City;
             this.starInfo = item.AboutMe;
             this.starSurname = item.Surname;
             console.log(event.currentTarget);
@@ -95,7 +95,7 @@ export default {
                     this.galleryWomen = responce.data.users;
                     this.imgUrl = responce.data.users[0].Avatar;
                     this.starName = responce.data.users[0].Name;
-                    // this.starCity = responce.data.users[0].City;
+                    this.starCity = responce.data.users[0].City;
                     this.starInfo = responce.data.users[0].AboutMe;
                     this.starSurname = responce.data.users[0].Surname;
                 })

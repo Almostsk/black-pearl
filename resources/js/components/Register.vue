@@ -328,8 +328,26 @@ export default {
             },
             activeCode() {
                 if (this.mobile_code.length > 2) {
-                    this.alert = false;
-                    this.showPopup = false;
+                    axios
+                        .post('api/verify-code',
+                            {
+                                'code': this.mobile_code
+                            }
+                        )
+                        .then(responce => {
+                            if (responce.data.success) {
+                                this.alert = false;
+                                this.showPopup = false;
+                            } else {
+                                console.log(responce);
+                                this.alert = true;
+                            }
+                        })
+                        .catch(error => {
+                                console.log(error);
+                                this.alert = true;
+                            // this.errors.push(e)
+                        }) 
                 } else {
                     this.alert = true;
                 }

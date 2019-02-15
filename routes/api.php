@@ -10,9 +10,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('send-sms', 'UserController@sendCode');
     Route::post('verify-code', 'UserController@verifyCode');
 
-    Route::post('send-sms', 'UserController@sendSms');
-    Route::post('verify-code', 'UserController@verifyCode');
-
     Route::get('cabinet', 'UserController@getCabinet');
     Route::post('cabinet/code', 'CodeController@register');
 
