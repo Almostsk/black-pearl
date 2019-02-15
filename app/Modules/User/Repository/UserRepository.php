@@ -79,6 +79,10 @@ class UserRepository extends BaseRepository
         return $this->model
             ->with('city')
             ->select('id', 'name', 'surname', 'city_id', 'avatar')
+            ->where([
+                ['status_id', $this->getAcceptedStatus()],
+                ['can_be_brand_face', true]
+            ])
             ->orderBy('id', 'desc')
             ->take(3)
             ->get();

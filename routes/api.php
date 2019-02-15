@@ -9,7 +9,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
 Route::group(['middleware' => 'api'], function () {
     Route::get('/cabinet', 'UserController@getCabinet');
-    Route::post('/cabinet/code', 'UserController@getCabinet');
+    Route::post('/cabinet/code', 'CodeController@register');
     Route::post('feedback/create', 'FeedbackController@store');
     Route::get('stars', 'UserController@getOurStars');
     Route::get('gallery', 'UserController@getGallery');
