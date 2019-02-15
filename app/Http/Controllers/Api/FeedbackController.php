@@ -27,8 +27,9 @@ class FeedbackController extends Controller
     public function store(StoreFeedbackRequest $request)
     {
         if ($this->feedbackService->save($request->all())) {
+
             event(new FeedbackFormCreated($request->name));
-            //$this->slackService->sendFormFilledMessage($request->name);
+
             return response([
                 'success' => 'true'
             ], Response::HTTP_CREATED);
