@@ -23,4 +23,15 @@ class SmsService
     {
         $this->smsRepository->save($params);
     }
+
+    public function isValidCode(string $mobilePhone, string $code)
+    {
+        $isValid = $this->smsRepository->getSmsWithPhoneNCode($mobilePhone, $code);
+
+        if ($isValid) {
+            return true;
+        }
+
+        return false;
+    }
 }

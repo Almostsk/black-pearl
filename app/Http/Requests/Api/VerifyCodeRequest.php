@@ -24,7 +24,8 @@ class VerifyCodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|max:12'
+            'mobile_phone' => 'required|max:14',
+            'code'         => 'required|max:12',
         ];
     }
 }
