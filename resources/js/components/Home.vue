@@ -17,7 +17,7 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
-                            @click.prevent.native="moveTo(2)"
+                            @click.prevent.native="showPopup()"
                         />
                     </div>
                     <div class="page-1-block page-1-right"></div>

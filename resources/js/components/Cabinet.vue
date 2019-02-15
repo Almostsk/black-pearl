@@ -145,6 +145,20 @@ export default {
         methods: {
             sendCode() {
                 console.log(this.packCode);
+                axios
+                    .post('api/cabinet/code', {
+                        headers: {
+                            Accept : 'application/json, text/javascript',
+                            Connection: 'keep'
+                            },
+                        name: this.packCode
+                    })
+                    .then(responce => {
+                        console.log(responce);
+                    })
+                    .catch(error => {
+                        console.log('Ошибка');
+                    })
             },
             setImage(e) {
                 const file = e.target.files[0];
@@ -198,8 +212,9 @@ export default {
                     console.log(responce.data);
                     this.user = responce.data.user;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch(error => {
+                    // this.errors.push(e)
+                    console.log(error.responce);
                 })
         },
 }
