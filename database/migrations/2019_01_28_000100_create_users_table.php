@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(false);
             $table->integer('city_id')->unsigned();
             $table->string('mobile_phone')->unique();
-            $table->boolean('is_mobile_verified')->default(false);
             $table->integer('status_id')->unsigned()->default(1);
             $table->boolean('can_be_brand_face')->default(false);
             $table->string('about_me')->nullable();

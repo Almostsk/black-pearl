@@ -25,7 +25,6 @@ class User extends Authenticatable implements JWTSubject
         'is_admin',
         'city_id',
         'mobile_phone',
-        'is_mobile_verified',
         'status_id',
         'can_be_brand_face',
         'about_me',
