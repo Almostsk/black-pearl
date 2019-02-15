@@ -307,8 +307,21 @@ export default {
             getCode() {
                 if(this.mobile_phone.length == 10) {
                     this.alert = false;
-                    this.getCodeForm = false;
-                    this.codeForm = true;
+                    axios
+                        .post('api/send-sms',
+                            {
+                                'mobile_phone': '38' + this.mobile_phone
+                            }
+                        )
+                        .then(responce => {
+                            if (responce.data.success) {
+                                this.getCodeForm = false;
+                                this.codeForm = true;
+                            }
+                        })
+                        .catch(e => {
+                            // this.errors.push(e)
+                        })                    
                 } else {
                     this.alert = true;
                 }

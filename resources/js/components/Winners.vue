@@ -63,6 +63,28 @@ export default {
             'v-header': Header,
             'v-footer': Footer
         },
+        data() {
+            return {
+                journal: [],
+                coulomb: []
+            }
+        },
+        beforeMount() {
+            axios
+                .get('api/winners', {
+                    headers: {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep'
+                        }
+                })
+                .then(responce => {
+                    console.log(responce.data);
+                    // this.stars = responce.data.users;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+        }
     
 }
 </script>
