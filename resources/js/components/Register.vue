@@ -260,7 +260,8 @@ export default {
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
-                    const filePhoto = dataURItoBlob(this.cropImg);
+                    if(this.avatar !== '') {
+                                            const filePhoto = dataURItoBlob(this.cropImg);
                     this.avatar = filePhoto;
 
                     testData.append("avatar", filePhoto);
@@ -270,9 +271,8 @@ export default {
                             console.log(formData[key]);
                             testData.append(key + "", formData[key]);
                     }
+                    }
 
-                    // xhr.open('POST', '/', true);
-                    // xhr.send(fd);
 
                     axios
                         .post('api/register', 
@@ -281,7 +281,7 @@ export default {
                         .then(responce => {
                             console.log(responce);
                             if (responce.data.success) {
-                                this.$router.push("cabinet");
+                                this.$router.push("Home");
                             }
                         })
                         .catch(e => {
