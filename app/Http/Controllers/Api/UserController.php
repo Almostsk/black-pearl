@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\VerifyCodeRequest;
 use Auth;
 use Exception;
 use Illuminate\Http\Response;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Api\SendSmsRequest;
+use App\Http\Requests\Api\VerifyCodeRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
 use App\Http\Resources\User\{WinnersResource, CabinetResource, GalleryResource, OurStarsResource};
@@ -40,17 +40,13 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function sendSms(SendSmsRequest $request)
+    public function sendCode(SendSmsRequest $request)
     {
         try{
             $code = mt_rand(1000, 9999);
-            $userId = $this->userService->findUserIdByPhone($request->mobile_phone);
 
-            // Saving to the database
-            $this->smsService->save([
-                'message_body' => $code,
-                'user_id' => $userId
-            ]);
+            // saving to session
+            session()->put(['code' => $code]);
 
             // Sending a message
             $response = $this->startMobileService->sendMessage($code, $request->mobile_phone);
@@ -77,21 +73,20 @@ class UserController extends Controller
                 'message' => 'Server error'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
     }
 
     public function verifyCode(VerifyCodeRequest $request)
     {
-        $userId = Auth::user()->id;
+        $code = session()->get('code');
 
-        if (!$userId) {
+        if (!$code) {
             return response()->json([
                 'success' => false,
-                'message' => 'User not found'
+                'message' => 'Resource not found'
             ], Response::HTTP_NOT_FOUND);
         }
 
-        if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
+        if ($request->code == $code) {
             return response()->json([
                 'success' => true
             ], Response::HTTP_OK);
@@ -99,8 +94,8 @@ class UserController extends Controller
 
         return response()->json([
             'success' => false,
-            'message' => 'Server error'
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            'message' => 'Codes does not match'
+        ]);
 
     }
 

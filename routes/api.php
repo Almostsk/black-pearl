@@ -2,13 +2,13 @@
 
 Route::group(['middleware' => 'jwt.auth'], function () {
 
-    Route::post('send-sms', 'UserController@sendSms');
-    Route::post('verify-code', 'UserController@verifyCode');
     Route::post('logout', 'AuthController@logout');
 
 });
 
 Route::group(['middleware' => 'api'], function () {
+    Route::post('send-sms', 'UserController@sendCode');
+    Route::post('verify-code', 'UserController@verifyCode');
 
     Route::get('cabinet', 'UserController@getCabinet');
     Route::post('cabinet/code', 'CodeController@register');

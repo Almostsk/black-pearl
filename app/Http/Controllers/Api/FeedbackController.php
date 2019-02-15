@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Listeners\SendNotificationToSlack;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreFeedbackRequest;
@@ -25,8 +26,8 @@ class FeedbackController extends Controller
     public function store(StoreFeedbackRequest $request)
     {
         if ($this->feedbackService->save($request->all())) {
-
-            $this->slackService->sendFormFilledMessage($request->name);
+            //event(new SendNotificationToSlack($request->name));
+            //$this->slackService->sendFormFilledMessage($request->name);
             return response([
                 'success' => 'true'
             ], Response::HTTP_CREATED);
