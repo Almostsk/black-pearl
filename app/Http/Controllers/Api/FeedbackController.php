@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\FeedbackFormCreated;
 use App\Listeners\SendNotificationToSlack;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class FeedbackController extends Controller
     public function store(StoreFeedbackRequest $request)
     {
         if ($this->feedbackService->save($request->all())) {
-            //event(new SendNotificationToSlack($request->name));
+            event(new FeedbackFormCreated($request->name));
             //$this->slackService->sendFormFilledMessage($request->name);
             return response([
                 'success' => 'true'
