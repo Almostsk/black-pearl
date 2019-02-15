@@ -3,6 +3,7 @@
 }
 .winners-title {
     margin-top: 210px;
+    margin-bottom: 15px;
     font-family: $thirdFont;
     font-size: 48px;
     letter-spacing: 1.2px;
@@ -51,4 +52,23 @@
 }
 .winners-journal {
     width: 40%;
+}
+
+
+//List animation
+
+.list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.liste-enter-active, .liste-leave-active {
+    transition: all 1s;
+  }
+.liste-enter, .liste-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(-50px);
 }

@@ -260,10 +260,8 @@ export default {
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
-                    const filePhoto = dataURItoBlob(this.cropImg);
-                    let fd = new FormData(document.forms[0]);
-                    let xhr = new XMLHttpRequest();
-
+                    if(this.avatar !== '') {
+                                            const filePhoto = dataURItoBlob(this.cropImg);
                     this.avatar = filePhoto;
 
                     testData.append("avatar", filePhoto);
@@ -273,9 +271,8 @@ export default {
                             console.log(formData[key]);
                             testData.append(key + "", formData[key]);
                     }
+                    }
 
-                    // xhr.open('POST', '/', true);
-                    // xhr.send(fd);
 
                     axios
                         .post('api/register', 
@@ -284,7 +281,7 @@ export default {
                         .then(responce => {
                             console.log(responce);
                             if (responce.data.success) {
-                                this.$router.push("cabinet");
+                                this.$router.push("Home");
                             }
                         })
                         .catch(e => {
@@ -310,16 +307,47 @@ export default {
             getCode() {
                 if(this.mobile_phone.length == 10) {
                     this.alert = false;
-                    this.getCodeForm = false;
-                    this.codeForm = true;
+                    axios
+                        .post('api/send-sms',
+                            {
+                                'mobile_phone': '38' + this.mobile_phone
+                            }
+                        )
+                        .then(responce => {
+                            if (responce.data.success) {
+                                this.getCodeForm = false;
+                                this.codeForm = true;
+                            }
+                        })
+                        .catch(e => {
+                            // this.errors.push(e)
+                        })                    
                 } else {
                     this.alert = true;
                 }
             },
             activeCode() {
                 if (this.mobile_code.length > 2) {
-                    this.alert = false;
-                    this.showPopup = false;
+                    axios
+                        .post('api/verify-code',
+                            {
+                                'code': this.mobile_code
+                            }
+                        )
+                        .then(responce => {
+                            if (responce.data.success) {
+                                this.alert = false;
+                                this.showPopup = false;
+                            } else {
+                                console.log(responce);
+                                this.alert = true;
+                            }
+                        })
+                        .catch(error => {
+                                console.log(error);
+                                this.alert = true;
+                            // this.errors.push(e)
+                        }) 
                 } else {
                     this.alert = true;
                 }

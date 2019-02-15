@@ -17,7 +17,7 @@
                             @click.native="getCode"
                             text="Відправити код"
                             color="gold"/>
-                    <a href="/register" class="register-btn">
+                    <a href="/registration" class="register-btn">
                         Зареєструватись
                     </a>
                 </form>
