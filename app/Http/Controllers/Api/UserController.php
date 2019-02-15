@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Auth;
+use Illuminate\Support\Facades\Cookie;
+use Session;
 use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -45,8 +47,11 @@ class UserController extends Controller
         try{
             $code = mt_rand(1000, 9999);
 
-            // saving to session
-            session()->put(['code' => $code]);
+            // saving to db
+            $this->smsService->save([
+                'mobile_phone' => $request->mobile_phone,
+                'message_body' => $code
+            ]);
 
             // Sending a message
             $response = $this->startMobileService->sendMessage($code, $request->mobile_phone);
@@ -58,9 +63,9 @@ class UserController extends Controller
             }
 
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Message service error'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_OK);
 
         } catch(ModelNotFoundException $notFoundHttpException) {
             return response()->json([
@@ -70,31 +75,24 @@ class UserController extends Controller
         } catch (Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => 'Server error'
+                'message' => $exception->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function verifyCode(VerifyCodeRequest $request)
     {
-        $code = session()->get('code');
+        $isValid = $this->smsService->isValidCode($request->mobile_phone, $request->code);
 
-        if (!$code) {
+        if (!$isValid) {
             return response()->json([
                 'success' => false,
-                'message' => 'Resource not found'
+                'message' => 'Wrong code'
             ], Response::HTTP_NOT_FOUND);
         }
 
-        if ($request->code == $code) {
-            return response()->json([
-                'success' => true
-            ], Response::HTTP_OK);
-        }
-
         return response()->json([
-            'success' => false,
-            'message' => 'Codes does not match'
+            'success' => true,
         ]);
 
     }

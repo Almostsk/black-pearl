@@ -11,4 +11,14 @@ class SmsRepository extends BaseRepository
     {
         parent::__construct($sms);
     }
+
+    public function getSmsWithPhoneNCode(string $mobilePhone, string $code)
+    {
+        return $this->model
+            ->where([
+                ['mobile_phone', $mobilePhone],
+                ['message_body', $code],
+            ])
+            ->first();
+    }
 }
