@@ -12,11 +12,17 @@ class FeedbackRepository extends BaseRepository
         parent::__construct($model);
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllForIndexPage()
     {
         return $this->model->select('id', 'active', 'name', 'email', 'mobile_phone')->get();
     }
 
+    /**
+     * @return mixed
+     */
     public  function getActiveFeedbacks()
     {
         return $this->model
@@ -25,6 +31,9 @@ class FeedbackRepository extends BaseRepository
             ->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function getInactiveFeedbacks()
     {
         return $this->model
@@ -33,6 +42,10 @@ class FeedbackRepository extends BaseRepository
             ->get();
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
     public function deactivate(int $id)
     {
         return $this->model->find($id)->update([

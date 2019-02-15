@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Session;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Feedback\Service\FeedbackService;
 

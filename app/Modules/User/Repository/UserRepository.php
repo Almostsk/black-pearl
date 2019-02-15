@@ -14,21 +14,33 @@ class UserRepository extends BaseRepository
         parent::__construct($user);
     }
 
+    /**
+     * @return int
+     */
     public function getOnModerationStatus()
     {
         return User::STATUS_ON_MODERATION;
     }
 
+    /**
+     * @return int
+     */
     public function getBannedStatus()
     {
         return User::STATUS_BANNED;
     }
 
+    /**
+     * @return int
+     */
     public function getAcceptedStatus()
     {
         return User::STATUS_ACCEPTED;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDataForTheGallery()
     {
         return $this->model
@@ -106,16 +118,27 @@ class UserRepository extends BaseRepository
             ->get();
     }
 
+    /**
+     * @param array $params
+     * @param int $id
+     */
     public function update(array $params, int $id)
     {
         $this->model->find($id)->update($params);
     }
 
+    /**
+     * @param array $params
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
     public function getAllWith(array $params)
     {
         return $this->model->with($params)->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsersStars()
     {
         return $this->model->where([
@@ -124,6 +147,9 @@ class UserRepository extends BaseRepository
         ])->with('status')->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsersWithCodes()
     {
         return $this->model
@@ -151,25 +177,25 @@ class UserRepository extends BaseRepository
         return $user;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllWinners()
     {
         return $this->model->whereHas('prizes')->get();
     }
 
-    public function getWinnersByPrizeId($prizeId)
+    /**
+     * @param int $prizeId
+     * @return mixed
+     */
+    public function getWinnersByPrizeId(int $prizeId)
     {
         return $this->model
             ->whereHas('prizes', function ($query) use ($prizeId) {
                 $query->where('prize_id', $prizeId);
             })
             ->get();
-    }
-
-    public function getWinnerOfPrize(int $prizeId)
-    {
-        return $this->model->whereHas('prizes', function($query) use ($prizeId) {
-            $query->where('prize_id', $prizeId);
-        })->get();
     }
 
     /**

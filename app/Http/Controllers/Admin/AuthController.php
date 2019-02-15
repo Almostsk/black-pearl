@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Session;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AuthorizeAdminRequest;
 use App\Modules\User\Service\UserService;
+use App\Http\Requests\Admin\AuthorizeAdminRequest;
 
 class AuthController extends Controller
 {

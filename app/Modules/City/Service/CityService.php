@@ -14,6 +14,11 @@ class CityService
         $this->cityRepository = $cityRepository;
     }
 
+    /**
+     * Get all cities
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
     public function getAll()
     {
         return $this->cityRepository->all();

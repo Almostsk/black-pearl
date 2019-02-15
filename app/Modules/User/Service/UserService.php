@@ -16,11 +16,18 @@ class UserService
      */
     protected $userRepository;
 
+    /**
+     * UserService constructor.
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
     public function all()
     {
         return $this->userRepository->all();
@@ -140,26 +147,34 @@ class UserService
         $this->userRepository->update($request->all(), $id);
     }
 
+    /**
+     * @return mixed
+     */
     public function getWinners()
     {
         return $this->userRepository->getAllWinners();
     }
 
+    /**
+     * @param int $prizeId
+     * @return mixed
+     */
     public function getWinnersByPrizeId(int $prizeId)
     {
         return $this->userRepository->getWinnersByPrizeId($prizeId);
     }
 
-    public function getPrizeWinners(int $prizeId)
-    {
-        return $this->userRepository->getWinnerOfPrize($prizeId);
-    }
-
+    /**
+     * @return mixed
+     */
     public function getUsersStars()
     {
         return $this->userRepository->getUsersStars();
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsersWithCodes()
     {
         return $this->userRepository->getUsersWithCodes();
@@ -180,11 +195,18 @@ class UserService
         return $filename;
     }
 
+    /**
+     * @return mixed
+     */
     public function getGalleryUsers()
     {
         return $this->userRepository->getDataForTheGallery();
     }
 
+    /**
+     * @param array $params
+     * @return bool
+     */
     public function authorizeAdmin(array $params)
     {
         if (Auth::attempt([
@@ -202,6 +224,9 @@ class UserService
         return false;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function getDataForPersonalCabinet()
     {
         $userId = Auth::user()->id;
@@ -209,6 +234,9 @@ class UserService
         return $this->userRepository->getDataForPersonalCabinet($userId);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection
+     */
     public function getRecentlyViewed()
     {
         $ids = Session::get('viewed');

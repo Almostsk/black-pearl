@@ -9,12 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Api\SendSmsRequest;
-use App\Http\Resources\User\WinnersResource;
-use App\Http\Resources\User\CabinetResource;
-use App\Http\Resources\User\GalleryResource;
-use App\Http\Resources\User\OurStarsResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
+use App\Http\Resources\User\{WinnersResource, CabinetResource, GalleryResource, OurStarsResource};
 
 class UserController extends Controller
 {
