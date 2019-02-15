@@ -128,7 +128,7 @@
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
                             <div class="page-5-star" v-for="star in stars" :key="star.id">
-                                <img class="page-5-star-photo" :src="star.avatar"   alt="avatar">
+                                <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>

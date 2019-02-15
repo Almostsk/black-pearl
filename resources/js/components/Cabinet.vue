@@ -46,7 +46,7 @@
                             </span>
                         </div>
                         <div class="register-photo">
-                            <img  class="cropped-photo" :src="user.Avatar">
+                            <img  class="cropped-photo" :src="'storage/' + user.Avatar">
                         </div>
                     </div>                    
             </div>

@@ -24,7 +24,7 @@
                 <swiper class="gallery-slider" :options="swiperOption">
                     <swiper-slide class="gallery-slide" v-for="woman in galleryWomen" :key="woman.id">
                         <div class="slider-img-container" @click.prevent="chooseStar($event, woman)">
-                            <img class="gallery-slide-image" :src="woman.Avatar" alt="">
+                            <img class="gallery-slide-image" :src="'storage/' + woman.Avatar" alt="">
                             <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
                         </div>
                     </swiper-slide>
@@ -93,7 +93,7 @@ export default {
                 .then(responce => {
                     console.log(responce);
                     this.galleryWomen = responce.data.users;
-                    this.imgUrl = responce.data.users[0].Avatar;
+                    this.imgUrl = 'storage/' + responce.data.users[0].Avatar;
                     this.starName = responce.data.users[0].Name;
                     this.starCity = responce.data.users[0].City;
                     this.starInfo = responce.data.users[0].AboutMe;
