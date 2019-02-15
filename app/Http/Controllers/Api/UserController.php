@@ -133,8 +133,8 @@ class UserController extends Controller
     public function winners()
     {
         return response()->json([
-            1 => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
-            2 => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
+            'first' => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
+            'second' => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
         ]);
     }
 }
