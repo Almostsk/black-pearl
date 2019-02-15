@@ -331,7 +331,8 @@ export default {
                     axios
                         .post('api/verify-code',
                             {
-                                'code': this.mobile_code
+                                'code': this.mobile_code,
+                                'mobile_phone': '38' + this.mobile_phone
                             }
                         )
                         .then(responce => {

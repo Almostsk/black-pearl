@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Session;
 use App\Http\Controllers\Controller;
 use App\Modules\User\Service\UserService;
