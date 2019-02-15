@@ -6,9 +6,10 @@ use Auth;
 use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
+use App\Http\Requests\Api\SendSmsRequest;
+use App\Http\Resources\User\WinnersResource;
 use App\Http\Resources\User\CabinetResource;
 use App\Http\Resources\User\GalleryResource;
 use App\Http\Resources\User\OurStarsResource;
@@ -97,11 +98,26 @@ class UserController extends Controller
 
     /**
      * Gets personal info for current user for the cabinet
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getCabinet()
     {
         return response()->json([
             'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
+        ]);
+    }
+
+    /**
+     * Gets all the winners and puts them to different arrays
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function winners()
+    {
+        return response()->json([
+            1 => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
+            2 => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
         ]);
     }
 }

@@ -8,13 +8,20 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 });
 
 Route::group(['middleware' => 'api'], function () {
+
     Route::get('/cabinet', 'UserController@getCabinet');
     Route::post('/cabinet/code', 'CodeController@register');
+
     Route::post('feedback/create', 'FeedbackController@store');
+
+    // dictionaries
+    Route::get('winners', 'UserController@winners');
     Route::get('stars', 'UserController@getOurStars');
     Route::get('gallery', 'UserController@getGallery');
+    Route::get('cities', 'CityController@index');
+
+    // auth
     Route::post('register', 'RegisterController@register');
     Route::post('login', 'AuthController@login');
-    Route::get('cities', 'CityController@index');
-    Route::get('stars', 'UserController@getOurStars');
+
 });

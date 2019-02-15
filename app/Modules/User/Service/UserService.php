@@ -145,6 +145,11 @@ class UserService
         return $this->userRepository->getAllWinners();
     }
 
+    public function getWinnersByPrizeId(int $prizeId)
+    {
+        return $this->userRepository->getWinnersByPrizeId($prizeId);
+    }
+
     public function getPrizeWinners(int $prizeId)
     {
         return $this->userRepository->getWinnerOfPrize($prizeId);
