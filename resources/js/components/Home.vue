@@ -12,7 +12,7 @@
                     <div class="page-1-block page-1-left"></div>
                     <div class="page-1-block page-1-center">
                         <img class="main-logo" src="/img/main/logo.png" alt="">
-                        <h2 class="main-title">Сяй разом <br> з «Чeрный Жемчуг» <br> та вигравай <br> подарунки щодня!</h2>
+                        <h2 class="main-title">Сяй разом <br class="br-desctop"/> з «Чeрный Жемчуг» <br class="br-tablets"/> <br class="br-desctop"/> та вигравай <br class="br-desctop"/> подарунки щодня!</h2>
                         <v-btn
                             text="Взяти участь"
                             link="/login"
