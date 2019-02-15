@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\VerifyCodeRequest;
 use Auth;
 use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\SendSmsRequest;
 use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
-use App\Http\Resources\User\CabinetResource;
-use App\Http\Resources\User\GalleryResource;
-use App\Http\Resources\User\OurStarsResource;
+use App\Http\Requests\Api\SendSmsRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
+use App\Http\Resources\User\{WinnersResource, CabinetResource, GalleryResource, OurStarsResource};
 
 class UserController extends Controller
 {
@@ -81,6 +80,30 @@ class UserController extends Controller
 
     }
 
+    public function verifyCode(VerifyCodeRequest $request)
+    {
+        $userId = Auth::user()->id;
+
+        if (!$userId) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
+            return response()->json([
+                'success' => true
+            ], Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Server error'
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+    }
+
     public function getOurStars()
     {
         return response()->json([
@@ -97,11 +120,26 @@ class UserController extends Controller
 
     /**
      * Gets personal info for current user for the cabinet
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getCabinet()
     {
         return response()->json([
             'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
+        ]);
+    }
+
+    /**
+     * Gets all the winners and puts them to different arrays
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function winners()
+    {
+        return response()->json([
+            1 => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
+            2 => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
         ]);
     }
 }

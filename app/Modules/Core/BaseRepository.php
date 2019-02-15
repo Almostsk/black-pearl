@@ -35,7 +35,7 @@ class BaseRepository
      */
     public function find($id)
     {
-        return $this->model->with('prizes')->find($id);
+        return $this->model->find($id);
     }
 
     /**

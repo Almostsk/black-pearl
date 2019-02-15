@@ -63,14 +63,22 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Winners of the prize
+     *
+     * @param $prizeId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function winnersOfPrize($prizeId)
     {
         return view('admin.users.index', [
-            'users' => $this->userService->getPrizeWinners($prizeId)
+            'users' => $this->userService->getWinnersByPrizeId($prizeId)
         ]);
     }
 
     /**
+     * Not moderated users
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function moderate()
@@ -80,6 +88,11 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Users participating in main prize flow
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function usersStars()
     {
         return view('admin.users.stars', [
@@ -87,6 +100,11 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Users who put their codes and they are valid
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function usersCodes()
     {
         return view('admin.users.users_codes', [
@@ -125,6 +143,11 @@ class UserController extends Controller
         return Excel::download(new UsersWithCodeExport(), 'codes_' . date("y_m_d_h_i_s") . '.xlsx');
     }
 
+    /**
+     * Get recently viewed users
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function recent()
     {
         return view('admin.users.recent', [

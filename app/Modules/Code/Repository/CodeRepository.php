@@ -12,16 +12,28 @@ class CodeRepository extends BaseRepository
         parent::__construct($code);
     }
 
+    /**
+     * @param string $codeName
+     * @return mixed
+     */
     public function findByCodeName(string $codeName)
     {
         return $this->model->where('code_name', $codeName)->first();
     }
 
+    /**
+     * @param array $params
+     * @param int $id
+     */
     public function update(array $params, int $id)
     {
         $this->model->find($id)->update($params);
     }
 
+    /**
+     * @param string $codeName
+     * @return mixed
+     */
     public function getIdByCode(string $codeName)
     {
         return $this->findByCodeName($codeName)->id;
