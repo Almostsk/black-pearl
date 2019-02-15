@@ -8,7 +8,7 @@ class Sms extends Model
 {
     protected $table = 'sms';
 
-    protected $fillable = ['user_id', 'message_body'];
+    protected $fillable = ['user_id', 'message_body', 'created_at', 'updated_at'];
 
     protected $casts = [
         'user_id' => 'integer'

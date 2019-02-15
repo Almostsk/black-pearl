@@ -11,5 +11,5 @@ class Prize extends Model
 
     protected $table = 'prizes';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'created_at', 'updated_at'];
 }

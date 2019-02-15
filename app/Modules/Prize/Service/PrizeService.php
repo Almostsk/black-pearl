@@ -14,6 +14,9 @@ class PrizeService
         $this->prizeRepository = $prizeRepository;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
     public function all()
     {
         return $this->prizeRepository->all();
