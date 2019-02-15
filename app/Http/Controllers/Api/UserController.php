@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\VerifyCodeRequest;
 use Auth;
 use Exception;
 use Illuminate\Http\Response;
@@ -76,6 +77,30 @@ class UserController extends Controller
                 'message' => 'Server error'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+    }
+
+    public function verifyCode(VerifyCodeRequest $request)
+    {
+        $userId = Auth::user()->id;
+
+        if (!$userId) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
+            return response()->json([
+                'success' => true
+            ], Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Server error'
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
 
     }
 
