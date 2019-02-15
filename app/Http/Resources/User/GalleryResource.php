@@ -19,6 +19,7 @@ class GalleryResource extends JsonResource
             'Name' => $this->name,
             'Surname' => $this->surname,
             'AboutMe' => $this->about_me,
+            'City'    => $this->city->name,
             'Avatar' => $this->avatar,
         ];
     }
