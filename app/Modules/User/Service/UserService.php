@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Modules\User\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class UserService
 {
@@ -63,17 +64,6 @@ class UserService
     public function findUserIdByPhone(string $phone): int
     {
         return $this->userRepository->findUserIdByPhone($phone);
-    }
-
-    /**
-     * Gets the code that has been sent on mobile to authorize user
-     *
-     * @param int $userId
-     * @return string
-     */
-    public function getCodeSentOnMobile(int $userId): string
-    {
-        return $this->userRepository->getCodeSentOnMobile($userId);
     }
 
     /**
@@ -144,7 +134,26 @@ class UserService
      */
     public function update(Request $request, int $id)
     {
-        $this->userRepository->update($request->all(), $id);
+        $params = $request->all();
+
+        if ($request->hasFile('avatar') && $request->has('about_me')) {
+            // is a participant in brand face
+
+            $filename = $this->storeAvatar($request);
+
+            return $this->userRepository->update(array_merge($params, [
+                'avatar' => $filename,
+                'can_be_brand_face' => true
+            ]), $id);
+        } elseif ($request->hasFile('avatar')) {
+            // participating only in black pearl but has avatar
+
+            $filename = $this->storeAvatar($request);
+
+            return $this->userRepository->update(array_merge($params, [
+                'avatar' => $filename
+            ]), $id);
+        }
     }
 
     /**
@@ -225,13 +234,18 @@ class UserService
     }
 
     /**
+     * @throws TokenExpiredException
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function getDataForPersonalCabinet()
     {
-        $userId = Auth::user()->id;
+        $user = Auth::user();
 
-        return $this->userRepository->getDataForPersonalCabinet($userId);
+        if ($user) {
+            return $this->userRepository->getDataForPersonalCabinet($user->id);
+        }
+
+        throw new TokenExpiredException();
     }
 
     /**
@@ -245,5 +259,10 @@ class UserService
             return $this->userRepository->getWithIds($ids);
         }
         return collect();
+    }
+
+    public function searchGallery(array $params)
+    {
+        return $this->userRepository->searchGallery($params['q']);
     }
 }

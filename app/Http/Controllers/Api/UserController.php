@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\SearchGalleryRequest;
+use App\Http\Requests\Api\UpdateUserCabinetRequest;
 use Auth;
-use Illuminate\Support\Facades\Cookie;
 use Session;
 use Exception;
 use Illuminate\Http\Response;
@@ -12,6 +13,7 @@ use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Api\SendSmsRequest;
 use App\Http\Requests\Api\VerifyCodeRequest;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
 use App\Http\Resources\User\{WinnersResource, CabinetResource, GalleryResource, OurStarsResource};
@@ -118,9 +120,22 @@ class UserController extends Controller
      */
     public function getCabinet()
     {
-        return response()->json([
-            'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
-        ]);
+        try {
+            return response()->json([
+                'user' => new CabinetResource($this->userService->getDataForPersonalCabinet())
+            ]);
+        } catch (TokenExpiredException $expiredException) {
+            return response()->json([
+                'user' => [],
+                'message' => 'Token expired'
+            ], Response::HTTP_UNAUTHORIZED);
+        } catch (Exception $exception) {
+            return response()->json([
+                'user' => [],
+                'message' => 'Server error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /**
@@ -130,9 +145,52 @@ class UserController extends Controller
      */
     public function winners()
     {
+        try {
+            return response()->json([
+                'first' => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
+                'second' => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
+            ]);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Resource not found'
+            ], Response::HTTP_NOT_FOUND);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Server error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Update user data from Personal Cabinet
+     *
+     * @param UpdateUserCabinetRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateUserCabinetRequest $request)
+    {
+        try {
+            $userId = Auth::user()->id;
+            $this->userService->update($request, $userId);
+
+            return response()->json([
+                'success' => true
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'user' => [],
+                'message' => 'Server error'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    public function searchGallery(SearchGalleryRequest $request)
+    {
         return response()->json([
-            'first' => WinnersResource::collection($this->userService->getWinnersByPrizeId(1)),
-            'second' => WinnersResource::collection($this->userService->getWinnersByPrizeId(2))
+            'users' => GalleryResource::collection($this->userService->searchGallery($request->all()))
         ]);
     }
 }

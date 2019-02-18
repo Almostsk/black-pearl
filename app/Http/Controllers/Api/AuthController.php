@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Modules\Sms\Service\SmsService;
 use JWTAuth;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -15,15 +16,17 @@ class AuthController extends Controller
 {
     use AuthenticatesUsers;
 
-    /**
-     * @var UserService $userService
-     */
-    protected $userService;
+    /** @var UserService $userService */
+    private $userService;
 
-    public function __construct(UserService $userService)
+    /** @var SmsService */
+    private $smsService;
+
+    public function __construct(UserService $userService, SmsService $smsService)
     {
         $this->middleware('auth:api', ['except' => ['login']]);
         $this->userService = $userService;
+        $this->smsService  = $smsService;
     }
 
     /**
@@ -35,10 +38,9 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        try{
-            /*$userId = $this->userService->findUserIdByPhone($request->mobile_phone);
+        try {
 
-            if ($request->code === $this->userService->getCodeSentOnMobile($userId)) {
+            if ($this->smsService->isValidCode($request->mobile_phone, $request->code)) {
 
                 if (!$token = JWTAuth::attempt([
                         'password' => config('app.user_password'),
@@ -55,17 +57,7 @@ class AuthController extends Controller
                     'success' => 'false',
                     'message' => 'codes don`t match'
                 ], Response::HTTP_NOT_FOUND);
-            }*/
-
-            if (!$token = JWTAuth::attempt([
-                'password' => config('app.user_password'),
-                'mobile_phone' => $request->mobile_phone,
-            ])
-            ) {
-                return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
             }
-
-            return $this->sendUserDataWithToken($token);
 
         } catch (ModelNotFoundException $notFoundException) {
             return response()->json([

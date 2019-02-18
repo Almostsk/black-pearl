@@ -73,15 +73,6 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param int $userId
-     * @return string
-     */
-    public function getCodeSentOnMobile(int $userId): string
-    {
-        return $this->find($userId)->code->message_body;
-    }
-
-    /**
      * Gets last three records from users table for 'our stars' block ( main page)
      *
      * @return mixed
@@ -216,6 +207,18 @@ class UserRepository extends BaseRepository
         return $this->model
             ->whereIn('id', $ids)
             ->select('id', 'name', 'surname', 'city_id', 'mobile_phone', 'status_id')
+            ->get();
+    }
+
+    public function searchGallery(string $q)
+    {
+        return $this->model
+            ->whereHas('city', function ($query) use ($q) {
+                $query->where('name', 'LIKE', '%' . $q . '%');
+            })
+            ->orWhere('name', 'LIKE', '%' . $q . '%')
+            ->orWhere('surname', 'LIKE', '%' . $q . '%')
+            ->where('avatar', '!=', '')
             ->get();
     }
 }
