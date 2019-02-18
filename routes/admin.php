@@ -1,8 +1,8 @@
 <?php
 
-Route::group(['middleware' => ['api']], function () {
+Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/auth', 'AuthController@logIn')->name('log_in');
+    Route::get('/auth', 'AuthController@logIn')->name('admin_login');
     Route::post('/authorize', 'AuthController@authorizeAdmin')->name('authorize');
 
 });

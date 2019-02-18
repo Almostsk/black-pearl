@@ -154,6 +154,8 @@ class UserService
                 'avatar' => $filename
             ]), $id);
         }
+
+        return $this->userRepository->update($params, $id);
     }
 
     /**

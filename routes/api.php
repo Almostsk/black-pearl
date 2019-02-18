@@ -13,7 +13,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('send-sms', 'UserController@sendCode');
     Route::post('verify-code', 'UserController@verifyCode');
 
-    Route::get('/gallery/search', 'UserController@searchGallery');
+    Route::get('gallery/search', 'UserController@searchGallery');
 
     Route::post('feedback/create', 'FeedbackController@store');
 
