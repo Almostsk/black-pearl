@@ -20,6 +20,9 @@
     font-family: $RobotoMedium;
     font-size: 18px;
     font-weight: 400;
+    @include tablets() {
+        font-size: 12px;
+    }
 }
 .header-link {
     color: black;

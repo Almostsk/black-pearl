@@ -229,9 +229,9 @@ class UserService
      */
     public function getDataForPersonalCabinet()
     {
-        // $userId = Auth::user()->id;
+        $userId = Auth::user()->id;
 
-        return $this->userRepository->getDataForPersonalCabinet(6);
+        return $this->userRepository->getDataForPersonalCabinet($userId);
     }
 
     /**

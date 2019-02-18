@@ -8,6 +8,9 @@
     @include laptop() {
         height: calc(100vh - 225px);
     }
+    @include tablets() {
+        height: calc(100vh - 220px);
+    }
 }
 .gallery-top, .gallery-bottom {
     width: 80%;
@@ -23,11 +26,18 @@
     @include laptop() {
         padding: 10px 0;
     }
+    @include tablets() {
+        height: 50%;
+        align-items: flex-end;
+    }
 }
 .gallery-photo {
     position: relative;
     height: 100%;
     width: auto;
+    @include tablets() {
+        height: 70%;
+    }
     .gallery-big-star {
         height: 100%;
         width: auto;
@@ -55,6 +65,9 @@
     @include laptop() {
         font-size: 24px;
     }
+    @include tablets() {
+        font-size: 24px;
+    }
 }
 .gallery-city {
     font-family: $secondFont;
@@ -63,6 +76,9 @@
     letter-spacing: 0.6px;
     @include laptop() {
         font-size: 18px;
+    }
+    @include tablets() {
+        font-size: 20px;
     }
 }
 .gallery-quote {
@@ -77,6 +93,10 @@
         margin-top: 10px;
         padding: 15px 20%;
     }
+    @include tablets() {
+        margin-top: 20px;
+        padding: 20px 10%;
+    }
 }
 .gallery-quote-text {
     font-family: $secondFont;
@@ -87,6 +107,9 @@
     position: relative;
     @include laptop() {
         font-size: 14px;
+    }
+    @include tablets() {
+        font-size: 12px;
     }
     &::before {
         content: '';
@@ -104,6 +127,12 @@
             width: 20px;
             height: 20px;
         }
+        @include tablets() {
+            left: -30px;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+        }
     }
     &::after {
         content: '';
@@ -116,7 +145,13 @@
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
         @include laptop() {
-            right: 30px;
+            right: -30px;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+        }
+        @include tablets() {
+            right: -30px;
             bottom: -10px;
             width: 20px;
             height: 20px;

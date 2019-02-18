@@ -20,3 +20,14 @@
     display: inline-block;
   }
 }
+.desktop-only {
+  @include tablets() {
+    display: none;
+  }
+}
+.mobile-only {
+  display: none;
+  @include tablets() {
+    display: flex;
+  }
+}

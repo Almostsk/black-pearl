@@ -10,6 +10,9 @@
     align-content: center;
     justify-content: center;
     padding: 5% 10%;
+    @include tablets {
+        padding-top: 10%;
+    }
     .title {
         color: black;
         font-size: 48px;
@@ -106,18 +109,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include tablets() {
+        flex-direction: column-reverse;
+    }
     .page-2-left {
         width: 60%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        @include tablets() {
+            width: 100%;
+            flex-direction: column;
+        }
     }
     .page-2-video {
         width: 700px;
         height: 450px;
         @include laptop() {
             width: 560px;
+            height: 315px;
+        }
+        @include tablets() {
+            width: 100%;
             height: 315px;
         }
         // width="560" height="315"
@@ -129,6 +143,9 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        @include tablets() {
+            width: 100%;
+        }
         .page-text {
             font-size: 24px;
             @include laptop() {
@@ -150,18 +167,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.page-3-left {
-    width: 30%;
-    height: 100%;
+    @include tablets() {
+        flex-direction: column;
+        .page-text {
+            font-size: 18px;
+            width: 70%;
+            text-align: center;
+            margin: 20px auto;
+        }
+    }
 }
 .page-3-left {
     background: url('../img/main/page3-coulomb.png') top center no-repeat;
     background-size: 55%;
+    width: 30%;
+    height: 100%;
+    @include tablets() {
+        background-size: contain;
+        width: 50%;
+        height: 30%;
+    }
 }
 .page-3-right {
     background: url('../img/main/page3-journal.png') bottom center no-repeat;
     background-size: 100%;
+    width: 30%;
+    height: 100%;
+    @include tablets() {
+        background-size: contain;
+        width: 50%;
+        height: 30%;
+    }
 }
 .page-3-center {
     padding: 5% 0;
@@ -188,10 +224,6 @@
         }
     }
 
-}
-.page-3-right {
-    width: 30%;
-    height: 100%;
 }
 .page-4 {
     background-color: transparent;

@@ -28,6 +28,13 @@
                         <div class="page-content page-2-content">
                             <div class="page-2-left">
                                 <iframe class="page-2-video"  src="https://www.youtube.com/embed/2Rmdtg9EEM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <v-btn
+                                    class="mobile-only"
+                                    text="Взяти участь"
+                                    link="/login"
+                                    color="gold"
+                                    @click.prevent.native="showPopup()"
+                                />
                             </div>
                             <div class="page-2-right">
                                 <p class="page-text">
@@ -37,6 +44,7 @@
                                     блискучі подарунки
                                 </p>
                                 <v-btn
+                                    class="desktop-only"
                                     text="Взяти участь"
                                     link="/login"
                                     color="gold"
@@ -51,7 +59,15 @@
                         <h2 class="title">Призи</h2>
                         <div class="page-content page-3-content">
                             <div class="page-3-left"></div>
-                            <div class="page-3-center">
+                            <div class="mobile-only">
+                                <p class="page-text">
+                                    Срібна прикраса з натуральною
+                                    чорною перлиною може стати
+                                    твоєю з кожним зареєстрованим
+                                    кодом
+                                </p>
+                            </div>
+                            <div class="page-3-center desktop-only">
                                 <p class="page-text">
                                     Срібна прикраса з натуральною
                                     чорною перлиною може стати
@@ -66,6 +82,14 @@
                                 </p>
                             </div>
                             <div class="page-3-right"></div>
+                            <div class="mobile-only">
+                                <p class="page-text">
+                                    Бери участь у творчому конкурсі
+                                    та стань натхненням для інших
+                                    у рекламній кампанії
+                                    «Черный жемчуг» 
+                                </p>
+                            </div>
                         </div>
                         <v-btn
                             text="Взяти участь"

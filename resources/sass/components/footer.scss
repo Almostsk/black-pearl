@@ -9,6 +9,9 @@
     @include laptop() {
         height: 160px;
     }
+    @include tablets() {
+        height: 160px;
+    }
 }
 .footer-text, .footer-link {
     font-family: $secondFont;
@@ -16,6 +19,10 @@
     color: black;
     font-weight: 400;
     line-height: 18px;
+    @include tablets() {
+        font-size: 10px;
+        line-height: 12px;
+    }
 }
 .footer-link {
     cursor: pointer;
