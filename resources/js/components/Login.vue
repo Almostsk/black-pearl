@@ -25,8 +25,10 @@
                     <the-mask   class="popup-input"
                                 mask="####-####-####" 
                                 type="text" 
+                                v-model="code"
                                 placeholder="Код підтвердження*"/>
                     <v-btn
+                            @click.native="login"
                             text="Відправити"
                             color="gold"/>
 
@@ -52,15 +54,67 @@ export default {
            codeForm: false,
            getCodeForm: true,
            phone_number: '',
+           code: '',
            displayPopup: false,
+           token: localStorage.getItem('token') || ''
        }
    }, 
    methods: {
        getCode: function() {
            console.log(this.phone_number);
-           this.codeForm = !this.codeForm
-           this.getCodeForm = !this.getCodeForm
+        //    this.codeForm = !this.codeForm
+        //    this.getCodeForm = !this.getCodeForm
+
+            if (this.phone_number.length == 10) {
+                
+                axios
+                    .post('api/send-sms',
+                        {
+                            'mobile_phone': '38' + this.phone_number
+                        }
+                    )
+                    .then(responce => {
+                        if (responce.data.success) {
+                            this.getCodeForm = false;
+                            this.codeForm = true;
+                        }
+                    })
+                    .catch(e => {
+                        // this.errors.push(e)
+                    })   
+            }
+
        },
+       login: function() { 
+
+                if (this.code.length > 2) {
+                    axios
+                        .post('api/login',
+                            {
+                                'code': this.code,
+                                'mobile_phone': '38' + this.phone_number
+                            }
+                        )
+                        .then(responce => {
+                            if (responce.data.token) {
+                                const token = responce.data.token;
+                                localStorage.setItem('token', token);
+                                this.$router.push('/')
+                                // this.$emit('close');
+                            } else {
+                                console.log(responce);
+                                localStorage.removeItem('token');
+                            }
+                        })
+                        .catch(error => {
+                                console.log(error);
+                                // this.alert = true;
+                            // this.errors.push(e)
+                        }) 
+                } else {
+                    this.alert = true;
+                }
+        }
    }
 }
 </script>

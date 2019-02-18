@@ -1,7 +1,9 @@
 <template>
     <div class="header-container">
         <div class="header-hat" v-if="hatShow">
-            <img src="/img/main/logo.png" alt="logo">
+            <router-link class="header-logo-link" to="/">
+                <img src="/img/main/logo.png" alt="logo">
+            </router-link>
         </div>
         <div class="header">
             <ul class="header-list">
