@@ -181,7 +181,8 @@
                 },
                 pageNum: 0,
                 Popup: false,
-                stars: []
+                stars: [],
+                token: localStorage.getItem('token') || ''
             }
         },
         methods: {
@@ -192,7 +193,12 @@
                     this.$refs.fullpage.$fullpage.moveTo(index, true);
                 },
                 showPopup() {
-                    this.Popup = true;
+                    if(this.token == '') {
+                         this.Popup = true;
+                    } else {
+                        this.$router.push('/cabinet')
+                    }
+                   
                 }
         },
         beforeMount() {

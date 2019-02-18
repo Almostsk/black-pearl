@@ -3,7 +3,7 @@
         <v-header
             :display-hat="true"
         />
-        <div class="cabinet-content">
+        <div class="cabinet-content" v-if="token != ''">
             <div class="cabinet-top">
                 <div class="cabinet-container">
                     <div class="cabinet-info-block">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cabinet-bottom" v-if="user.Can_be_brand_face == 1 ">
+            <div class="cabinet-bottom" v-if="user.Can_be_brand_face == '1' ">
                     <div class="register-star-title-container">
                         <h1 class="register-star-title">ВИ БЕРЕТЕ УЧАСТЬ У КОНКУРСІ «САМА СОБІ ЗІРКА»</h1>
                         <!-- <span>Тоді візьміть участь у творчому конкурсі «Сама собі зірка»</span> -->
@@ -50,7 +50,7 @@
                         </div>
                     </div>                    
             </div>
-            <div class="register-bottom" v-if="user.Can_be_brand_face !== 1 ">
+            <div class="register-bottom" v-if="user.Can_be_brand_face == '0' ">
                 <div class="register-star">
                     <div class="register-star-title-container">
                         <h1 class="register-star-title">БАЖАЄТЕ СТАТИ ЗІРКОЮ РЕКЛАМНОЇ КАМПАНІЇ «ЧЕРНЫЙ ЖЕМЧУГ»? </h1>
@@ -84,6 +84,12 @@
                 />
             </div>
         </div>
+        <div class="unautorized" v-if="token == ''">
+        </div>
+        <v-login
+            v-if="token == ''"
+            @close="Popup = false"
+        ></v-login>
         <v-footer/>
 
         <!-- Upload photo popup -->
@@ -120,6 +126,7 @@
     import Footer from './Footer.vue';
     import RegStar from './RegisterStar.vue';
     import Btn from './btn.vue';
+    import Login from './Login.vue';
     import VueCropper from 'vue-cropperjs';
     import { required, minLength, between } from 'vuelidate/lib/validators';
 
@@ -129,6 +136,7 @@ export default {
             'v-footer': Footer,
             'v-star': RegStar,
             'v-btn': Btn,
+            'v-login': Login,
             VueCropper,
         },
         data() {
@@ -140,6 +148,7 @@ export default {
                 popupImage: false,
                 imgSrc: '',
                 cropImg: '',
+                token: localStorage.getItem('token') || ''
             }
         },
         methods: {
@@ -149,7 +158,8 @@ export default {
                     .post('api/cabinet/code', {
                         headers: {
                             Accept : 'application/json, text/javascript',
-                            Connection: 'keep'
+                            Connection: 'keep',
+                            Authorization: this.token
                             },
                         name: this.packCode
                     })
@@ -205,7 +215,8 @@ export default {
                 .get('api/cabinet', {
                     headers: {
                         Accept : 'application/json, text/javascript',
-                        Connection: 'keep'
+                        Connection: 'keep',
+                        Authorization: this.token
                         }
                 })
                 .then(responce => {

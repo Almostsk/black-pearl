@@ -244,15 +244,15 @@
     }
     .btn-wrapper {
         margin-top: 15px;
-        @include laptop() {
+        @include desktop() {
             margin-top: 5px;
             margin-bottom: 5px;
             .btn {
                 margin-bottom: 5px;
-                height: 30px;
+                height: 40px;
                 width: 250px;
                 font-size: 18px;
-                line-height: 30px;
+                line-height: 40px;
             }
         }
     }
