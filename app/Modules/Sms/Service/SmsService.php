@@ -34,4 +34,9 @@ class SmsService
 
         return false;
     }
+
+    public function removeUnactualSms()
+    {
+        return $this->smsRepository->removeUnactualSms();
+    }
 }
