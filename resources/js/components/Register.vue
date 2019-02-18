@@ -260,17 +260,23 @@ export default {
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
-                    if(this.avatar !== '') {
-                                            const filePhoto = dataURItoBlob(this.cropImg);
-                    this.avatar = filePhoto;
+                    console.log('you herer');
 
-                    testData.append("avatar", filePhoto);
+
+                    if(this.cropImage !== '') {
+                        const filePhoto = dataURItoBlob(this.cropImg);
+                        this.avatar = filePhoto;
+
+                        testData.append("avatar", filePhoto);
+
+                    }
+
+                    console.log(formData);
 
                     for (const key in formData) {
                             console.log(key);
                             console.log(formData[key]);
                             testData.append(key + "", formData[key]);
-                    }
                     }
 
 
@@ -281,11 +287,11 @@ export default {
                         .then(responce => {
                             console.log(responce);
                             if (responce.data.success) {
-                                this.$router.push("Home");
+                                this.$router.push({name: "Home"});
                             }
                         })
                         .catch(e => {
-                            this.errors.push(e)
+                            // this.errors.push(e)
                         })
                 } else {
                     // this.$refs.check_rules.$el.classList.add("alert-input");
@@ -293,6 +299,7 @@ export default {
                 }
 
                 console.log(formData);
+                console.log('test',testData);
 
             },
             singleValues(items){

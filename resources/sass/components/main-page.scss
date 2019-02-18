@@ -42,20 +42,35 @@
 .page-1 {
     background: url('../img/page-1-bg.png') center no-repeat;
     background-size: cover;
+    @include tablets() {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .page-1-block {
     width: 33%;
     height: 100%;
+    @include tablets() {
+        width: 100%;
+    }
 }
 .page-1-left {
     background: url('../img/main/journal.png') left no-repeat;
     background-size: 100%;
     transform: translateX(-10%);
+    @include tablets() {
+        order: 2;
+        width: 50%;
+    }
 }
 .page-1-right {
     background: url('../img/main/coulomb.png') left no-repeat;
     background-size: 100%;
     transform: translateX(10%);
+    @include tablets() {
+        order: 3;
+        width: 50%;
+    }
 }
 .page-1-center {
     display: flex;
@@ -66,8 +81,14 @@
     @include laptop() {
         padding: 0;
     }
+    @include tablets() {
+        order: 1;
+    }
     .main-logo {
         width: 60%;
+        @include tablets() {
+            width: 40%;
+        }
     }
     .main-title {
         color: #fefefe;
@@ -223,15 +244,15 @@
     }
     .btn-wrapper {
         margin-top: 15px;
-        @include laptop() {
+        @include desktop() {
             margin-top: 5px;
             margin-bottom: 5px;
             .btn {
                 margin-bottom: 5px;
-                height: 30px;
+                height: 40px;
                 width: 250px;
                 font-size: 18px;
-                line-height: 30px;
+                line-height: 40px;
             }
         }
     }

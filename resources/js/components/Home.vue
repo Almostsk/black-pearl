@@ -12,7 +12,7 @@
                     <div class="page-1-block page-1-left"></div>
                     <div class="page-1-block page-1-center">
                         <img class="main-logo" src="/img/main/logo.png" alt="">
-                        <h2 class="main-title">Сяй разом <br> з «Чeрный Жемчуг» <br> та вигравай <br> подарунки щодня!</h2>
+                        <h2 class="main-title">Сяй разом <br class="br-desctop"/> з «Чeрный Жемчуг» <br class="br-tablets"/> <br class="br-desctop"/> та вигравай <br class="br-desctop"/> подарунки щодня!</h2>
                         <v-btn
                             text="Взяти участь"
                             link="/login"
@@ -128,7 +128,7 @@
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
                             <div class="page-5-star" v-for="star in stars" :key="star.id">
-                                <img class="page-5-star-photo" :src="star.avatar"   alt="avatar">
+                                <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
@@ -181,7 +181,8 @@
                 },
                 pageNum: 0,
                 Popup: false,
-                stars: []
+                stars: [],
+                token: localStorage.getItem('token') || ''
             }
         },
         methods: {
@@ -192,7 +193,12 @@
                     this.$refs.fullpage.$fullpage.moveTo(index, true);
                 },
                 showPopup() {
-                    this.Popup = true;
+                    if(this.token == '') {
+                         this.Popup = true;
+                    } else {
+                        this.$router.push('/cabinet')
+                    }
+                   
                 }
         },
         beforeMount() {

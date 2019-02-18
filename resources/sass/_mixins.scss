@@ -1,6 +1,6 @@
 
 @mixin desktop() {
-    @media only screen and (min-width: 1200px) and(max-height: 1600px) and (min-height: 781px) {
+    @media only screen and (min-width: 1200px) and(max-height: 1700px) and (min-height: 800px) {
       @content
     }
 }
@@ -9,4 +9,9 @@
     @media only screen and (min-width: 768px) and (max-width: 1599px) and (max-height: 780px) {
       @content
     }
+}
+@mixin tablets() {
+  @media screen and (max-width: 1024px) {
+    @content
+  }
 }

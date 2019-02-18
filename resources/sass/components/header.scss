@@ -45,6 +45,9 @@
     @include laptop() {
         height: 80px;
     }
+    .header-logo-link {
+        height: 100%;
+    }
     img {
         height: 80%;
         width: auto;
