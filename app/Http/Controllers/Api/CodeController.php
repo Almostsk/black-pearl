@@ -20,19 +20,21 @@ class CodeController extends Controller
 
     public function register(Request $request)
     {
-        $id = $this->codeService->getIdByCode($request->name);
+        $codeId = $this->codeService->getIdByCode($request->name);
 
-        if (!$id) {
+        if (!$codeId) {
             return response()->json([
                 'success' => false,
                 'message' => 'Resource not found'
             ], Response::HTTP_NOT_FOUND);
         }
 
-        if (Auth::user()) {
+        $user = Auth::user();
+
+        if ($user) {
             $updated = $this->codeService->update([
-                'user_id' => Auth::user()->id
-            ], $id);
+                'user_id' => $user->id
+            ], $codeId);
 
             if ($updated) {
                 return response()->json([

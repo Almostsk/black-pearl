@@ -4,15 +4,16 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::post('logout', 'AuthController@logout');
 
+    Route::get('cabinet', 'UserController@getCabinet');
+    Route::post('cabinet/code', 'CodeController@register');
+    Route::put('cabinet/update', 'UserController@update');
 });
 
 Route::group(['middleware' => 'api'], function () {
     Route::post('send-sms', 'UserController@sendCode');
     Route::post('verify-code', 'UserController@verifyCode');
 
-    Route::get('cabinet', 'UserController@getCabinet');
-    Route::post('cabinet/code', 'CodeController@register');
-    Route::put('cabinet/update', 'UserController@update');
+    Route::get('/gallery/search', 'UserController@searchGallery');
 
     Route::post('feedback/create', 'FeedbackController@store');
 
