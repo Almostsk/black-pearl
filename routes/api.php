@@ -12,6 +12,7 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('cabinet', 'UserController@getCabinet');
     Route::post('cabinet/code', 'CodeController@register');
+    Route::put('cabinet/update', 'UserController@update');
 
     Route::post('feedback/create', 'FeedbackController@store');
 

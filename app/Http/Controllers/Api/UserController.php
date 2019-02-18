@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use Auth;
-use Illuminate\Support\Facades\Cookie;
 use Session;
 use Exception;
 use Illuminate\Http\Response;
