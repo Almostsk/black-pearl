@@ -29,7 +29,9 @@
                                     name="code" 
                                     placeholder="Код з упаковки*" 
                                     :class="{'alert-input' : alert}"
-                                    v-model="packCode">
+                                    v-model="packCode"
+                                    v-on:keyup.enter.prevent.native = "sendCode"
+                                    >
                             <button class="cabinet-page-btn" @click.prevent="sendCode()">Зареєструвати</button>
                         </form>
                     </div>
@@ -154,6 +156,84 @@ export default {
             }
         },
         methods: {
+            sendReg() {
+                let formData = {
+                    about_me: this.about_me,
+                };
+
+
+                let testData = new FormData();
+
+                function dataURItoBlob(dataURI) {
+                    // convert base64 to raw binary data held in a string
+                    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+                    var byteString = atob(dataURI.split(',')[1]);
+
+                    // separate out the mime component
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                    // write the bytes of the string to an ArrayBuffer
+                    var ab = new ArrayBuffer(byteString.length);
+                    var ia = new Uint8Array(ab);
+                    for (var i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+
+                    //Old Code
+                    //write the ArrayBuffer to a blob, and you're done
+                    //var bb = new BlobBuilder();
+                    //bb.append(ab);
+                    //return bb.getBlob(mimeString);
+
+                    //New Code
+                    return new Blob([ab], {type: mimeString});
+
+
+                }
+
+
+                if(this.about_me) {
+
+                    if(this.cropImage !== '') {
+                        const filePhoto = dataURItoBlob(this.cropImg);
+                        this.avatar = filePhoto;
+                        testData.append("avatar", this.avatar);
+                        console.log('199', testData);
+
+                    }
+
+                    console.log('205',formData);
+
+                    for (const key in formData) {
+                            // console.log(key);
+                            // console.log(formData[key]);
+                            testData.append(key + "", formData[key]);
+                    }
+                    
+                    console.log('213',testData);
+
+                    if(testData) {
+                        let headers = {
+                            Accept : 'application/json, text/javascript',
+                            Connection: 'keep',
+                            Authorization: this.token
+                        };
+                        axios
+                        .post('api/cabinet/update', 
+                            testData , {headers : headers}
+                        )
+                        .then(responce => {
+                            console.log(responce);
+                            this.$router.push('/')
+                        })
+                        .catch(e => {
+                            // this.errors.push(e)
+                        })
+                    }
+
+                } 
+
+            },
             sendCode() {
                 console.log(this.packCode);
                 let headers = {
@@ -232,9 +312,14 @@ export default {
                 .then(responce => {
                     console.log(responce);
                     this.user = responce.data.user;
-                    if(responce.data.message == "Token has expired") {
+                    if(responce.data == "Unauthorized" && this.token != '') {
                         localStorage.removeItem('token');
-                    }
+                        this.token = '';
+                        this.$router.push('/')
+                    } 
+                    // if(responce.data == "Unauthorized" && this.token == '') {
+                        
+                    // }
                 })
                 .catch(error => {
                     console.log(error.request.statusText);

@@ -17,10 +17,19 @@
                             text="Взяти участь"
                             link="/login"
                             color="gold"
+                            class="desktop-only"
                             @click.prevent.native="showPopup()"
                         />
                     </div>
                     <div class="page-1-block page-1-right"></div>
+                        <v-btn
+                            text="Взяти участь"
+                            link="/login"
+                            color="gold"
+                            class="mobile-only"
+                            @click.prevent.native="showPopup()"
+                            style="order: 4;"
+                        />
                 </div>
                 <div class="page-2 page">
                     <div class="page-wrapper">
@@ -105,38 +114,46 @@
                         <div class="page-content page-4-content">
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-1.png" alt="">
-                                <span class="page-4-item-title">1.Реєструй</span>
-                                <p class="page-4-item-text">код з упаковки
-                                    «Черный Жемчуг» на сайті
-                                    samasobizirka.com.ua
-                                    або через SMS
-                                </p>
+                                <div class="page-4-item-text-cont">
+                                    <span class="page-4-item-title">1.Реєструй</span>
+                                    <p class="page-4-item-text">код з упаковки
+                                        «Черный Жемчуг» на сайті
+                                        samasobizirka.com.ua
+                                        або через SMS
+                                    </p>
+                                </div>
                             </div>
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-2.png" alt="">
-                                <span class="page-4-item-title">2.Вигравай</span>
-                                <p class="page-4-item-text">
-                                    прикрасу з чорною
-                                    перлиною щодня 
-                                </p>
+                                <div class="page-4-item-text-cont">
+                                    <span class="page-4-item-title">2.Вигравай</span>
+                                    <p class="page-4-item-text">
+                                        прикрасу з чорною
+                                        перлиною щодня 
+                                    </p>
+                                </div>
                             </div>
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-3.png" alt="">
-                                <span class="page-4-item-title">3.Додай</span>
-                                <p class="page-4-item-text">
-                                    своє фото та розкажи,
-                                    що надихає тебе
-                                    залишатись молодою
-                                    та красивою 
-                                </p>
+                                <div class="page-4-item-text-cont">
+                                    <span class="page-4-item-title">3.Додай</span>
+                                    <p class="page-4-item-text">
+                                        своє фото та розкажи,
+                                        що надихає тебе
+                                        залишатись молодою
+                                        та красивою 
+                                    </p>
+                                </div>
                             </div>
                             <div class="page-4-item">
                                 <img class="page-4-ico" src="/img/main/page-4-ico-4.png" alt="">
-                                <span class="page-4-item-title">4.Отримай</span>
-                                <p class="page-4-item-text">
-                                    шанс стати зіркою рекламної
-                                    кампанії «Черный Жемчуг» 
-                                </p>
+                                <div class="page-4-item-text-cont">
+                                    <span class="page-4-item-title">4.Отримай</span>
+                                    <p class="page-4-item-text">
+                                        шанс стати зіркою рекламної
+                                        кампанії «Черный Жемчуг» 
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <v-btn
@@ -151,11 +168,20 @@
                     <div class="page-5-content">
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
-                            <div class="page-5-star" v-for="star in stars" :key="star.id">
+                            <div class="page-5-star desktop-only" v-for="star in stars" :key="star.id">
                                 <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
+                            <swiper class="stars-slider mobile-only" :options="swiperOption">
+                                <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id">
+                                    <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
+                                    <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
+                                    <span class="page-5-star-city">м. {{ star.city }}</span>
+                                </swiper-slide>
+                            </swiper>
+                            <div class="swiper-button-prev" slot="button-prev"></div>
+                            <div class="swiper-button-next" slot="button-next"></div>
                         </div>
                         <v-btn
                             text="До галереї"
@@ -196,6 +222,28 @@
         },
         data: function() {
             return {
+                swiperOption: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                    pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev'
+                    },
+                    breakpoints: {
+                        1024: {
+                        slidesPerView: 1,
+                        // spaceBetween: 40
+                        },
+                        640: {
+                        slidesPerView: 1,
+                        // spaceBetween: 20
+                        }
+                    }
+                },
                 opts: {
                     start: 0,
                     dir: 'v',

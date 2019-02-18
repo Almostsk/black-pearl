@@ -6,12 +6,13 @@
         <div class="popup-content-wrapper">
             <div class="popup-content">
                 <h2 class="popup-title">Будь ласка, авторизуйтесь</h2>
-                <form action="POST" class="popup-form" v-if="getCodeForm">
+                <div  class="popup-form" v-if="getCodeForm">
                     <the-mask   class="popup-input"
                                 mask="(###)###-##-##" 
                                 type="tel" 
                                 placeholder="Номер телефону*"
                                 v-model="phone_number"
+                                v-on:keyup.enter.prevent.native = "getCode"
                                 />
                     <v-btn  
                             @click.native="getCode"
@@ -20,19 +21,21 @@
                     <a href="/registration" class="register-btn">
                         Зареєструватись
                     </a>
-                </form>
-                <form action="POST" class="popup-form" v-if="codeForm">
+                </div>
+                <div  class="popup-form" v-if="codeForm">
                     <the-mask   class="popup-input"
                                 mask="####-####-####" 
                                 type="text" 
                                 v-model="code"
+                                v-on:keyup.enter.prevent.native = "login"
                                 placeholder="Код підтвердження*"/>
                     <v-btn
                             @click.native="login"
                             text="Відправити"
                             color="gold"/>
+                            
 
-                </form>
+                </div>
             </div>
         </div>
     </div>

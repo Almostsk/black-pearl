@@ -3,6 +3,19 @@
         <v-header />
         <div class="gallery-container">
             <div class="gallery-top">
+                <div class="search-container">
+                    <div class="search-input-cont">
+                        <input 
+                            class="search-input" 
+                            type="search" 
+                            name="search"
+                            v-model="question"
+                            placeholder="Пошук зірок"
+                            v-on:keyup.enter = "search"
+                        >
+                    </div>
+                    <span class="search-alert" v-if="usersNone" >Користувачів не знайдено</span>
+                </div>
                 <div class="gallery-photo">
                     <img class="gallery-big-star" :src="imgUrl" alt="women">
                     <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
@@ -79,6 +92,8 @@ export default {
             starSurname: '',
             starInfo: '',
             galleryInfo: true,
+            question: '',
+            usersNone: false,
         }
     },
     methods: {
@@ -90,6 +105,35 @@ export default {
             this.starSurname = item.Surname;
             console.log(event.currentTarget);
 
+        },
+        search() {
+            
+                let headers = {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep',
+                    };
+                axios
+                .post('api/gallery/search', {
+                    q: this.question
+                }, {headers : headers})
+                .then(responce => {
+                    console.log(responce.data);
+                    if(responce.data.users.length > 1) {
+                        this.usersNone = false;
+                        this.galleryWomen = responce.data.users;
+                        this.imgUrl = 'storage/' + responce.data.users[0].Avatar;
+                        this.starName = responce.data.users[0].Name;
+                        this.starCity = responce.data.users[0].City;
+                        this.starInfo = responce.data.users[0].AboutMe;
+                        this.starSurname = responce.data.users[0].Surname;
+                    } else {
+                        this.usersNone = true;
+                        console.log('none users');
+                    }
+                })
+                .catch(e => {
+                    // this.errors.push(e)
+                })
         }
     },
     beforeMount() {

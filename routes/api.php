@@ -6,14 +6,14 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::get('cabinet', 'UserController@getCabinet');
     Route::post('cabinet/code', 'CodeController@register');
-    Route::put('cabinet/update', 'UserController@update');
+    Route::post('cabinet/update', 'UserController@update');
 });
 
 Route::group(['middleware' => 'api'], function () {
     Route::post('send-sms', 'UserController@sendCode');
     Route::post('verify-code', 'UserController@verifyCode');
 
-    Route::get('gallery/search', 'UserController@searchGallery');
+    Route::post('gallery/search', 'UserController@searchGallery');
 
     Route::post('feedback/create', 'FeedbackController@store');
 

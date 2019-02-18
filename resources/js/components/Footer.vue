@@ -10,7 +10,7 @@
                     <p class="footer-text">kyiv.reception@unilever.com</p>
                 </div>
                 <div class="footer-center">
-                    <a class="footer-link" href="#">
+                    <a class="footer-link" href="http://www.blackpearl.com.ua" target="_blank">
                         http://www.blackpearl.com.ua 
                     </a>
                     <v-btn

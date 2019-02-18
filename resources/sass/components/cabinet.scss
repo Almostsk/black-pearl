@@ -87,6 +87,10 @@
     @include laptop() {
         width: 100%;
     }
+    @include tablets() {
+        width: 100%;
+        padding: 10px;
+    }
     .code-input {
         width: 60%;
         padding: 10px;
@@ -106,6 +110,11 @@
         &:focus {
             outline: none;
         }
+        @include tablets() {
+            font-size: 12px;
+            margin-bottom: 10px;
+            width: 90%;
+        }
     }
     .cabinet-page-btn {
         width: 60%;
@@ -118,6 +127,10 @@
         background-color: #591478;
         border-radius: 30px;
         border: none;
+        @include tablets() {
+            font-size: 12px;
+            width: 90%;
+        }
     }
 }
 .cabinet-bottom {
@@ -140,6 +153,9 @@
     @include laptop() {
         padding: 40px 10%;
     }
+    @include tablets() {
+        padding: 20px 10%;
+    }
 }
 .cabinet-quote-text {
     margin: 0 auto;
@@ -152,6 +168,9 @@
     @include laptop() {
         font-size: 16px;
     }
+    @include tablets() {
+        font-size: 14px;
+    }
     &::before {
         content: '';
         display: block;
@@ -162,6 +181,12 @@
         height: 40px;
         background: url('../img/quote-open.png') center no-repeat;
         background-size: contain;
+        @include tablets() {
+            left: -30px;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+        }
     }
     &::after {
         content: '';
@@ -173,5 +198,11 @@
         height: 40px;
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
+        @include tablets() {
+            right: -30px;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+        }
     }
 }
