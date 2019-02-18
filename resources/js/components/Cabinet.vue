@@ -219,13 +219,13 @@ export default {
                         Authorization: this.token
                         }
                 })
-                .then(responce => {
-                    console.log(responce.data);
-                    this.user = responce.data.user;
+                .then(response => {
+                    console.log(response);
+                    this.user = response.data.user;
                 })
                 .catch(error => {
                     // this.errors.push(e)
-                    console.log(error.responce);
+                    console.log(error.response);
                 })
         },
 }
