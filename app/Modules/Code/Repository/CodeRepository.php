@@ -24,10 +24,11 @@ class CodeRepository extends BaseRepository
     /**
      * @param array $params
      * @param int $id
+     * @return mixed
      */
     public function update(array $params, int $id)
     {
-        $this->model->find($id)->update($params);
+        return $this->model->find($id)->update($params);
     }
 
     /**
@@ -36,6 +37,8 @@ class CodeRepository extends BaseRepository
      */
     public function getIdByCode(string $codeName)
     {
-        return $this->findByCodeName($codeName)->id;
+        $code = $this->findByCodeName($codeName);
+
+        return $code ? $code->id : null;
     }
 }
