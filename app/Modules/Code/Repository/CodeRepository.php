@@ -27,7 +27,7 @@ class CodeRepository extends BaseRepository
      */
     public function update(array $params, int $id)
     {
-        $this->model->find($id)->update($params);
+        return $this->model->find($id)->update($params);
     }
 
     /**

@@ -154,17 +154,21 @@ export default {
         methods: {
             sendCode() {
                 console.log(this.packCode);
+                let headers = {
+                        Accept : 'application/json, text/javascript',
+                        Connection: 'keep',
+                        Authorization: this.token
+                    };
                 axios
                     .post('api/cabinet/code', {
-                        headers: {
-                            Accept : 'application/json, text/javascript',
-                            Connection: 'keep',
-                            Authorization: this.token
-                            },
                         name: this.packCode
-                    })
+                    }, {headers : headers}
+                    )
                     .then(responce => {
-                        console.log(responce);
+                        if(responce.data.success) {
+                            this.user.Codes.push({Id: '', Name: this.packCode});
+                        }
+                        
                     })
                     .catch(error => {
                         console.log('Ошибка');
