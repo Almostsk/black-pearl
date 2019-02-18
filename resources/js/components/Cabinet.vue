@@ -28,6 +28,7 @@
                                     type="text" 
                                     name="code" 
                                     placeholder="Код з упаковки*" 
+                                    :class="{'alert-input' : alert}"
                                     v-model="packCode">
                             <button class="cabinet-page-btn" @click.prevent="sendCode()">Зареєструвати</button>
                         </form>
@@ -148,7 +149,8 @@ export default {
                 popupImage: false,
                 imgSrc: '',
                 cropImg: '',
-                token: localStorage.getItem('token') || ''
+                token: localStorage.getItem('token') || '',
+                alert: false
             }
         },
         methods: {
@@ -167,11 +169,15 @@ export default {
                     .then(responce => {
                         if(responce.data.success) {
                             this.user.Codes.push({Id: '', Name: this.packCode});
+                            this.alert = false;
+                        } else {
+                            this.alert = true;
                         }
                         
                     })
                     .catch(error => {
                         console.log('Ошибка');
+                         this.alert = true;
                     })
             },
             setImage(e) {
@@ -224,12 +230,14 @@ export default {
                         }
                 })
                 .then(responce => {
-                    console.log(responce.data);
+                    console.log(responce);
                     this.user = responce.data.user;
+                    if(responce.data.message == "Token has expired") {
+                        localStorage.removeItem('token');
+                    }
                 })
                 .catch(error => {
-                    // this.errors.push(e)
-                    console.log(error.responce);
+                    console.log(error.request.statusText);
                 })
         },
 }
