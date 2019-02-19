@@ -66,7 +66,7 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => config('response_message.wrong_code_error')
+                'message' => config('response_message.wrong_number_code_error')
             ], Response::HTTP_NOT_FOUND);
 
         } catch(ModelNotFoundException $notFoundHttpException) {
@@ -128,7 +128,7 @@ class UserController extends Controller
             return response()->json([
                 'user' => [],
                 'message' => config('response_message.token_expired_error')
-            ], Response::HTTP_UNAUTHORIZED);
+            ], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
             return response()->json([
                 'user' => [],

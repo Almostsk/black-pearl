@@ -8,5 +8,6 @@ return [
     'resource_not_found_error' => 'Ресурс не знайдений',
     'successfully_logged_out'  => 'Ви успішно вийшли з облікового запису',
     'wrong_promo_code_error'   => 'Введений Вами промокод невірний',
+    'wrong_number_code_error'  => 'Введений номер телефону невірний',
 
 ];
