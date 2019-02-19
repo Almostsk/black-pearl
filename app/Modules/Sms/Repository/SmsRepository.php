@@ -29,11 +29,11 @@ class SmsRepository extends BaseRepository
     }
 
     /**
-     * @return mixed
+     * Removes not actual sms
      */
     public function removeUnactualSms()
     {
-        return $this->model
+        $this->model
             ->where('created_at', '<', Carbon::now()->subMinutes(5)->toDateTimeString())
             ->delete();
     }

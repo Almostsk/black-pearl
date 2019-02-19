@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Modules\Sms\Service\SmsService;
 use JWTAuth;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Modules\Sms\Service\SmsService;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Modules\User\Service\UserService;
 use App\Http\Resources\User\UserResource;
@@ -55,14 +55,14 @@ class AuthController extends Controller
             } else {
                 return response()->json([
                     'success' => 'false',
-                    'message' => 'codes don`t match'
+                    'message' => config('response_message.wrong_code_error')
                 ], Response::HTTP_NOT_FOUND);
             }
 
         } catch (ModelNotFoundException $notFoundException) {
             return response()->json([
                 'success' => 'false',
-                'message' => 'User not found'
+                'message' => config('response_message.no_user_found_with_phone')
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -76,7 +76,10 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json([
+            'success' => true,
+            'message' => config('response_message.successfully_logged_out')
+        ]);
     }
 
     /**
