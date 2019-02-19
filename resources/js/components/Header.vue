@@ -6,7 +6,7 @@
             </router-link>
         </div>
         <div class="header">
-            <ul class="header-list">
+            <ul class="header-list desktop-only">
                 <li class="header-item">
                    <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo1')">Сама собі зірка</router-link>
                 </li>
@@ -30,11 +30,26 @@
                 </li>
             </ul>
         </div>
+        <Slide class="burger-menu mobile-only">
+                <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo1')">Сама собі зірка</router-link>
+                <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo2')">Призи</router-link>
+                <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo3')">Як взяти участь</router-link>
+                <router-link class="header-link" to="/gallery">Галерея</router-link>
+                <router-link class="header-link" to="/rules">Правила</router-link>
+                <router-link class="header-link" to="/winners">Переможці</router-link>
+                <router-link class="header-link" to="/cabinet">Особистий кабінет</router-link>
+        </Slide>
     </div>
 </template>
 
 <script>
+
+import { Slide } from 'vue-burger-menu' 
+
 export default {
+    components: {
+        Slide 
+    },
     props: {
         displayHat: false,
         activeItem: '',

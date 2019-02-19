@@ -19,7 +19,6 @@
 //components styles
 
 @import './components/popup';
-@import './components/common';
 @import './components/header';
 @import './components/footer';
 @import './components/btn';
@@ -30,6 +29,7 @@
 @import './components/winners';
 @import './components/cabinet';
 @import './components/main-page';
+@import './components/common';
 
 .navbar-laravel {
   background-color: #fff;

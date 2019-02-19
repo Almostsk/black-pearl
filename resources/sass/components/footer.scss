@@ -9,6 +9,13 @@
     @include laptop() {
         height: 160px;
     }
+    @include tablets() {
+        height: 160px;
+    }
+    @include phones() {
+        height: 270px;
+        margin-top: 10px;
+    }
 }
 .footer-text, .footer-link {
     font-family: $secondFont;
@@ -16,11 +23,19 @@
     color: black;
     font-weight: 400;
     line-height: 18px;
+    @include tablets() {
+        font-size: 10px;
+        line-height: 12px;
+    }
 }
 .footer-link {
     cursor: pointer;
     text-decoration: underline;
     margin-right: 15px;
+    @include phones() {
+        margin: 0 0 5px 0;
+        text-align: center;
+    }
     &:hover {
         color: black;
     }
@@ -33,33 +48,70 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @include phones() {
+        padding: 10px 0;
+    }
 }
 .footer-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @include phones() {
+        flex-direction: column;
+    }
 }
 .footer-left, .footer-center, .footer-right {
     width: 33%;
+    @include phones() {
+        width: 100%;
+    }
 }
 .footer-left {
     text-align: left;
+    @include phones() {
+        text-align: center;
+        order: 4;
+    }
 }
 .footer-center {
     text-align: center;
+    @include phones() {
+        order: 1;
+    }
+    .btn-wrapper {
+        @include phones() {
+            margin: 10px auto;
+        }
+    }
 }
 .footer-right {
     text-align: right;
+    @include phones() {
+        text-align: center;
+        order: 2;
+    }
 }
 .footer-right-container {
     float: right;
+    @include phones() {
+        float: none;
+    }
 }
 .footer-social {
     margin-top: 15px;
     text-align: left;
+    @include phones() {
+        text-align: center;
+        margin-top: 5px;
+    }
 }
 .footer-social-ico {
     margin-right: 15px;
+    img {
+        @include phones() {
+            height: 30px;
+        }
+    }
 }
 .footer-bottom {
     display: flex;
@@ -68,4 +120,9 @@
     &.footer-link {
         display: inline-block;
     }
+}
+.footer-links {
+    order: 3;
+    flex-direction: column;
+    margin: 5px auto;
 }

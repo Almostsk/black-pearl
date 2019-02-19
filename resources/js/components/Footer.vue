@@ -3,14 +3,14 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-left">
-                    <p class="footer-text">© Черный жемчуг 2018, Україна</p>
-                    <p class="footer-text">ТОВ "Юнілівер Україна"</p>
+                    <p class="footer-text">© Черный жемчуг 2018, Україна <span class="mobile-only" style="display: inline-block">ТОВ "Юнілівер Україна"</span></p>
+                    <p class="footer-text desktop-only">ТОВ "Юнілівер Україна"</p>
                     <p class="footer-text">Україна, Київ, 04119, вул.Дегтярівська, 27-Т, літера А</p>
                     <p class="footer-text">Телефон: +38 044 490 58 46</p>
                     <p class="footer-text">kyiv.reception@unilever.com</p>
                 </div>
                 <div class="footer-center">
-                    <a class="footer-link" href="#">
+                    <a class="footer-link" href="http://www.blackpearl.com.ua" target="_blank">
                         http://www.blackpearl.com.ua 
                     </a>
                     <v-btn
@@ -34,14 +34,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="footer-links mobile-only">
+                    <span  class="footer-link"
+                        @click="rulesShow()"
+                        @closeRules="rules = false"
+                    >Правила використання сайту</span>
+                <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
+                <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
+                </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom desktop-only">
                 <span  class="footer-link"
                     @click="rulesShow()"
                     @closeRules="rules = false"
                  >Правила використання сайту</span>
-                <a href="#" class="footer-link">Політика cookie</a>
-                <a href="#" class="footer-link">Політика про персональні дані</a>
+                <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
+                <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
             </div>
         </div>
         <v-feedback 

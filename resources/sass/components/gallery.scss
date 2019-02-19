@@ -8,6 +8,12 @@
     @include laptop() {
         height: calc(100vh - 225px);
     }
+    @include tablets() {
+        height: calc(100vh - 220px);
+    }
+    @include phones() {
+        height: auto;
+    }
 }
 .gallery-top, .gallery-bottom {
     width: 80%;
@@ -15,6 +21,7 @@
     position: relative;
 }
 .gallery-top {
+    position: relative;
     height: 55%;
     padding: 30px 0;
     display: flex;
@@ -23,14 +30,79 @@
     @include laptop() {
         padding: 10px 0;
     }
+    @include tablets() {
+        height: 50%;
+        align-items: flex-end;
+    }
+    @include phones() {
+        padding: 5px 0;
+        flex-direction: column;
+        height: auto;
+    }
+}
+.search-container {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 500;
+    @include phones() {
+        top: -40px;
+    }
+}
+.search-alert {
+    font-size: 12px;
+    color: #cccccc;
+}
+.search-input-cont {
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+        background: url('../img/search-ico.png') center no-repeat;
+        background-size: contain;
+    }
+}
+.search-input {
+    position: relative;
+    height: 30px;
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: none;
+    border: 1px solid #cccccc;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    @include phones() {
+        width: 200px;
+    }
+    &:focus {
+        outline: none;
+    }
 }
 .gallery-photo {
     position: relative;
     height: 100%;
     width: auto;
+    @include tablets() {
+        height: 70%;
+    }
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
     .gallery-big-star {
         height: 100%;
         width: auto;
+        @include phones() {
+            width: 100%;
+            height: auto;
+        }
     }
 }
 .gallery-info {
@@ -41,6 +113,9 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+    @include phones() {
+        padding: 0;
+    }
 }
 .gallery-name, .gallery-city {
     display: block;
@@ -55,6 +130,12 @@
     @include laptop() {
         font-size: 24px;
     }
+    @include tablets() {
+        font-size: 24px;
+    }
+    @include phones() {
+        font-size: 16px;
+    }
 }
 .gallery-city {
     font-family: $secondFont;
@@ -63,6 +144,12 @@
     letter-spacing: 0.6px;
     @include laptop() {
         font-size: 18px;
+    }
+    @include tablets() {
+        font-size: 20px;
+    }
+    @include phones() {
+        font-size: 14px;
     }
 }
 .gallery-quote {
@@ -77,6 +164,10 @@
         margin-top: 10px;
         padding: 15px 20%;
     }
+    @include tablets() {
+        margin-top: 20px;
+        padding: 20px 10%;
+    }
 }
 .gallery-quote-text {
     font-family: $secondFont;
@@ -87,6 +178,9 @@
     position: relative;
     @include laptop() {
         font-size: 14px;
+    }
+    @include tablets() {
+        font-size: 12px;
     }
     &::before {
         content: '';
@@ -104,6 +198,12 @@
             width: 20px;
             height: 20px;
         }
+        @include tablets() {
+            left: -25px;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+        }
     }
     &::after {
         content: '';
@@ -116,10 +216,16 @@
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
         @include laptop() {
-            right: 30px;
+            right: -30px;
             bottom: -10px;
             width: 20px;
             height: 20px;
+        }
+        @include tablets() {
+            right: -25px;
+            bottom: -10px;
+            width: 15px;
+            height: 15px;
         }
     }
 }
@@ -132,6 +238,11 @@
 }
 .gallery-bottom {
     height: 45%;
+    .swiper-button-prev, .swiper-button-next {
+        @include phones() {
+            top: 60%;
+        }
+    }
 }
 .gallery-title {
     font-family: $thirdFont;
@@ -147,6 +258,10 @@
 .gallery-slider {
     height: 70%;
     width: calc(100% - 100px);
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
 }
 .gallery-slide {
     display: flex;
@@ -161,9 +276,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
     .gallery-slide-image {
         height: 100%;
         width: auto;
         position: relative;
+        @include phones() {
+            width: 100%;
+            height: auto;
+        }
     }
 }

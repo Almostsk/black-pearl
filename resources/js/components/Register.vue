@@ -260,7 +260,6 @@ export default {
 
                 if(this.check_rules && this.check_policy && !this.$v.$invalid) {
 
-                    console.log('you herer');
 
 
                     if(this.cropImage !== '') {
