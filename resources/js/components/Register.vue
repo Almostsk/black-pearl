@@ -35,19 +35,19 @@
                     <div class="register-row">
                         <input class="register-input" type="text" name="code" placeholder="Код з упаковки*" ref="code" v-model="$v.code.$model" :class="{ 'alert-input': $v.code.$error }">
                         <div class="register-checkbox-container">
-                                <p-check name="check_rules" class="p-icon p-default" color="primary-o" ref="check_rules" v-model="check_rules">
+                                <p-check name="check_rules" class="p-icon p-default" color="primary-o" ref="check_rules" v-model="check_rules" @click.native.prevent="rulesActionShow">
                                 </p-check>
-                                <span class="register-checkbox-text">
+                                <span class="register-checkbox-text" @click="rulesActionShow">
                                     Я погоджуюсь <br>
-                                    з  <a class="checkbox-link" href="/rules"> Правилами Акції </a>
+                                    з  <span class="checkbox-link"> Правилами Акції </span>
                                 </span>
                         </div>
                         <div class="register-checkbox-container">
-                                <p-check name="check_privacy" class="p-icon p-default" color="primary-o" ref="check_policy" v-model="check_policy">
+                                <p-check name="check_privacy" class="p-icon p-default" color="primary-o" ref="check_policy" v-model="check_policy" @click.native.prevent="rulesPolicyShow">
                                 </p-check>
-                                <span class="register-checkbox-text">
+                                <span class="register-checkbox-text" @click="rulesPolicyShow">
                                     Я погоджуюсь <br>
-                                    з  <a class="checkbox-link" href="/rules"> Політикою конфіденційності </a>
+                                    з  <span class="checkbox-link"> Політикою конфіденційності </span>
                                 </span>
                         </div>
                         <!-- <button class="register-input register-page-btn" @click="sendReg()">Відправити</button> -->
@@ -136,6 +136,15 @@
             </div>
         </div>
 
+        <v-rules-pop
+            v-if="rulesPolicy"
+            @closeRules="rulesPolicy = false, check_policy = true"
+        />
+        <v-rules-pop
+            v-if="rulesAction"
+            @closeRules="rulesAction = false, check_rules = true"
+        />
+
 
     </div>
 </template>
@@ -147,6 +156,7 @@
     import RegStar from './RegisterStar.vue';
     import Btn from './btn.vue';
     import VueCropper from 'vue-cropperjs';
+    import RulesPopup from './RulesPopup.vue'
     import { required, minLength, between } from 'vuelidate/lib/validators';
 
 export default {
@@ -155,6 +165,7 @@ export default {
             'v-footer': Footer,
             'v-star': RegStar,
             'v-btn': Btn,
+            'v-rules-pop': RulesPopup,
             VueCropper,
         },
         data() {
@@ -176,7 +187,9 @@ export default {
                     alert: false,
                     popupImage: false,
                     imgSrc: '',
-                    cropImg: ''
+                    cropImg: '',
+                    rulesPolicy: false,
+                    rulesAction: false,
             }
         },
         validations: {
@@ -400,7 +413,13 @@ export default {
             },
             hideCropPopup() {
                 this.popupImage = false;
-            }
+            },
+            rulesPolicyShow() {
+                this.rulesPolicy = true;
+            },
+            rulesActionShow() {
+                this.rulesAction = true;
+            },
         },
         beforeMount() {
           axios
