@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
                 'surname' => 'Полянская',
                 'is_admin' => true,
                 'city_id' => 24,
-                'mobile_phone' => '380111111111',
+                'mobile_phone' => '380932302770',
                 'status_id' => 3,
                 'can_be_brand_face' => false,
                 'about_me' => 'Я Даша',
