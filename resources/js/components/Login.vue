@@ -108,7 +108,7 @@ export default {
                             if (responce.data.token) {
                                 const token = responce.data.token;
                                 localStorage.setItem('token', token);
-                                this.$router.push('/')
+                                this.$router.push('/cabinet')
                                 this.alertMessage = '';
                                 // this.$emit('close');
                             } else {
@@ -116,8 +116,8 @@ export default {
                                 localStorage.removeItem('token');
                             }
                         })
-                        .catch(error => {
-                                console.log(error);
+                        .catch(e => {
+                                console.log(e);
                                 this.alertMessage = e.response.data.message;
                                 // this.alert = true;
                             // this.errors.push(e)

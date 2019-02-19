@@ -86,6 +86,7 @@
                     link="/"
                     @click.native.prevent="sendReg()"
                 />
+                <span class="login-alert">{{ this.alertMessage }}</span>
             </div>
         </div>
         <v-footer/>
@@ -101,11 +102,13 @@
                         <the-mask class="popup-input" mask="(###)###-##-##" type="tel" placeholder="Номер телефону*" v-model="mobile_phone" v-on:keyup.enter.prevent.native = "getCode" />
                         <span class="alert-popup-text" :class="{'active' : alert}">Номер введений невірно</span>
                         <v-btn @click.native="getCode" text="Відправити код" color="gold" />
+                        <span class="login-alert">{{ this.alertMessage }}</span> 
                     </div>
                     <div class="popup-form" v-if="codeForm">
                         <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Промо код*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
                         <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span>
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
+                        <span class="login-alert">{{ this.alertMessage }}</span> 
 
                     </div>
                 </div>
@@ -190,6 +193,7 @@ export default {
                     cropImg: '',
                     rulesPolicy: false,
                     rulesAction: false,
+                    alertMessage: '',
             }
         },
         validations: {
@@ -276,7 +280,7 @@ export default {
 
 
                     if(this.cropImg != "") {
-                        console.log('crop');
+                        // console.log('crop');
                         const filePhoto = dataURItoBlob(this.cropImg);
                         this.avatar = filePhoto;
 
@@ -284,11 +288,11 @@ export default {
 
                     }
 
-                    console.log(formData);
+                    // console.log(formData);
 
                     for (const key in formData) {
-                            console.log(key);
-                            console.log(formData[key]);
+                            // console.log(key);
+                            // console.log(formData[key]);
                             testData.append(key + "", formData[key]);
                     }
 
@@ -301,9 +305,12 @@ export default {
                             console.log(responce);
                             if (responce.data.success) {
                                 this.$router.push({name: "Home"});
+                                this.alertMessage = '';
                             }
                         })
                         .catch(e => {
+                            const response = e.response;
+                            this.alertMessage = response.data.message;
                             // this.errors.push(e)
                         })
                 } else {
@@ -337,10 +344,12 @@ export default {
                             if (responce.data.success) {
                                 this.getCodeForm = false;
                                 this.codeForm = true;
+                                this.alertMessage = '';
                             }
                         })
                         .catch(e => {
                             // this.errors.push(e)
+                            this.alertMessage = e.response.data.message;
                         })                    
                 } else {
                     this.alert = true;
@@ -359,14 +368,16 @@ export default {
                             if (responce.data.success) {
                                 this.alert = false;
                                 this.showPopup = false;
+                                this.alertMessage = '';
                             } else {
                                 console.log(responce);
                                 this.alert = true;
                             }
                         })
-                        .catch(error => {
-                                console.log(error);
+                        .catch(e => {
+                                console.log(e.data.message);
                                 this.alert = true;
+                                this.alertMessage = 'Код введено невірно';
                             // this.errors.push(e)
                         }) 
                 } else {
