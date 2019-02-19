@@ -6,7 +6,7 @@
     height: 45px;
     background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
     @include phones() {
-        background: transparent;
+        display: none;
     }
 }
 .header-list {
@@ -54,6 +54,9 @@
     @include laptop() {
         height: 80px;
     }
+    @include phones() {
+        height: 80px;
+    }
     .header-logo-link {
         height: 100%;
     }
@@ -71,6 +74,9 @@
 
 //Burger menu
 .burger-menu {
+    position: absolute;
+    z-index: 9999;
+    top: 15px;
     .bm-menu {
         background-color: rgba(0,0,0, .8);
     }

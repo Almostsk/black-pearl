@@ -29,7 +29,8 @@
                     <router-link class="header-link" to="/cabinet">Особистий кабінет</router-link>
                 </li>
             </ul>
-            <Slide class="burger-menu">
+        </div>
+        <Slide class="burger-menu mobile-only">
                 <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo1')">Сама собі зірка</router-link>
                 <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo2')">Призи</router-link>
                 <router-link class="header-link" to="/" @click.native.prevent="$emit('goTo3')">Як взяти участь</router-link>
@@ -37,8 +38,7 @@
                 <router-link class="header-link" to="/rules">Правила</router-link>
                 <router-link class="header-link" to="/winners">Переможці</router-link>
                 <router-link class="header-link" to="/cabinet">Особистий кабінет</router-link>
-            </Slide>
-        </div>
+        </Slide>
     </div>
 </template>
 

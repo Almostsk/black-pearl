@@ -39,8 +39,8 @@
                         @click="rulesShow()"
                         @closeRules="rules = false"
                     >Правила використання сайту</span>
-                    <a href="#" class="footer-link">Політика cookie</a>
-                    <a href="#" class="footer-link">Політика про персональні дані</a>
+                <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
+                <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
                 </div>
             </div>
             <div class="footer-bottom desktop-only">
@@ -48,8 +48,8 @@
                     @click="rulesShow()"
                     @closeRules="rules = false"
                  >Правила використання сайту</span>
-                <a href="#" class="footer-link">Політика cookie</a>
-                <a href="#" class="footer-link">Політика про персональні дані</a>
+                <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
+                <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
             </div>
         </div>
         <v-feedback 

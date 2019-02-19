@@ -12,6 +12,10 @@
     @include laptop() {
         margin-top: 140px;
     }
+    @include phones() {
+        margin-top: 80px;
+        font-size: 28px;
+    }
 }
 .winners-container {
     width: 80%;
@@ -20,6 +24,9 @@
     min-height: 50vh;
     display: flex;
     justify-content: space-around;
+    @include phones() {
+        flex-direction: column;
+    }
 }
 .winners-list-title {
     font-family: $thirdFont;
@@ -28,6 +35,9 @@
     letter-spacing: 0.6px;
     text-align: center;
     color: #571375;
+    @include phones() {
+        font-size: 18px;
+    }
 }
 .winners-list {
     display: flex;
@@ -55,11 +65,18 @@
     @include tablets() {
         width: 45%;
     }
+    @include phones() {
+        width: 100%;
+    }
 }
 .winners-journal {
     width: 40%;
     @include tablets() {
         width: 45%;
+    }
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
     }
 }
 
