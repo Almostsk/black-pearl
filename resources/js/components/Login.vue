@@ -108,7 +108,8 @@ export default {
                             if (responce.data.token) {
                                 const token = responce.data.token;
                                 localStorage.setItem('token', token);
-                                this.$router.push('/cabinet')
+                                let routePush = this.$router.currentRoute.path == '/cabinet' ? '/' : '/cabinet';
+                                this.$router.push(routePush);
                                 this.alertMessage = '';
                                 // this.$emit('close');
                             } else {

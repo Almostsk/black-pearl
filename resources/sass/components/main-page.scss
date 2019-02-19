@@ -10,6 +10,9 @@
     align-content: center;
     justify-content: center;
     padding: 5% 10%;
+    @include laptop() {
+        padding-top: 6%; 
+    }
     @include tablets {
         padding-top: 10%;
     }
@@ -343,6 +346,7 @@
     padding: 5% 10% 0;
     width: 100%;
     @include laptop() {
+        padding-top: 6%;
         height: calc( 100% - 160px );
     }
     @include phones() {
@@ -353,22 +357,34 @@
         @include desktop() {
             margin-top: 5px;
             margin-bottom: 5px;
-            .btn {
-                margin-bottom: 5px;
-                height: 40px;
-                width: 250px;
-                font-size: 18px;
-                line-height: 40px;
-            }
+        }
+        @include laptop() {
+            margin: 5px 0;
         }
         @include phones() {
             margin: 5px 0;
-            .btn {
-                margin-bottom: 5px;
-                height: 25px;
+        }
+        .btn {
+            @include desktop() {
+                    margin-bottom: 5px;
+                    height: 40px;
+                    width: 250px;
+                    font-size: 18px;
+                    line-height: 40px;
+            }
+            @include laptop() {
+                margin-bottom: 0;
+                height: 30px;
                 width: 200px;
-                font-size: 14px;
-                line-height: 25px;
+                font-size: 16px;
+                line-height: 30px;  
+            }
+            @include phones() {
+                    margin-bottom: 5px;
+                    height: 25px;
+                    width: 200px;
+                    font-size: 14px;
+                    line-height: 25px;
             }
         }
     }
@@ -397,7 +413,6 @@
             display: block;
             top: 40%;
             right: 5%;
-            margin: 5px 0;
         }
     }
     @include phones() {

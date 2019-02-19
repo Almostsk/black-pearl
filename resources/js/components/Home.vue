@@ -30,13 +30,15 @@
                             @click.prevent.native="showPopup()"
                             style="order: 4;"
                         />
+                    <div class="arrow-down" @click="moveNext()"></div>    
                 </div>
                 <div class="page-2 page">
+                    <div class="arrow-up" @click="movePrev()"></div> 
                     <div class="page-wrapper">
                         <h2 class="title">Про акцію</h2>
                         <div class="page-content page-2-content">
                             <div class="page-2-left">
-                                <iframe class="page-2-video"  src="https://www.youtube.com/embed/2Rmdtg9EEM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="page-2-video"  src="https://www.youtube.com/embed/CrU-829qoUY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <v-btn
                                     class="mobile-only"
                                     text="Взяти участь"
@@ -62,8 +64,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="arrow-down" @click="moveNext()"></div> 
                 </div>
                 <div class="page-3 page">
+                    <div class="arrow-up" @click="movePrev()"></div> 
                     <div class="page-wrapper">
                         <h2 class="title">Призи</h2>
                         <div class="page-content page-3-content">
@@ -107,8 +111,10 @@
                             @click.prevent.native="showPopup()"
                         />
                     </div>
+                    <div class="arrow-down" @click="moveNext()"></div> 
                 </div>
                 <div class="page-4 page">
+                    <div class="arrow-up" @click="movePrev()"></div> 
                     <div class="page-wrapper">
                         <h2 class="title violet">Як взяти участь</h2>
                         <div class="page-content page-4-content">
@@ -163,8 +169,10 @@
                             @click.prevent.native="showPopup()"
                         />
                     </div>
+                    <div class="arrow-down" @click="moveNext()"></div> 
                 </div>
                 <div class="page-5 page">
+                    <div class="arrow-up" @click="movePrev()"></div> 
                     <div class="page-5-content">
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
@@ -260,6 +268,9 @@
         methods: {
                 moveNext() {
                     this.$refs.fullpage.$fullpage.moveNext(); //Move to the next page
+                },
+                movePrev() {
+                    this.$refs.fullpage.$fullpage.movePrev(); //Move to the next page
                 },
                 moveTo: function(index) {
                     this.$refs.fullpage.$fullpage.moveTo(index, true);

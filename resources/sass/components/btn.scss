@@ -5,6 +5,9 @@
     width: 100%;
     margin-top: 30px;
     margin-bottom: 15px;
+    @include laptop() {
+        margin-top: 15px;
+    }
     &.feedback {
         .btn {
             width: 200px;

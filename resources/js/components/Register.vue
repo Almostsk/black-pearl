@@ -33,7 +33,7 @@
                         />
                     </div>
                     <div class="register-row">
-                        <input class="register-input" type="text" name="code" placeholder="Код з упаковки*" ref="code" v-model="$v.code.$model" :class="{ 'alert-input': $v.code.$error }">
+                        <input class="register-input" type="text" name="code" placeholder="Промокод з упаковки*" ref="code" v-model="$v.code.$model" :class="{ 'alert-input': $v.code.$error }">
                         <div class="register-checkbox-container">
                                 <p-check name="check_rules" class="p-icon p-default" color="primary-o" ref="check_rules" v-model="check_rules" @click.native.prevent="rulesActionShow">
                                 </p-check>
@@ -69,7 +69,7 @@
                                 <textarea  
                                     name="about-me" 
                                     placeholder="Розкажіть про свою сцену чи аудиторію, що Вас надихає бути привабливою"
-                                    maxlength="180"
+                                    maxlength="250"
                                     v-model="about_me"
                                     ></textarea>
                             </div>
@@ -100,13 +100,13 @@
                     <h2 class="popup-title">Будь ласка, підтвердіть номер телефону</h2>
                     <div  class="popup-form" v-if="getCodeForm">
                         <the-mask class="popup-input" mask="(###)###-##-##" type="tel" placeholder="Номер телефону*" v-model="mobile_phone" v-on:keyup.enter.prevent.native = "getCode" />
-                        <span class="alert-popup-text" :class="{'active' : alert}">Номер введений невірно</span>
+                        <!-- <span class="alert-popup-text" :class="{'active' : alert}">Номер введений невірно</span> -->
                         <v-btn @click.native="getCode" text="Відправити код" color="gold" />
                         <span class="login-alert">{{ this.alertMessage }}</span> 
                     </div>
                     <div class="popup-form" v-if="codeForm">
-                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Промо код*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
-                        <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span>
+                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Код підтвердження*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
+                        <!-- <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span> -->
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
                         <span class="login-alert">{{ this.alertMessage }}</span> 
 
@@ -129,7 +129,7 @@
                     <div class="crop-image-container">
                         <vue-cropper class="crop-image-canvas" ref='cropper' :guides="true" :view-mode="2" drag-mode="crop"
                             aspect-ratio="1" :auto-crop-area="0.5" :min-container-width="250" :min-container-height="180"
-                            :background="true" :rotatable="true" :src="imgSrc" alt="" :img-style="{ 'width': '400px', 'height': '300px', 'margin': '0 auto' }">
+                            :background="true" :rotatable="true" :src="imgSrc" alt="" :img-style="cropWidth">
                         </vue-cropper>
                     </div>
                     <!-- <img :src="cropImg" style="width: 200px; height: 200px; border: 1px solid gray" alt="Cropped Image" /> -->
@@ -194,6 +194,9 @@ export default {
                     rulesPolicy: false,
                     rulesAction: false,
                     alertMessage: '',
+                    isStarCheck: true,
+                    windowWidth: '',
+                    cropWidth: {},
             }
         },
         validations: {
@@ -275,7 +278,15 @@ export default {
                     this.$refs.check_policy.$el.classList.remove("alert-input");
                 }
 
-                if(this.check_rules && this.check_policy && !this.$v.$invalid) {
+                if((this.about_me.length < 1 && this.cropImg.length > 1) || (this.about_me.length > 1 && this.cropImg.length < 1) ) {
+                    this.alertMessage = "Необхідно заповнити обидва поля участі у конкурсі";
+                    this.isStarCheck = false;
+                } else {
+                    this.alertMessage = '';
+                    this.isStarCheck = true;
+                }
+
+                if(this.check_rules && this.check_policy && !this.$v.$invalid && this.isStarCheck) {
 
 
 
@@ -375,9 +386,9 @@ export default {
                             }
                         })
                         .catch(e => {
-                                console.log(e.data.message);
+                                const response = e.response;
                                 this.alert = true;
-                                this.alertMessage = 'Код введено невірно';
+                                this.alertMessage = response.data.message;
                             // this.errors.push(e)
                         }) 
                 } else {
@@ -433,6 +444,15 @@ export default {
             },
         },
         beforeMount() {
+        this.windowWidth = window.innerWidth;
+
+        if(this.windowWidth > 500) {
+            console.log('>500');
+            this.cropWidth = { 'width': '400px', 'height': '300px', 'margin': '0 auto' };
+        } else {
+            console.log('<500');
+            this.cropWidth = { 'width': '250px', 'height': '180px', 'margin': '0 auto' };
+        }
           axios
              .get('api/cities'
             )

@@ -1,6 +1,9 @@
 .register-page {
     margin-top: 200px;
     width: 100%;
+    @include phones() {
+        margin-top: 90px;
+    }
     .footer {
         position: static;
     }
@@ -25,6 +28,10 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+    @include phones() {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
     .v-selectpage {
         width: 23%;
         height: 40px;
@@ -32,6 +39,10 @@
         border: none;
         background-color: #eee7f1;
         outline: none;
+        @include phones() {
+            width: 100%;
+            margin-bottom: 10px;
+        }
         .sp-input {
             //Sorry
             background: transparent !important;
@@ -86,6 +97,10 @@
     background-color: #eee7f1;
     outline: none;
     font-weight: 600;
+    @include phones() {
+        width: 100%;
+        margin-bottom: 10px;
+    }
     &:focus {
         outline: none;
     }
@@ -102,6 +117,10 @@
 .register-checkbox-container {
     width: 33%;
     height: 40px;
+    @include phones() {
+        width: 100%;
+        margin-bottom: 10px;
+    }
     .pretty.p-default:not(.p-fill) input:checked ~ .state.p-primary-o label:after {
         background-color: #591478 !important;
     }
@@ -131,6 +150,9 @@
         font-family: $secondFont;
         font-size: 16px;
         line-height: 20px;
+        @include phones() {
+            font-size: 12px;
+        }
     }
     .checkbox-link {
         color: #111111;
@@ -166,6 +188,10 @@
     letter-spacing: 0.6px;
     text-align: left;
     color: #591478;
+    @include phones() {
+        font-size: 18px;
+        text-align: center;
+    }
 }
 .register-star-form {
     width: 100%;
@@ -173,16 +199,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    @include phones() {
+        flex-direction: column;
+    }
 }
 .register-quote {
     display: flex;
     position: relative;
     align-items: center;
     width: 70%;
-    padding: 60px 20%;
+    padding: 60px 10%;
     background-color: #f0e8f4;
     @include laptop() {
         padding: 40px 8%;
+    }
+    @include phones() {
+        width: 100%;
+        padding: 30px 8%;
     }
     &::before {
         content: '1';
@@ -214,6 +247,12 @@
         height: 40px;
         background: url('../img/quote-open.png') center no-repeat;
         background-size: contain;
+        @include phones() {
+            left: -20px;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+        }
     }
     &::after {
         content: '';
@@ -225,6 +264,12 @@
         height: 40px;
         background: url('../img/quote-close.png') center no-repeat;
         background-size: contain;
+        @include phones() {
+            right: -20px;
+            bottom: -10px;
+            width: 15px;
+            height: 15px;
+        }
     }
     textarea {
         width: 600px;
@@ -245,6 +290,13 @@
             height: 120px;
             font-size: 18px;
         }
+        @include phones {
+            min-width: 240px;
+            min-height: 180px;
+            width: 100%;
+            height: auto;
+            font-size: 14px;
+        }
         &::placeholder {
             color: #000000;
         }
@@ -260,6 +312,10 @@
     position: relative;
     width: 25%;
     background-color: #f0e8f4;
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
+    }
     &::before {
         content: '2';
         display: block;
@@ -285,7 +341,7 @@
     .register-photo-text {
         font-family: $secondFont;
         color: #111111;
-        font-weight: 600;
+        font-weight: 500;
     }
     .cropped-photo {
         position: absolute;
@@ -300,6 +356,10 @@
     }
 }
 .popup-image-crop {
+    @include phones() {
+        bottom: 0;
+        position: fixed;
+    }
     .upload-file-container {
         position: relative;
         margin-bottom: 15px;
@@ -323,6 +383,10 @@
         height: 300px;
         border: 1px solid gray;
         display: inline-block;
+        @include phones() {
+            width: 280px;
+            height: 185px;
+        }
     }
     .crop-image-canvas {
         img[src=""] {

@@ -27,6 +27,9 @@
     padding: 5px;
     border-radius: 10px;
     background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+    @include phones() {
+        width: 320px;
+    }
 }
 .popup-content {
     width: 100%;
@@ -36,6 +39,9 @@
     padding: 30px 5%;
     .btn-wrapper {
         width: 60%;
+        @include phones() {
+            width: 100%;
+        }
         .btn {
             color: #390d52;
             font-size: 18px;
@@ -49,6 +55,9 @@
     letter-spacing: 0.6px;
     text-align: center;
     color: #ffffff;
+    @include phones() {
+        font-size: 16px;
+    }
 }
 .popup-form {
     display: flex;
@@ -68,6 +77,9 @@
     text-align: center;
     letter-spacing: 0.4px;
     color: #fffeff;
+    @include phones() {
+        width: 100%;
+    }
     &:focus {
         outline: none;
     }
@@ -100,6 +112,10 @@
 .rules-popup {
     width: 60%;
     height: 70%;
+    @include phones() {
+        width: 95%;
+        height: 90%;
+    }
     .popup-content {
         .btn-wrapper {
             width: 100%;
@@ -134,6 +150,9 @@
         letter-spacing: 0.5px;
         text-align: left;
         color: #ffffff;
+        @include phones() {
+            font-size: 12px;
+        }
     }
     li {
         list-style-type: disc;
@@ -144,8 +163,14 @@
     font-size: 24px;
     text-align: center;
     margin-bottom: 15px;
+    @include phones() {
+        font-size: 18px;
+    }
 }
 .popup-rules-subtitle {
     font-size: 18px;
     margin: 10px 0;
+    @include phones() {
+        font-size: 16px;
+    }
 }
