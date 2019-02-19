@@ -103,7 +103,7 @@
                         <v-btn @click.native="getCode" text="Відправити код" color="gold" />
                     </div>
                     <div class="popup-form" v-if="codeForm">
-                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Код підтвердження*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
+                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Промо код*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
                         <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span>
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
 
