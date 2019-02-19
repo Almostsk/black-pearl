@@ -56,8 +56,8 @@ class CodeController extends Controller
         } catch (Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => 'Server error'
-            ]);
+                'message' => config('response_message.server_error')
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

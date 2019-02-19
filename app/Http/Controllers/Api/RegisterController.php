@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Log;
 use Exception;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Modules\Code\Service\CodeService;
 use App\Modules\User\Service\UserService;
@@ -55,14 +56,14 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid code'
-            ]);
+                'message' => config('response_message.wrong_code_error')
+            ], Response::HTTP_NOT_FOUND);
 
         } catch(Exception $exception) {
             Log::warning($exception->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => $exception->getMessage()
+                'message' => config('response_message.server_error')
             ]);
         }
     }

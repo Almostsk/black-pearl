@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\SearchGalleryRequest;
-use App\Http\Requests\Api\UpdateUserCabinetRequest;
 use Auth;
 use Session;
 use Exception;
@@ -13,6 +11,8 @@ use App\Modules\Sms\Service\SmsService;
 use App\Modules\User\Service\UserService;
 use App\Http\Requests\Api\SendSmsRequest;
 use App\Http\Requests\Api\VerifyCodeRequest;
+use App\Http\Requests\Api\SearchGalleryRequest;
+use App\Http\Requests\Api\UpdateUserCabinetRequest;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\StartMobile\Service\SmsService as StartMobileService;
@@ -65,19 +65,19 @@ class UserController extends Controller
             }
 
             return response()->json([
-                'success' => true,
-                'message' => 'Message service error'
-            ], Response::HTTP_OK);
+                'success' => false,
+                'message' => config('response_message.wrong_code_error')
+            ], Response::HTTP_NOT_FOUND);
 
         } catch(ModelNotFoundException $notFoundHttpException) {
             return response()->json([
                 'success' => false,
-                'message' => 'No user found with this phone'
+                'message' => config('response_message.no_user_found_with_phone')
             ], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => $exception->getMessage()
+                'message' => config('response_message.server_error')
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -89,7 +89,7 @@ class UserController extends Controller
         if (!$isValid) {
             return response()->json([
                 'success' => false,
-                'message' => 'Wrong code'
+                'message' => config('response_message.wrong_code_error')
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -127,12 +127,12 @@ class UserController extends Controller
         } catch (TokenExpiredException $expiredException) {
             return response()->json([
                 'user' => [],
-                'message' => 'Token expired'
+                'message' => config('response_message.token_expired_error')
             ], Response::HTTP_UNAUTHORIZED);
         } catch (Exception $exception) {
             return response()->json([
                 'user' => [],
-                'message' => 'Server error'
+                'message' => config('response_message.server_error')
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -153,12 +153,12 @@ class UserController extends Controller
         } catch (ModelNotFoundException $modelNotFoundException) {
             return response()->json([
                 'success' => false,
-                'message' => 'Resource not found'
+                'message' => config('response_message.resource_not_found_error')
             ], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => 'Server error'
+                'message' => config('response_message.server_error')
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -181,7 +181,7 @@ class UserController extends Controller
         } catch (Exception $exception) {
             return response()->json([
                 'user' => [],
-                'message' => 'Server error'
+                'message' => config('response_message.server_error')
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

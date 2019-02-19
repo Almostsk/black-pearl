@@ -21,29 +21,23 @@ class DeleteUnactualSms extends Command
      */
     protected $description = 'Removing unactual sms';
 
-    /** @var SmsService */
-    private $smsService;
-
     /**
      * Create a new command instance.
      *
-     * @param SmsService $smsService
      * @return void
      */
-    public function __construct(SmsService $smsService)
+    public function __construct()
     {
-        $this->smsService = $smsService;
         parent::__construct();
     }
 
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @param SmsService $smsService
      */
-    public function handle()
+    public function handle(SmsService $smsService)
     {
-        \Log('123');
-        return $this->smsService->removeUnactualSms();
+        $smsService->removeUnactualSms();
     }
 }
