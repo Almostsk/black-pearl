@@ -33,11 +33,11 @@ class FeedbackController extends Controller
             return response([
                 'success' => 'true'
             ], Response::HTTP_CREATED);
-
         }
 
         return response([
-            'success' => 'false'
+            'success' => 'false',
+            'message' => config('response_message.server_error')
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
