@@ -56,7 +56,7 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => config('response_message.wrong_code_error')
+                'message' => config('response_message.wrong_promo_code_error')
             ], Response::HTTP_NOT_FOUND);
 
         } catch(Exception $exception) {
