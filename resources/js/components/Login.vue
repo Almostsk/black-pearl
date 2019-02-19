@@ -13,11 +13,12 @@
                                 placeholder="Номер телефону*"
                                 v-model="phone_number"
                                 v-on:keyup.enter.prevent.native = "getCode"
-                                />
+                                />       
                     <v-btn  
                             @click.native="getCode"
                             text="Відправити код"
                             color="gold"/>
+                    <span class="login-alert">{{ this.alertMessage }}</span>     
                     <a href="/registration" class="register-btn">
                         Зареєструватись
                     </a>
@@ -33,6 +34,7 @@
                             @click.native="login"
                             text="Відправити"
                             color="gold"/>
+                    <span class="login-alert">{{ this.alertMessage }}</span>         
                             
 
                 </div>
@@ -58,6 +60,7 @@ export default {
            getCodeForm: true,
            phone_number: '',
            code: '',
+           alertMessage: '',
            displayPopup: false,
            token: localStorage.getItem('token') || ''
        }
@@ -80,10 +83,13 @@ export default {
                         if (responce.data.success) {
                             this.getCodeForm = false;
                             this.codeForm = true;
-                        }
+                            this.alertMessage = '';
+                        } 
                     })
                     .catch(e => {
                         // this.errors.push(e)
+                        console.log(e.response.data.message);
+                        this.alertMessage = e.response.data.message;
                     })   
             }
 
@@ -102,15 +108,17 @@ export default {
                             if (responce.data.token) {
                                 const token = responce.data.token;
                                 localStorage.setItem('token', token);
-                                this.$router.push('/')
+                                this.$router.push('/cabinet')
+                                this.alertMessage = '';
                                 // this.$emit('close');
                             } else {
                                 console.log(responce);
                                 localStorage.removeItem('token');
                             }
                         })
-                        .catch(error => {
-                                console.log(error);
+                        .catch(e => {
+                                console.log(e);
+                                this.alertMessage = e.response.data.message;
                                 // this.alert = true;
                             // this.errors.push(e)
                         }) 

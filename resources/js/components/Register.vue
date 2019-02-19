@@ -35,19 +35,19 @@
                     <div class="register-row">
                         <input class="register-input" type="text" name="code" placeholder="Код з упаковки*" ref="code" v-model="$v.code.$model" :class="{ 'alert-input': $v.code.$error }">
                         <div class="register-checkbox-container">
-                                <p-check name="check_rules" class="p-icon p-default" color="primary-o" ref="check_rules" v-model="check_rules">
+                                <p-check name="check_rules" class="p-icon p-default" color="primary-o" ref="check_rules" v-model="check_rules" @click.native.prevent="rulesActionShow">
                                 </p-check>
-                                <span class="register-checkbox-text">
+                                <span class="register-checkbox-text" @click="rulesActionShow">
                                     Я погоджуюсь <br>
-                                    з  <a class="checkbox-link" href="/rules"> Правилами Акції </a>
+                                    з  <span class="checkbox-link"> Правилами Акції </span>
                                 </span>
                         </div>
                         <div class="register-checkbox-container">
-                                <p-check name="check_privacy" class="p-icon p-default" color="primary-o" ref="check_policy" v-model="check_policy">
+                                <p-check name="check_privacy" class="p-icon p-default" color="primary-o" ref="check_policy" v-model="check_policy" @click.native.prevent="rulesPolicyShow">
                                 </p-check>
-                                <span class="register-checkbox-text">
+                                <span class="register-checkbox-text" @click="rulesPolicyShow">
                                     Я погоджуюсь <br>
-                                    з  <a class="checkbox-link" href="/rules"> Політикою конфіденційності </a>
+                                    з  <span class="checkbox-link"> Політикою конфіденційності </span>
                                 </span>
                         </div>
                         <!-- <button class="register-input register-page-btn" @click="sendReg()">Відправити</button> -->
@@ -86,6 +86,7 @@
                     link="/"
                     @click.native.prevent="sendReg()"
                 />
+                <span class="login-alert">{{ this.alertMessage }}</span>
             </div>
         </div>
         <v-footer/>
@@ -101,11 +102,13 @@
                         <the-mask class="popup-input" mask="(###)###-##-##" type="tel" placeholder="Номер телефону*" v-model="mobile_phone" v-on:keyup.enter.prevent.native = "getCode" />
                         <span class="alert-popup-text" :class="{'active' : alert}">Номер введений невірно</span>
                         <v-btn @click.native="getCode" text="Відправити код" color="gold" />
+                        <span class="login-alert">{{ this.alertMessage }}</span> 
                     </div>
                     <div class="popup-form" v-if="codeForm">
-                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Код підтвердження*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
+                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Промо код*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
                         <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span>
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
+                        <span class="login-alert">{{ this.alertMessage }}</span> 
 
                     </div>
                 </div>
@@ -136,6 +139,15 @@
             </div>
         </div>
 
+        <v-rules-pop
+            v-if="rulesPolicy"
+            @closeRules="rulesPolicy = false, check_policy = true"
+        />
+        <v-rules-pop
+            v-if="rulesAction"
+            @closeRules="rulesAction = false, check_rules = true"
+        />
+
 
     </div>
 </template>
@@ -147,6 +159,7 @@
     import RegStar from './RegisterStar.vue';
     import Btn from './btn.vue';
     import VueCropper from 'vue-cropperjs';
+    import RulesPopup from './RulesPopup.vue'
     import { required, minLength, between } from 'vuelidate/lib/validators';
 
 export default {
@@ -155,6 +168,7 @@ export default {
             'v-footer': Footer,
             'v-star': RegStar,
             'v-btn': Btn,
+            'v-rules-pop': RulesPopup,
             VueCropper,
         },
         data() {
@@ -176,7 +190,10 @@ export default {
                     alert: false,
                     popupImage: false,
                     imgSrc: '',
-                    cropImg: ''
+                    cropImg: '',
+                    rulesPolicy: false,
+                    rulesAction: false,
+                    alertMessage: '',
             }
         },
         validations: {
@@ -263,7 +280,7 @@ export default {
 
 
                     if(this.cropImg != "") {
-                        console.log('crop');
+                        // console.log('crop');
                         const filePhoto = dataURItoBlob(this.cropImg);
                         this.avatar = filePhoto;
 
@@ -271,11 +288,11 @@ export default {
 
                     }
 
-                    console.log(formData);
+                    // console.log(formData);
 
                     for (const key in formData) {
-                            console.log(key);
-                            console.log(formData[key]);
+                            // console.log(key);
+                            // console.log(formData[key]);
                             testData.append(key + "", formData[key]);
                     }
 
@@ -288,9 +305,12 @@ export default {
                             console.log(responce);
                             if (responce.data.success) {
                                 this.$router.push({name: "Home"});
+                                this.alertMessage = '';
                             }
                         })
                         .catch(e => {
+                            const response = e.response;
+                            this.alertMessage = response.data.message;
                             // this.errors.push(e)
                         })
                 } else {
@@ -324,10 +344,12 @@ export default {
                             if (responce.data.success) {
                                 this.getCodeForm = false;
                                 this.codeForm = true;
+                                this.alertMessage = '';
                             }
                         })
                         .catch(e => {
                             // this.errors.push(e)
+                            this.alertMessage = e.response.data.message;
                         })                    
                 } else {
                     this.alert = true;
@@ -346,14 +368,16 @@ export default {
                             if (responce.data.success) {
                                 this.alert = false;
                                 this.showPopup = false;
+                                this.alertMessage = '';
                             } else {
                                 console.log(responce);
                                 this.alert = true;
                             }
                         })
-                        .catch(error => {
-                                console.log(error);
+                        .catch(e => {
+                                console.log(e.data.message);
                                 this.alert = true;
+                                this.alertMessage = 'Код введено невірно';
                             // this.errors.push(e)
                         }) 
                 } else {
@@ -400,7 +424,13 @@ export default {
             },
             hideCropPopup() {
                 this.popupImage = false;
-            }
+            },
+            rulesPolicyShow() {
+                this.rulesPolicy = true;
+            },
+            rulesActionShow() {
+                this.rulesAction = true;
+            },
         },
         beforeMount() {
           axios

@@ -33,6 +33,7 @@
                                     v-on:keyup.enter.prevent.native = "sendCode"
                                     >
                             <button class="cabinet-page-btn" @click.prevent="sendCode()">Зареєструвати</button>
+                            <span class="login-alert">{{ this.alertMessage }}</span>  
                         </form>
                     </div>
                 </div>
@@ -152,7 +153,8 @@ export default {
                 imgSrc: '',
                 cropImg: '',
                 token: localStorage.getItem('token') || '',
-                alert: false
+                alert: false,
+                alertMessage: '',
             }
         },
         methods: {
@@ -250,14 +252,17 @@ export default {
                         if(responce.data.success) {
                             this.user.Codes.push({Id: '', Name: this.packCode});
                             this.alert = false;
+                            this.alertMessage = '';
                         } else {
                             this.alert = true;
+                            this.alertMessage = 'Промо код невірний';
                         }
                         
                     })
-                    .catch(error => {
+                    .catch(e => {
                         console.log('Ошибка');
                          this.alert = true;
+                         this.alertMessage = 'Промо код невірний';
                     })
             },
             setImage(e) {
