@@ -37,4 +37,18 @@ class SmsRepository extends BaseRepository
             ->where('created_at', '<', Carbon::now()->subMinutes(5)->toDateTimeString())
             ->delete();
     }
+
+    /**
+     * @param string $mobilePhone
+     * @param string $code
+     */
+    public function removeEntityByCodeNPhone(string $mobilePhone, string $code)
+    {
+        $this->model
+            ->where([
+                ['mobile_phone', $mobilePhone],
+                ['message_body', $code],
+            ])
+            ->delete();
+    }
 }
