@@ -213,12 +213,16 @@ class UserRepository extends BaseRepository
     public function searchGallery(string $q)
     {
         return $this->model
-            ->whereHas('city', function ($query) use ($q) {
-                $query->where('name', 'LIKE', '%' . $q . '%');
+            ->join('cities', 'users.city_id', '=', 'cities.id')
+            ->select('users.id', 'users.name', 'users.surname', 'users.avatar', 'users.avatar', 'users.city_id')
+            ->where(function ($query) use ($q) {
+                $query->orWhere('users.name', 'LIKE', '%' . $q . '%');
+                $query->orWhere('surname', 'LIKE', '%' . $q . '%');
+                $query->orWhere('cities.name', 'LIKE', '%' . $q . '%');
             })
-            ->orWhere('name', 'LIKE', '%' . $q . '%')
-            ->orWhere('surname', 'LIKE', '%' . $q . '%')
-            ->where('avatar', '!=', '')
+            ->where(function ($query) use ($q) {
+                $query->where('avatar', '!=', '');
+            })
             ->get();
     }
 }
