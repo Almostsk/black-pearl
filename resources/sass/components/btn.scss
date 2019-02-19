@@ -25,6 +25,12 @@
     font-family: $secondFont;
     font-size: 24px;
     line-height: 50px;
+    @include phones() {
+        width: 220px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+    }
     &.gold {
         background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
     }

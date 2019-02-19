@@ -5,6 +5,9 @@
     width: 100%;
     height: 45px;
     background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
+    @include phones() {
+        background: transparent;
+    }
 }
 .header-list {
     margin: 0 auto;
@@ -28,6 +31,9 @@
     color: black;
     font-family: $RobotoMedium;
     text-decoration: none;
+    @include phones() {
+        color: #ffffff;
+    }
     &:hover {
         text-decoration: none;
         color: black;
@@ -61,4 +67,17 @@
     top: 0;
     width: 100%;
     z-index: 5000;
+}
+
+//Burger menu
+.burger-menu {
+    .bm-menu {
+        background-color: rgba(0,0,0, .8);
+    }
+    .bm-burger-button {
+        top: 10px;
+    }
+    .bm-burger-bars {
+        background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+    }
 }
