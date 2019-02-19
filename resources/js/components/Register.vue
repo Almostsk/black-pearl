@@ -97,17 +97,17 @@
             <div class="popup-content-wrapper">
                 <div class="popup-content">
                     <h2 class="popup-title">Будь ласка, підтвердіть номер телефону</h2>
-                    <form action="POST" class="popup-form" v-if="getCodeForm">
-                        <the-mask class="popup-input" mask="(###)###-##-##" type="tel" placeholder="Номер телефону*" v-model="mobile_phone" />
+                    <div  class="popup-form" v-if="getCodeForm">
+                        <the-mask class="popup-input" mask="(###)###-##-##" type="tel" placeholder="Номер телефону*" v-model="mobile_phone" v-on:keyup.enter.prevent.native = "getCode" />
                         <span class="alert-popup-text" :class="{'active' : alert}">Номер введений невірно</span>
                         <v-btn @click.native="getCode" text="Відправити код" color="gold" />
-                    </form>
-                    <form action="POST" class="popup-form" v-if="codeForm">
-                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Код підтвердження*" v-model="mobile_code"/>
+                    </div>
+                    <div class="popup-form" v-if="codeForm">
+                        <the-mask class="popup-input" mask="####-####-####" type="text" placeholder="Код підтвердження*" v-model="mobile_code" v-on:keyup.enter.prevent.native = "activeCode"/>
                         <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span>
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -262,7 +262,8 @@ export default {
 
 
 
-                    if(this.cropImage !== '') {
+                    if(this.cropImg != "") {
+                        console.log('crop');
                         const filePhoto = dataURItoBlob(this.cropImg);
                         this.avatar = filePhoto;
 
