@@ -6,6 +6,9 @@
 .cabinet-page {
     margin-top: 195px;
     width: 100%;
+    @include phones() {
+        margin-top: 90px;
+    }
     .footer {
         position: static;
     }
@@ -15,6 +18,9 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    @include phones() {
+        flex-direction: column;
+    }
 }
 .cabinet-top {
     position: relative;
@@ -24,6 +30,9 @@
 }
 .cabinet-info-block {
     width: 60%;
+    @include phones() {
+        width: 100%;
+    }
 }
 .cabinet-main-info {
     margin-bottom: 15px;
@@ -73,6 +82,10 @@
 }
 .cabinet-reg-codes {
     width: 40%;
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
+    }
 }
 .reg-codes-form {
     display: flex;
@@ -155,6 +168,9 @@
     }
     @include tablets() {
         padding: 20px 10%;
+    }
+    @include phones() {
+        width: 100%;
     }
 }
 .cabinet-quote-text {

@@ -72,6 +72,11 @@
         text-align: center;
         order: 4;
     }
+    .mobile-only {
+        @include phones() {
+            display: inline-block;
+        }
+    }
 }
 .footer-center {
     text-align: center;

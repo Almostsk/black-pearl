@@ -3,7 +3,7 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-left">
-                    <p class="footer-text">© Черный жемчуг 2018, Україна <span class="mobile-only" style="display: inline-block">ТОВ "Юнілівер Україна"</span></p>
+                    <p class="footer-text">© Черный жемчуг 2018, Україна <span class="mobile-only">ТОВ "Юнілівер Україна"</span></p>
                     <p class="footer-text desktop-only">ТОВ "Юнілівер Україна"</p>
                     <p class="footer-text">Україна, Київ, 04119, вул.Дегтярівська, 27-Т, літера А</p>
                     <p class="footer-text">Телефон: +38 044 490 58 46</p>
@@ -25,20 +25,17 @@
                     <div class="footer-right-container">
                         <p class="footer-text">Ми в соціальних мережах</p>
                         <div class="footer-social">
-                            <a class="footer-social-ico" href="https://www.facebook.com/">
+                            <a class="footer-social-ico" href="https://www.facebook.com/blackpearlrukraine/">
                                 <img src="img/fb-ico.png" alt="">
                             </a>
-                            <a class="footer-social-ico" href="https://www.youtube.com/">
+                            <!-- <a class="footer-social-ico" href="https://www.youtube.com/">
                                 <img src="img/yt-ico.png" alt="">
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
                 <div class="footer-links mobile-only">
-                    <span  class="footer-link"
-                        @click="rulesShow()"
-                        @closeRules="rules = false"
-                    >Правила використання сайту</span>
+                    <span  class="footer-link">Правила використання сайту</span>
                 <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
                 <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
                 </div>
