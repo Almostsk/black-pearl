@@ -47,7 +47,10 @@ class AuthController extends Controller
                         'mobile_phone' => $request->mobile_phone,
                     ])
                 ) {
-                    return response()->json(['error' => true], Response::HTTP_UNAUTHORIZED);
+                    return response()->json([
+                        'success' => false,
+                        'message' => config('response_message.no_user_found_with_phone')
+                    ], Response::HTTP_UNAUTHORIZED);
                 }
 
                 return $this->sendUserDataWithToken($token);
