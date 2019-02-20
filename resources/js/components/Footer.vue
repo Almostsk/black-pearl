@@ -35,13 +35,13 @@
                     </div>
                 </div>
                 <div class="footer-links mobile-only">
-                    <span  class="footer-link">Правила використання сайту</span>
+                <a href="img/Rules.pdf" class="footer-link" target="_blank">Правила використання сайту</a>
                 <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
                 <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
                 </div>
             </div>
             <div class="footer-bottom desktop-only">
-                <span  class="footer-link">Правила використання сайту</span>
+                <a href="img/Rules.pdf" class="footer-link" target="_blank">Правила використання сайту</a>
                 <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
                 <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
             </div>
