@@ -24,6 +24,11 @@ class SmsService
         $this->smsRepository->save($params);
     }
 
+    /**
+     * @param string $mobilePhone
+     * @param string $code
+     * @return bool
+     */
     public function isValidCode(string $mobilePhone, string $code)
     {
         $isValid = $this->smsRepository->getSmsWithPhoneNCode($mobilePhone, $code);
@@ -35,8 +40,20 @@ class SmsService
         return false;
     }
 
+    /**
+     * Removes Sms that are not likely to be passed by
+     */
     public function removeUnactualSms()
     {
         $this->smsRepository->removeUnactualSms();
+    }
+
+    /**
+     * @param string $mobilePhone
+     * @param string $code
+     */
+    public function removeCurrentCode(string $mobilePhone, string $code)
+    {
+        $this->smsRepository->removeEntityByCodeNPhone($mobilePhone, $code);
     }
 }

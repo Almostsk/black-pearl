@@ -28,10 +28,10 @@ class CodeController extends Controller
         try {
             $codeId = $this->codeService->getIdByCode($request->name);
 
-            if (!$codeId) {
+            if ($this->codeService->isCodeValid($request->name)) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Resource not found'
+                    'message' => config('response_message.wrong_promo_code_error')
                 ], Response::HTTP_NOT_FOUND);
             }
 

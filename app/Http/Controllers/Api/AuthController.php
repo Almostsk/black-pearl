@@ -53,6 +53,8 @@ class AuthController extends Controller
                     ], Response::HTTP_NOT_FOUND);
                 }
 
+                $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
+
                 return $this->sendUserDataWithToken($token);
 
             } else {
