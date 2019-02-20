@@ -115,6 +115,7 @@
     align-items: flex-start;
     @include phones() {
         padding: 0;
+        width: 100%;
     }
 }
 .gallery-name, .gallery-city {
