@@ -226,4 +226,11 @@ class UserRepository extends BaseRepository
             })
             ->get();
     }
+
+    public function userExistsWithNumber(string $mobilePhone)
+    {
+        $user = $this->model->where('mobile_phone', '=', $mobilePhone)->first();
+
+        return $user ? true : false;
+    }
 }

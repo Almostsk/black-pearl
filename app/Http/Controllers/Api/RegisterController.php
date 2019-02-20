@@ -40,24 +40,29 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
+            if (!$this->userService->userExistsWithNumber($request->mobile_phone)) {
+                if ($this->codeService->isCodeValid($request->code)) {
+                    $user = $this->userService->save($request);
+                    $codeId = $this->codeService->getIdByCode($request->code);
 
-            if ($this->codeService->isCodeValid($request->code)) {
-                $user = $this->userService->save($request);
-                $codeId = $this->codeService->getIdByCode($request->code);
+                    $this->codeService->update([
+                        'user_id' => $user->id,
+                    ], $codeId);
 
-                $this->codeService->update([
-                    'user_id' => $user->id,
-                ], $codeId);
+                    return response()->json([
+                        'success' => true
+                    ]);
+                }
 
                 return response()->json([
-                    'success' => true
-                ]);
+                    'success' => false,
+                    'message' => config('response_message.wrong_promo_code_error')
+                ], Response::HTTP_NOT_FOUND);
             }
-
             return response()->json([
                 'success' => false,
-                'message' => config('response_message.wrong_promo_code_error')
-            ], Response::HTTP_NOT_FOUND);
+                'message' => config('response_message.duplicate_phone')
+            ]);
 
         } catch(Exception $exception) {
             Log::warning($exception->getMessage());
