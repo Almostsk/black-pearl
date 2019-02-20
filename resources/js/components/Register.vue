@@ -70,7 +70,7 @@
                                 <textarea  
                                     name="about-me" 
                                     placeholder="Розкажіть про свою сцену чи аудиторію, що Вас надихає бути привабливою"
-                                    maxlength="250"
+                                    maxlength="180"
                                     v-model="about_me"
                                     ></textarea>
                             </div>
