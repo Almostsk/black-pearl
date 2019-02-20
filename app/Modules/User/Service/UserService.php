@@ -267,4 +267,9 @@ class UserService
     {
         return $this->userRepository->searchGallery($params['q']);
     }
+
+    public function userExistsWithNumber(string $mobilePhone)
+    {
+        return $this->userRepository->userExistsWithNumber($mobilePhone);
+    }
 }
