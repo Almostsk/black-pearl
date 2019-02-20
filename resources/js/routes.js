@@ -1,4 +1,5 @@
 import Page404 from './components/404.vue';
+import IEpage from './components/IEpage.vue';
 import Home from './components/Home.vue';
 import Cabinet from './components/Cabinet.vue';
 import Gallery from './components/Gallery.vue';
@@ -14,6 +15,11 @@ export const routes = [
         path: '*', 
         component: Page404, 
         name: '404',
+    },
+    { 
+        path: '/browser-support', 
+        component: IEpage, 
+        name: 'browser',
     },
     { 
         path: '/', 
