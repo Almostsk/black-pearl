@@ -333,7 +333,7 @@
     height: auto;
     @include tablets() {
        height: 100%;
-       width: auto;
+       width: initial;
     }
 }
 .page-5 {

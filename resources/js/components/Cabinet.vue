@@ -226,7 +226,8 @@ export default {
                         )
                         .then(responce => {
                             console.log(responce);
-                            this.$router.push('/')
+                            // this.$router.push('/')
+                            this.$router.go();
                         })
                         .catch(e => {
                             // this.errors.push(e)
