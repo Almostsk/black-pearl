@@ -40,6 +40,8 @@ class AuthController extends Controller
     {
         try {
 
+            $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
+
             if ($this->smsService->isValidCode($request->mobile_phone, $request->code)) {
 
                 if (!$token = JWTAuth::attempt([
@@ -52,8 +54,6 @@ class AuthController extends Controller
                         'message' => config('response_message.no_user_found_with_phone')
                     ], Response::HTTP_NOT_FOUND);
                 }
-
-                $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
 
                 return $this->sendUserDataWithToken($token);
 
