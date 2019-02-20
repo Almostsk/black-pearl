@@ -355,6 +355,8 @@ export default {
             },
             acceptMobile() {
                 this.showPopup = true;
+                this.codeForm = false;
+                this.getCodeForm = true;
             },
             hidePopup() {
                 this.showPopup = false;
