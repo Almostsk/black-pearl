@@ -156,6 +156,9 @@ export default {
                     console.log(responce.data.ladies);
                     this.galleryLadies = responce.data.ladies;
                     this.galleryWomen = responce.data.users;
+                    if(responce.data.users.length < 1) {
+                        this.imgUrl = responce.data.ladies[0];
+                    }
                     this.imgUrl = 'storage/' + responce.data.users[0].Avatar;
                     this.starName = responce.data.users[0].Name;
                     this.starCity = responce.data.users[0].City;
