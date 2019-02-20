@@ -25,7 +25,7 @@
                     <div class="footer-right-container">
                         <p class="footer-text">Ми в соціальних мережах</p>
                         <div class="footer-social">
-                            <a class="footer-social-ico" href="https://www.facebook.com/blackpearlrukraine/">
+                            <a class="footer-social-ico" href="https://www.facebook.com/blackpearlrukraine/" target="_blank">
                                 <img src="img/fb-ico.png" alt="">
                             </a>
                             <!-- <a class="footer-social-ico" href="https://www.youtube.com/">
@@ -41,10 +41,7 @@
                 </div>
             </div>
             <div class="footer-bottom desktop-only">
-                <span  class="footer-link"
-                    @click="rulesShow()"
-                    @closeRules="rules = false"
-                 >Правила використання сайту</span>
+                <span  class="footer-link">Правила використання сайту</span>
                 <a href="img/Cookie.pdf" class="footer-link" target="_blank">Політика cookie</a>
                 <a href="img/PrivacyPolicy.pdf" class="footer-link" target="_blank">Політика про персональні дані</a>
             </div>

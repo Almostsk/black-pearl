@@ -20,6 +20,7 @@
                             show-field="Name"
                             language="en"
                             @values="singleValues"
+                            :class="{ 'alert-input': $v.city_id.$error }"
                         />
                         <the-mask   class="register-input"
                                 mask="(###)###-##-##" 
@@ -80,13 +81,13 @@
                         </div>
                     </div>
                 </div>
+                <span class="login-alert">{{ this.alertMessage }}</span>
                 <v-btn
                     text="Відправити"
                     color="violet"
                     link="/"
                     @click.native.prevent="sendReg()"
                 />
-                <span class="login-alert">{{ this.alertMessage }}</span>
             </div>
         </div>
         <v-footer/>
@@ -109,6 +110,7 @@
                         <!-- <span class="alert-popup-text" :class="{'active' : alert}">Код не вірний</span> -->
                         <v-btn @click.native="activeCode" text="Відправити" color="gold" />
                         <span class="login-alert">{{ this.alertMessage }}</span> 
+                        
 
                     </div>
                 </div>
@@ -236,6 +238,19 @@ export default {
                     about_me: this.about_me,
                 };
 
+                this.$v.$touch()
+                // if (this.$v.$invalid) {
+                //     console.log($v.mobile_phone.$error);
+                // } else {
+                //     // do your submit logic here
+                // }
+
+                // for (const key in formData) {
+                //     if ( formData[key].length < 1 ) {
+                //         (key == 'name') ? console.log(this.$refs.name) : this.$refs.name;
+                //     }
+                // }
+
 
                 let testData = new FormData();
 
@@ -326,7 +341,7 @@ export default {
                         })
                 } else {
                     // this.$refs.check_rules.$el.classList.add("alert-input");
-                    this.$refs.check_policy.$el.classList.add("alert-input");
+                    // this.$refs.check_policy.$el.classList.add("alert-input");
                 }
 
                 console.log(formData);

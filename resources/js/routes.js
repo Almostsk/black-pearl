@@ -35,6 +35,7 @@ export const routes = [
         path: '/gallery', 
         component: Gallery, 
         name: 'Gallery',
+        props: true,
         meta:{
             web:true
         } 

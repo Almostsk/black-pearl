@@ -34,7 +34,10 @@
                             @click.native="login"
                             text="Відправити"
                             color="gold"/>
-                    <span class="login-alert">{{ this.alertMessage }}</span>         
+                    <span class="login-alert">{{ this.alertMessage }}</span> 
+                    <a href="/registration" class="register-btn" v-if="registerVisible">
+                        Зареєструватись
+                    </a>        
                             
 
                 </div>
@@ -56,6 +59,7 @@ export default {
    },
    data() {
        return {
+           registerVisible: false,
            codeForm: false,
            getCodeForm: true,
            phone_number: '',
@@ -111,6 +115,7 @@ export default {
                                 let routePush = this.$router.currentRoute.path == '/cabinet' ? '/' : '/cabinet';
                                 this.$router.push(routePush);
                                 this.alertMessage = '';
+                                this.registerVisible = false;
                                 // this.$emit('close');
                             } else {
                                 console.log(responce);
@@ -120,6 +125,9 @@ export default {
                         .catch(e => {
                                 console.log(e);
                                 this.alertMessage = e.response.data.message;
+                                if(e.response.data.message == "Користувач з введеним номером телефону не знайдений") {
+                                   this.registerVisible = true;
+                                }
                                 // this.alert = true;
                             // this.errors.push(e)
                         }) 

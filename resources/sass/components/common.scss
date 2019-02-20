@@ -42,12 +42,16 @@
 .arrow-down {
   cursor: pointer;
   position: absolute;
-  left: 49%;
+  left: calc(50% - 25px);
   bottom: 2%;
   width: 50px;
   height: 40px;
   background: url('../img/arrow-down.png') center no-repeat;
   background-size: contain;
+  &.gold-arrow {
+    background: url('../img/arrow-down-gold.png') center no-repeat;
+    background-size: contain;
+  }
   @include laptop() {
     bottom: 0;
   }
@@ -58,7 +62,7 @@
 .arrow-up {
   cursor: pointer;
   position: absolute;
-  left: 49%;
+  left: calc(50% - 25px);
   top: 50px;
   transform: rotate(180deg);
   width: 50px;

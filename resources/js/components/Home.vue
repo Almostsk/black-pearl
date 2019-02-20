@@ -30,7 +30,7 @@
                             @click.prevent.native="showPopup()"
                             style="order: 4;"
                         />
-                    <div class="arrow-down" @click="moveNext()"></div>    
+                    <div class="arrow-down gold-arrow" @click="moveNext()"></div>    
                 </div>
                 <div class="page-2 page">
                     <div class="arrow-up" @click="movePrev()"></div> 
@@ -176,13 +176,13 @@
                     <div class="page-5-content">
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
-                            <div class="page-5-star desktop-only" v-for="star in stars" :key="star.id">
+                            <div class="page-5-star desktop-only" v-for="star in stars" :key="star.id" @click="goToStar()">
                                 <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
                             <swiper class="stars-slider mobile-only" :options="swiperOption">
-                                <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id">
+                                <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id" :data-name="star.surname">
                                     <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                     <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                     <span class="page-5-star-city">м. {{ star.city }}</span>
@@ -282,6 +282,10 @@
                         this.$router.push('/cabinet')
                     }
                    
+                },
+                goToStar() {
+                    console.log('star');
+                    this.$router.push({name: 'Gallery', params: {starSurname: 'surname' }});
                 }
         },
         beforeMount() {
@@ -293,7 +297,7 @@
                         }
                 })
                 .then(responce => {
-                    console.log(responce.data.users);
+                    // console.log(responce.data.users);
                     this.stars = responce.data.users;
                 })
                 .catch(e => {
