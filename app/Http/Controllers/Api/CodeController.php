@@ -28,7 +28,7 @@ class CodeController extends Controller
         try {
             $codeId = $this->codeService->getIdByCode($request->name);
 
-            if ($this->codeService->isCodeValid($request->name)) {
+            if (!$this->codeService->isCodeValid($request->name)) {
                 return response()->json([
                     'success' => false,
                     'message' => config('response_message.wrong_promo_code_error')
