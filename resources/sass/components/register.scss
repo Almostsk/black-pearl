@@ -292,6 +292,9 @@
             height: 120px;
             font-size: 18px;
         }
+        @include desktopQuad() {
+            width: 530px;
+        }
         @include phones {
             min-width: 240px;
             min-height: 180px;

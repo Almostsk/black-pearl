@@ -13,6 +13,9 @@
     @include laptop() {
         padding-top: 6%; 
     }
+    @include desktopQuad() {
+        padding: 7% 10%;
+    }
     @include tablets {
         padding-top: 10%;
     }
@@ -157,6 +160,10 @@
         @include laptop() {
             width: 560px;
             height: 315px;
+        }
+        @include desktopQuad() {
+            width: 470px;
+            height: 320px;
         }
         @include tablets() {
             width: 100%;
@@ -351,6 +358,9 @@
         padding-top: 6%;
         height: calc( 100% - 160px );
     }
+    @include desktopQuad() {
+        padding-top: 7%;
+    }
     @include phones() {
         padding: 60px 10% 0;
     }
@@ -445,6 +455,9 @@
     height: 350px;
     @include laptop() {
         height: 180px;
+    }
+    @include desktopQuad() {
+        height: 270px;
     }
     @include phones() {
         height: 150px;
