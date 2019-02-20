@@ -13,30 +13,16 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Дарина',
-                'surname' => 'Полянська',
+                'name' => 'Даша',
+                'surname' => 'Полянская',
                 'is_admin' => true,
-                'city_id' => 116,
-                'mobile_phone' => '+380994444444',
-                'is_mobile_verified' => true,
-                'is_profile_moderated' => true,
-                'can_be_brand_face' => true,
+                'city_id' => 24,
+                'mobile_phone' => '380932302770',
+                'status_id' => 3,
+                'can_be_brand_face' => false,
                 'about_me' => 'Я Даша',
-                'avatar' => '/',
-                'password' => bcrypt('yadasha'),
-            ],
-            [
-                'name' => 'Первый',
-                'surname' => 'Пользователь',
-                'is_admin' => false,
-                'city_id' => 117,
-                'mobile_phone' => '+380994443333',
-                'is_mobile_verified' => true,
-                'is_profile_moderated' => true,
-                'can_be_brand_face' => true,
-                'about_me' => 'Я Первый Пользователь',
                 'avatar' => '',
-                'password' => bcrypt('111111'),
+                'password' => bcrypt(config('app.user_password')),
             ]
         ]);
     }

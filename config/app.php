@@ -68,7 +68,8 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
-
+    'slack_webhook_url' => env('SLACK_WEBHOOK_URL',
+        'https://hooks.slack.com/services/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'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -179,6 +180,8 @@ return [
          * Package Service Providers...
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -239,6 +242,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
 
     ],
 

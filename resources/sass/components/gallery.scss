@@ -1,0 +1,292 @@
+.gallery-page {
+    width: 100%;
+}
+.gallery-container {
+    //Footer 200 and header 60
+    height: calc(100vh - 260px);
+    margin-top: 60px;
+    @include laptop() {
+        height: calc(100vh - 225px);
+    }
+    @include tablets() {
+        height: calc(100vh - 220px);
+    }
+    @include phones() {
+        height: auto;
+    }
+}
+.gallery-top, .gallery-bottom {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+.gallery-top {
+    position: relative;
+    height: 55%;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include laptop() {
+        padding: 10px 0;
+    }
+    @include tablets() {
+        height: 50%;
+        align-items: flex-end;
+    }
+    @include phones() {
+        padding: 5px 0;
+        flex-direction: column;
+        height: auto;
+    }
+}
+.search-container {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 500;
+    @include phones() {
+        top: -40px;
+    }
+}
+.search-alert {
+    font-size: 12px;
+    color: #cccccc;
+}
+.search-input-cont {
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+        background: url('../img/search-ico.png') center no-repeat;
+        background-size: contain;
+    }
+}
+.search-input {
+    position: relative;
+    height: 30px;
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: none;
+    border: 1px solid #cccccc;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    @include phones() {
+        width: 200px;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+.gallery-photo {
+    position: relative;
+    height: 100%;
+    width: auto;
+    @include tablets() {
+        height: 70%;
+    }
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
+    .gallery-big-star {
+        height: 100%;
+        width: auto;
+        @include phones() {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+.gallery-info {
+    height: 100%;
+    flex-grow: 100;
+    padding: 0 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    @include phones() {
+        padding: 0;
+    }
+}
+.gallery-name, .gallery-city {
+    display: block;
+    color: #111111;
+}
+.gallery-name {
+    font-family: $thirdFont;
+    font-size: 32px;
+    line-height: 1.5;
+    letter-spacing: 0.8px;
+    text-align: left;
+    @include laptop() {
+        font-size: 24px;
+    }
+    @include tablets() {
+        font-size: 24px;
+    }
+    @include phones() {
+        font-size: 16px;
+    }
+}
+.gallery-city {
+    font-family: $secondFont;
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+    @include laptop() {
+        font-size: 18px;
+    }
+    @include tablets() {
+        font-size: 20px;
+    }
+    @include phones() {
+        font-size: 14px;
+    }
+}
+.gallery-quote {
+    margin-top: 30px;
+    width: 100%;
+    padding: 60px 20%;
+    background-color: #f0e8f4;
+    @include desktop() {
+        padding: 40px 10%; 
+    }
+    @include laptop() {
+        margin-top: 10px;
+        padding: 15px 20%;
+    }
+    @include tablets() {
+        margin-top: 20px;
+        padding: 20px 10%;
+    }
+}
+.gallery-quote-text {
+    font-family: $secondFont;
+    font-size: 20px;
+    line-height: 2.19;
+    text-align: left;
+    color: #000000;
+    position: relative;
+    @include laptop() {
+        font-size: 14px;
+    }
+    @include tablets() {
+        font-size: 12px;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -60px;
+        top: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-open.png') center no-repeat;
+        background-size: contain;
+        @include laptop() {
+            left: -30px;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+        }
+        @include tablets() {
+            left: -25px;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -60px;
+        bottom: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-close.png') center no-repeat;
+        background-size: contain;
+        @include laptop() {
+            right: -30px;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+        }
+        @include tablets() {
+            right: -25px;
+            bottom: -10px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
+.gallery-little-star {
+    position: absolute;
+    width: 40%;
+    height: auto;
+    bottom: 0;
+    right: 0;
+}
+.gallery-bottom {
+    height: 45%;
+    .swiper-button-prev, .swiper-button-next {
+        @include phones() {
+            top: 60%;
+        }
+    }
+}
+.gallery-title {
+    font-family: $thirdFont;
+    font-size: 30px;
+    text-align: center;
+    color: #111111;
+    margin-bottom: 30px;
+    @include laptop() {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+}
+.gallery-slider {
+    height: 70%;
+    width: calc(100% - 100px);
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
+}
+.gallery-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-img-container {
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include phones() {
+        width: 100%;
+        height: auto;
+    }
+    .gallery-slide-image {
+        height: 100%;
+        width: auto;
+        position: relative;
+        @include phones() {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

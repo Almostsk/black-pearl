@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\FeedbackFormCreated;
+use App\Listeners\SendNotificationToSlack;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -18,6 +20,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        FeedbackFormCreated::class => [SendNotificationToSlack::class]
     ];
 
     /**

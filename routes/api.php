@@ -1,23 +1,30 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::group(['middleware' => 'jwt.auth'], function () {
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-
-    Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-    Route::post('send-sms', 'Api\UserController@sendSms');
-    Route::post('register', 'RegisterController@register');
 
+    Route::get('cabinet', 'UserController@getCabinet');
+    Route::post('cabinet/code', 'CodeController@register');
+    Route::post('cabinet/update', 'UserController@update');
 });
 
+Route::group(['middleware' => 'api'], function () {
+    Route::post('send-sms', 'UserController@sendCode');
+    Route::post('verify-code', 'UserController@verifyCode');
+
+    Route::post('gallery/search', 'UserController@searchGallery');
+
+    Route::post('feedback/create', 'FeedbackController@store');
+
+    // dictionaries
+    Route::get('winners', 'UserController@winners');
+    Route::get('stars', 'UserController@getOurStars');
+    Route::get('gallery', 'UserController@getGallery');
+    Route::get('cities', 'CityController@index');
+
+    // auth
+    Route::post('register', 'RegisterController@register');
+    Route::post('login', 'AuthController@login');
+
+});

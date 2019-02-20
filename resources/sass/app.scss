@@ -1,12 +1,35 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import './fonts.scss';
 
 // Variables
 @import 'variables';
+@import 'mixins';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//Libs
+@import '~css-reset-and-normalize-sass/scss/reset-and-normalize';
+@import '~fullpage-vue/src/fullpage.css';
+@import '~swiper/dist/css/swiper.css';
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
+
+//components styles
+
+@import './components/popup';
+@import './components/header';
+@import './components/footer';
+@import './components/btn';
+@import './components/rules-page';
+@import './components/404';
+@import './components/register';
+@import './components/gallery';
+@import './components/winners';
+@import './components/cabinet';
+@import './components/main-page';
+@import './components/common';
 
 .navbar-laravel {
   background-color: #fff;

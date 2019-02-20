@@ -1,0 +1,89 @@
+.header {
+    margin-top: 10px;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 45px;
+    background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
+    @include phones() {
+        display: none;
+    }
+}
+.header-list {
+    margin: 0 auto;
+    width: $desktop;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-item {
+    cursor: pointer;
+    color: black;
+    font-family: $RobotoMedium;
+    font-size: 18px;
+    font-weight: 400;
+    @include tablets() {
+        font-size: 12px;
+    }
+}
+.header-link {
+    color: black;
+    font-family: $RobotoMedium;
+    text-decoration: none;
+    @include phones() {
+        color: #ffffff;
+    }
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+}
+.router-link-exact-active {
+    text-decoration: underline;
+}
+.header-hat {
+    height: 150px;
+    width: 100%;
+    margin-bottom: -10px;
+    background: url('../img/header-hat.png') center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include laptop() {
+        height: 80px;
+    }
+    @include phones() {
+        height: 80px;
+    }
+    .header-logo-link {
+        height: 100%;
+    }
+    img {
+        height: 80%;
+        width: auto;
+    }
+}
+.header-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5000;
+}
+
+//Burger menu
+.burger-menu {
+    position: absolute;
+    z-index: 9999;
+    top: 15px;
+    .bm-menu {
+        background-color: rgba(0,0,0, .8);
+    }
+    .bm-burger-button {
+        top: 10px;
+    }
+    .bm-burger-bars {
+        background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+    }
+}

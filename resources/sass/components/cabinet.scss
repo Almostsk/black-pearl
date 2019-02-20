@@ -1,0 +1,224 @@
+.unautorized {
+    height: 50vh;
+    background: url('../img/page-1-bg.png') center no-repeat;
+    background-size: cover;
+}
+.cabinet-page {
+    margin-top: 195px;
+    width: 100%;
+    @include phones() {
+        margin-top: 90px;
+    }
+    .footer {
+        position: static;
+    }
+}
+.cabinet-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    @include phones() {
+        flex-direction: column;
+    }
+}
+.cabinet-top {
+    position: relative;
+    padding: 30px 0;
+    border-bottom: 3px solid #e4c16e;
+    // border-image:  linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+}
+.cabinet-info-block {
+    width: 60%;
+    @include phones() {
+        width: 100%;
+    }
+}
+.cabinet-main-info {
+    margin-bottom: 15px;
+}
+.cabinet-name {
+    font-family: $thirdFont;
+    font-size: 24px;
+    text-align: left;
+    color: #591478;
+    margin-bottom: 10px;
+}
+.cabinet-city {
+    font-family: $secondFont;
+    font-size: 18px;
+    line-height: 1.33;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 5px;
+}
+.cabinet-phone {
+    font-family: $secondFont;
+    font-size: 18px;
+    line-height: 1.33;
+    text-align: left;
+    color: #000000;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+.cabinet-code-title {
+    font-family: $thirdFont;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #591478;
+    margin-bottom: 10px;
+}
+.cabinet-code-item {
+    display: inline-block;
+    width: 32%;
+    margin-top: 5px;
+    font-family: $secondFont;
+    font-size: 18px;
+    text-align: left;
+    color: #000000;
+}
+.cabinet-reg-codes {
+    width: 40%;
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+.reg-codes-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    width: 80%;
+    padding: 30px;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+    @include laptop() {
+        width: 100%;
+    }
+    @include tablets() {
+        width: 100%;
+        padding: 10px;
+    }
+    .code-input {
+        width: 60%;
+        padding: 10px;
+        margin-bottom: 30px;
+        font-family: $secondFont;
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: #591478;
+        background-color: transparent;
+        border-radius: 30px;
+        border:1px solid #6d1991; 
+        &::placeholder {
+            text-align: center;
+            color: #591478; 
+        }
+        &:focus {
+            outline: none;
+        }
+        @include tablets() {
+            font-size: 12px;
+            margin-bottom: 10px;
+            width: 90%;
+        }
+    }
+    .cabinet-page-btn {
+        width: 60%;
+        padding: 15px 10px;
+        font-family: $secondFont;
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: #ffffff;
+        background-color: #591478;
+        border-radius: 30px;
+        border: none;
+        @include tablets() {
+            font-size: 12px;
+            width: 90%;
+        }
+    }
+}
+.cabinet-bottom {
+    width: 80%;
+    margin: 30px auto 0;
+    .register-photo{
+        &::before {
+            content: none;
+        }
+    }
+}
+.cabinet-quote {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 70%;
+    align-self: center;
+    padding: 60px 20%;
+    background-color: #f0e8f4;
+    @include laptop() {
+        padding: 40px 10%;
+    }
+    @include tablets() {
+        padding: 20px 10%;
+    }
+    @include phones() {
+        width: 100%;
+    }
+}
+.cabinet-quote-text {
+    margin: 0 auto;
+    position: relative;
+    font-family: $secondFont;
+    font-size: 20px;
+    line-height: 2.19;
+    text-align: left;
+    color: #000000;
+    @include laptop() {
+        font-size: 16px;
+    }
+    @include tablets() {
+        font-size: 14px;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -60px;
+        top: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-open.png') center no-repeat;
+        background-size: contain;
+        @include tablets() {
+            left: -30px;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -60px;
+        bottom: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-close.png') center no-repeat;
+        background-size: contain;
+        @include tablets() {
+            right: -30px;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

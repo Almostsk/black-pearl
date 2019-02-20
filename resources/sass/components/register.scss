@@ -1,0 +1,410 @@
+.register-page {
+    margin-top: 200px;
+    width: 100%;
+    @include phones() {
+        margin-top: 90px;
+    }
+    .footer {
+        position: static;
+    }
+}
+.register-content {
+    margin-top: 55px;
+}
+.register-top {
+    position: relative;
+    padding: 30px 0 0 0;
+    border-bottom: 3px solid #e4c16e;
+    // border-image:  linear-gradient(to right, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a);
+}
+.register-input-container {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+}
+.register-row {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    @include phones() {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .v-selectpage {
+        width: 23%;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        background-color: #eee7f1;
+        outline: none;
+        @include phones() {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .sp-input {
+            //Sorry
+            background: transparent !important;
+            height: 40px !important;
+            text-align: center !important;
+            padding: 0 !important;
+            line-height: 40px !important;
+            border: none !important;
+            font-family: $secondFont !important;
+            color: #591478 !important;
+            font-weight: 600 !important;
+            .sp-placeholder {
+                font-weight: 600 !important;
+                color: #591478 !important;
+                letter-spacing: 2px !important; 
+                font-family: $secondFont !important;
+                font-size: 16px !important;
+            } 
+        }
+        .sg-clear {
+            top: 25%;
+            height: auto;
+            padding: 0;
+        }
+    }
+}
+.v-dropdown-container {
+    .sp-header {
+        position: relative;
+        button {
+            top: -3px;
+        }
+        &::before {
+            content: 'Оберіть місто зі списку';
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+        h3 {
+            opacity: 0 !important;
+            position: relative;
+        }
+    }
+}
+.register-input {
+    width: 23%;
+    padding: 0 10px;
+    font-family: $secondFont;
+    text-align: center;
+    color: #591478;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #eee7f1;
+    outline: none;
+    font-weight: 600;
+    @include phones() {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        font-weight: 600;
+        color: #591478;
+        letter-spacing: 2px;
+    }
+}
+.register-page-btn {
+    background-color: #591478;
+    color: #ffffff;
+}
+.register-checkbox-container {
+    width: 33%;
+    height: 40px;
+    @include phones() {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .pretty.p-default:not(.p-fill) input:checked ~ .state.p-primary-o label:after {
+        background-color: #591478 !important;
+    }
+    .state {
+        label {
+            text-indent: 0;
+            width: 40px;
+            height: 40px;
+            &::before {
+                width: 40px;
+                height: 40px;
+                background-color: #eee7f1;
+                border: none;
+                top: 0;
+            }
+            &::after {
+                width: 40px;
+                height: 40px;
+                top: 0;
+            }
+        }
+    }
+    .register-checkbox-text {
+        display: inline-block;
+        height: 40px;
+        vertical-align: top;
+        font-family: $secondFont;
+        font-size: 16px;
+        line-height: 20px;
+        @include phones() {
+            font-size: 12px;
+        }
+    }
+    .checkbox-link {
+        color: #111111;
+        text-decoration: underline;
+    }
+
+}
+
+
+.register-bottom {
+    width: 80%;
+    margin: 0 auto;
+}
+.register-star {
+    width: 100%;
+    margin-top: 30px;
+}
+.register-star-title-container {
+    span {
+        display: block;
+        margin-top: 15px;
+        font-family: $secondFont;
+        font-size: 18px;
+        line-height: 1.33;
+        letter-spacing: 0.5px;
+        text-align: left;
+        color: #000000;
+    }
+}
+.register-star-title {
+    font-family: $thirdFont;
+    font-size: 24px;
+    letter-spacing: 0.6px;
+    text-align: left;
+    color: #591478;
+    @include phones() {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+.register-star-form {
+    width: 100%;
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include phones() {
+        flex-direction: column;
+    }
+}
+.register-quote {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 70%;
+    padding: 60px 10%;
+    background-color: #f0e8f4;
+    @include laptop() {
+        padding: 40px 8%;
+    }
+    @include phones() {
+        width: 100%;
+        padding: 30px 8%;
+    }
+    &::before {
+        content: '1';
+        display: block;
+        position: absolute;
+        font-size: 24px;
+        font-family: $thirdFont;
+        text-align: center;
+        line-height: 40px;
+        top: -20px;
+        left: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #591478;
+        color: #ffffff;
+    }
+}
+.register-quote-text {
+    margin: 0 auto;
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -60px;
+        top: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-open.png') center no-repeat;
+        background-size: contain;
+        @include phones() {
+            left: -20px;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -60px;
+        bottom: -20px;
+        width: 40px;
+        height: 40px;
+        background: url('../img/quote-close.png') center no-repeat;
+        background-size: contain;
+        @include phones() {
+            right: -20px;
+            bottom: -10px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+    textarea {
+        width: 600px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 149px;
+        background: transparent;
+        box-sizing: border-box;
+        overflow: hidden;
+        border: none;
+        resize: none;
+        font-family: $secondFont;
+        font-size: 20px;
+        line-height: 2.19;
+        text-align: left;
+        color: #000000;
+        @include laptop() {
+            height: 120px;
+            font-size: 18px;
+        }
+        @include phones {
+            min-width: 240px;
+            min-height: 180px;
+            width: 100%;
+            height: auto;
+            font-size: 14px;
+        }
+        &::placeholder {
+            color: #000000;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.register-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 25%;
+    background-color: #f0e8f4;
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
+    }
+    &::before {
+        content: '2';
+        display: block;
+        position: absolute;
+        z-index: 50;
+        font-size: 24px;
+        font-family: $thirdFont;
+        text-align: center;
+        line-height: 40px;
+        top: -20px;
+        left: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #591478;
+        color: #ffffff;
+    }
+    &::after {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    .register-photo-text {
+        font-family: $secondFont;
+        color: #111111;
+        font-weight: 500;
+    }
+    .cropped-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        &[src=""] {
+            opacity: 0;
+        }
+    }
+}
+.popup-image-crop {
+    position: fixed;
+    @include phones() {
+        bottom: 0;
+        position: fixed;
+    }
+    .upload-file-container {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .upload-file-button {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+    .upload-file-label {
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 24px;
+        font-family: $mainFont;
+        span {
+            text-decoration: underline;
+        }
+    }
+    .crop-image-container {
+        width: 400px;
+        height: 300px;
+        border: 1px solid gray;
+        display: inline-block;
+        @include phones() {
+            width: 280px;
+            height: 185px;
+        }
+    }
+    .crop-image-canvas {
+        img[src=""] {
+            opacity: 0;
+         }
+    }
+    .crop-popup-text {
+        margin: 15px 0;
+        color: #ffffff;
+        font-size: 24px;
+        font-family: $mainFont;
+    }
+    .crop-image-button {
+        height: 40px;
+        width: 250px;
+        line-height: 40px;
+    }
+}

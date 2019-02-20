@@ -4,16 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/icon.png">
 
-    <title>@yield('Title', 'Panel')</title>
+    <title>@yield('Title', 'Black Pearl')</title>
     <!-- Styles -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
 
 </head>
 <body class="">
-<div id="root"></div>
+<div id="app">
+    <router-view></router-view>
+</div>
+
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

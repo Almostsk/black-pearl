@@ -1,0 +1,100 @@
+.winners-page {
+    width: 100%;
+}
+.winners-title {
+    margin-top: 210px;
+    margin-bottom: 15px;
+    font-family: $thirdFont;
+    font-size: 48px;
+    letter-spacing: 1.2px;
+    text-align: center;
+    color: #571375;
+    @include laptop() {
+        margin-top: 140px;
+    }
+    @include phones() {
+        margin-top: 80px;
+        font-size: 28px;
+    }
+}
+.winners-container {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    min-height: 50vh;
+    display: flex;
+    justify-content: space-around;
+    @include phones() {
+        flex-direction: column;
+    }
+}
+.winners-list-title {
+    font-family: $thirdFont;
+    font-size: 24px;
+    margin-bottom: 15px;
+    letter-spacing: 0.6px;
+    text-align: center;
+    color: #571375;
+    @include phones() {
+        font-size: 18px;
+    }
+}
+.winners-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.winner-item {
+    width: 100%;
+    font-size: 18px;
+    line-height: 1.3;
+    @include tablets() {
+        font-size: 14px;
+    }
+}
+.winner-name {
+    display: inline-block;
+    float: left;
+}
+.winner-date {
+    float: right;
+    display: inline-block;
+}
+.winners-coulomb {
+    width: 40%;
+    @include tablets() {
+        width: 45%;
+    }
+    @include phones() {
+        width: 100%;
+    }
+}
+.winners-journal {
+    width: 40%;
+    @include tablets() {
+        width: 45%;
+    }
+    @include phones() {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+
+//List animation
+
+.list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.liste-enter-active, .liste-leave-active {
+    transition: all 1s;
+  }
+.liste-enter, .liste-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(-50px);
+}

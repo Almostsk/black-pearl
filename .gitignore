@@ -1,6 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css
+/public/images
+/public/img
+/public/js
 /storage/*.key
 /vendor
 /data
@@ -15,3 +19,5 @@ yarn-error.log
 app.docker
 docker-compose.yml
 web.docker
+public/css/app.css
+public/js/app.js

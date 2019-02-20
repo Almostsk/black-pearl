@@ -1,0 +1,75 @@
+
+.page-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+.alert-input {
+  border: 1px solid red !important;
+}  
+.br-desctop {
+  @include tablets() {
+    display: none;
+  }
+}
+.br-tablets {
+  display: none;
+  @include tablets() {
+    display: inline-block;
+  }
+}
+.desktop-only {
+  @include tablets() {
+    display: none;
+  }
+}
+.mobile-only {
+  display: none;
+  @include tablets() {
+    display: flex;
+  }
+}
+.login-alert {
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    color: red;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.arrow-down {
+  cursor: pointer;
+  position: absolute;
+  left: calc(50% - 25px);
+  bottom: 2%;
+  width: 50px;
+  height: 40px;
+  background: url('../img/arrow-down.png') center no-repeat;
+  background-size: contain;
+  &.gold-arrow {
+    background: url('../img/arrow-down-gold.png') center no-repeat;
+    background-size: contain;
+  }
+  @include laptop() {
+    bottom: 0;
+  }
+  @include tablets() {
+    display: none;
+  }
+}
+.arrow-up {
+  cursor: pointer;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: 50px;
+  transform: rotate(180deg);
+  width: 50px;
+  height: 40px;
+  background: url('../img/arrow-down.png') center no-repeat;
+  background-size: contain;
+  @include tablets() {
+    display: none;
+  }
+}

@@ -13,6 +13,6 @@
 
 Route::group(['middleware' => ['web']], function() {
 
-    //Route::get('{path?}', 'SiteController@index')->where('path', '.*');
+    Route::get('{path?}', 'SiteController@index')->where('path', '.*');
 
 });
