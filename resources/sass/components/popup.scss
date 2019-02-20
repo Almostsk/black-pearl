@@ -20,7 +20,7 @@
     opacity: .7;
 }
 .popup-content-wrapper {
-    position: absolute;
+    position: fixed;
     z-index: 700;
     width: 450px;
     height: auto;

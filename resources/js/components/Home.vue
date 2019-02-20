@@ -297,7 +297,7 @@
                         }
                 })
                 .then(responce => {
-                    console.log(responce.data.users);
+                    // console.log(responce.data.users);
                     this.stars = responce.data.users;
                 })
                 .catch(e => {

@@ -20,7 +20,7 @@
                     <img class="gallery-big-star" :src="imgUrl" alt="women">
                     <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
                 </div>
-                <div class="gallery-info" v-if="galleryInfo">
+                <div class="gallery-info" v-if="starInfo">
                     <div class="gallery-personal-info">
                         <span class="gallery-name">{{ starName }} {{ starSurname }}</span>
                         <span class="gallery-city">м. {{ starCity }}</span>
@@ -38,6 +38,12 @@
                     <swiper-slide class="gallery-slide" v-for="woman in galleryWomen" :key="woman.id">
                         <div class="slider-img-container">
                             <img class="gallery-slide-image" @click.prevent="chooseStar($event, woman)" :src="'storage/' + woman.Avatar" alt="">
+                            <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
+                        </div>
+                    </swiper-slide>
+                    <swiper-slide class="gallery-slide" v-for="lady in galleryLadies" :key="lady.id">
+                        <div class="slider-img-container">
+                            <img class="gallery-slide-image" @click.prevent="chooseStar($event, lady)" :src="lady" alt="">
                             <img class="gallery-little-star" src="img/gallery-litle-star.png" alt="star">
                         </div>
                     </swiper-slide>
@@ -94,6 +100,7 @@ export default {
             galleryInfo: true,
             question: '',
             usersNone: false,
+            galleryLadies: [],
         }
     },
     methods: {
@@ -145,7 +152,9 @@ export default {
                         }
                 })
                 .then(responce => {
-                    console.log(responce);
+                    // console.log(responce);
+                    console.log(responce.data.ladies);
+                    this.galleryLadies = responce.data.ladies;
                     this.galleryWomen = responce.data.users;
                     this.imgUrl = 'storage/' + responce.data.users[0].Avatar;
                     this.starName = responce.data.users[0].Name;
