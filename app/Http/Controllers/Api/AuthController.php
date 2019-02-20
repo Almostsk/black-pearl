@@ -40,9 +40,9 @@ class AuthController extends Controller
     {
         try {
 
-            $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
-
             if ($this->smsService->isValidCode($request->mobile_phone, $request->code)) {
+
+                $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
 
                 if (!$token = JWTAuth::attempt([
                         'password' => config('app.user_password'),
