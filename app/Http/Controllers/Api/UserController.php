@@ -93,6 +93,8 @@ class UserController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
+        $this->smsService->removeCurrentCode($request->mobile_phone, $request->code);
+
         return response()->json([
             'success' => true,
         ]);
