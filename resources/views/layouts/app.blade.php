@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="/icon.png">
 
-    <title>@yield('Title', 'Black Pearl')</title>
+    <title>@yield('Title', 'Сама собі зірка')</title>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 

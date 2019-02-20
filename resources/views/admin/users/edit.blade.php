@@ -36,6 +36,8 @@
             <img src="{{asset('img/no-image.png')}}" height="300" width="300">
         @endif
     </div>
+
+    @if( $user->prizes()->count() > 0 )
     <div class="col-md-10 col-offset-1">
         <h1>Переможець</h1>
         <ul>
@@ -44,6 +46,7 @@
             @endforeach
         </ul>
     </div>
+    @endif
 @stop
 
 @section('js')
