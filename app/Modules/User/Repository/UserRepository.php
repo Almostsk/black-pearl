@@ -49,6 +49,7 @@ class UserRepository extends BaseRepository
                 ['can_be_brand_face', true]
             ])
             ->select('id', 'name', 'surname', 'about_me', 'city_id', 'avatar')
+            ->orderBy('id', 'desc')
             ->get();
     }
 
