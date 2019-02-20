@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'name'     => 'sometimes|required|max:190',
             'surname'  => 'sometimes|required|max:190',
             'status'   => 'sometimes|required|integer|min:1',
-            'about_me' => 'sometimes|required|max:190'
+            'about_me' => 'sometimes|max:190'
         ];
     }
 }
