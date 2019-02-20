@@ -141,7 +141,7 @@
             </div>
         </div>
 
-        <v-rules-pop
+        <v-policy-pop
             v-if="rulesPolicy"
             @closeRules="rulesPolicy = false, check_policy = true"
         />
@@ -162,6 +162,7 @@
     import Btn from './btn.vue';
     import VueCropper from 'vue-cropperjs';
     import RulesPopup from './RulesPopup.vue'
+    import PolicyPopup from './PolicyPopup.vue'
     import { required, minLength, between } from 'vuelidate/lib/validators';
 
 export default {
@@ -171,6 +172,7 @@ export default {
             'v-star': RegStar,
             'v-btn': Btn,
             'v-rules-pop': RulesPopup,
+            'v-policy-pop': PolicyPopup,
             VueCropper,
         },
         data() {
