@@ -62,7 +62,7 @@ class RegisterController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => config('response_message.duplicate_phone')
-            ]);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
 
         } catch(Exception $exception) {
             Log::warning($exception->getMessage());
