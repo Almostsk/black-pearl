@@ -38,7 +38,7 @@
                         <h2 class="title">Про акцію</h2>
                         <div class="page-content page-2-content">
                             <div class="page-2-left">
-                                <iframe class="page-2-video"  src="https://www.youtube.com/embed/CrU-829qoUY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="page-2-video" src="https://www.youtube.com/embed/aQWvlGxgj2g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <v-btn
                                     class="mobile-only"
                                     text="Взяти участь"
@@ -238,6 +238,7 @@
     import Footer from './Footer.vue';
     import Btn from './btn.vue';
     import Login from './Login.vue';
+    import { page } from 'vue-analytics';
 
     export default {
         components: {
@@ -284,6 +285,9 @@
             }
         },
         methods: {
+                track () {
+                 page('/')
+                },
                 moveNext() {
                     this.$refs.fullpage.$fullpage.moveNext(); //Move to the next page
                 },

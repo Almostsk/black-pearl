@@ -12,6 +12,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import Vuelidate from 'vuelidate';
 // import vSuggest from 'v-suggest';
 import vSelectPage from 'v-selectpage';
+import VueAnalytics from 'vue-analytics'
 
 
 
@@ -31,6 +32,9 @@ Vue.use(Vuelidate);
 // Vue.use(vSuggest);
 Vue.use(vSelectPage);
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
+Vue.use(VueAnalytics, {
+  id: 'UA-134826803-1'
+})
 
 const router = new VueRouter({
     mode: 'history',
