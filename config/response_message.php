@@ -9,5 +9,6 @@ return [
     'successfully_logged_out'  => 'Ви успішно вийшли з облікового запису',
     'wrong_promo_code_error'   => 'Введений Вами промокод невірний',
     'wrong_number_code_error'  => 'Введений номер телефону невірний',
+    'duplicate_phone'          => 'Користувач з таким телефоном вже існує',
 
 ];
