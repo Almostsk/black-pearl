@@ -112,8 +112,12 @@ export default {
                             if (responce.data.token) {
                                 const token = responce.data.token;
                                 localStorage.setItem('token', token);
-                                let routePush = this.$router.currentRoute.path == '/cabinet' ? '/' : '/cabinet';
-                                this.$router.push(routePush);
+                                // let routePush = this.$router.currentRoute.path == '/cabinet' ? '/' : '/cabinet';
+                                if(this.$router.currentRoute.path == '/cabinet') {
+                                    this.$router.go();
+                                } else {
+                                    this.$router.push('/cabinet');
+                                }
                                 this.alertMessage = '';
                                 this.registerVisible = false;
                                 // this.$emit('close');
