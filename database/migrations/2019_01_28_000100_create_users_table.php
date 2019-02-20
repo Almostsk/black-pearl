@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile_phone')->unique();
             $table->integer('status_id')->unsigned()->default(1);
             $table->boolean('can_be_brand_face')->default(false);
-            $table->string('about_me')->nullable();
+            $table->text('about_me')->nullable();
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->rememberToken();
