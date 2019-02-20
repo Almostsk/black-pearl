@@ -109,7 +109,8 @@ class UserController extends Controller
     public function getGallery()
     {
         return response()->json([
-            'users' => GalleryResource::collection($this->userService->getGalleryUsers())
+            'users' => GalleryResource::collection($this->userService->getGalleryUsers()),
+            'ladies' => config('static_photos.ladies')
         ]);
     }
 
