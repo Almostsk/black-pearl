@@ -18,6 +18,9 @@ import vSelectPage from 'v-selectpage';
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+const { detect } = require('detect-browser');
+const browser = detect();
+
 
 
 Vue.use(VueRouter);
@@ -35,5 +38,31 @@ const router = new VueRouter({
 });
 new Vue({
   el: '#app',
-  router
+  router,
+  created() {
+    if (browser.name == 'ie') {
+      console.log(browser.name);
+      console.log(browser.version);
+      console.log(browser.os);
+      this.$router.push('/browser-support');
+    }
+    if (browser.name == 'chrome') {
+      console.log(browser.name);
+      console.log(browser.version);
+      console.log(browser.os);
+    }
+  }
 });
+
+if (browser.name == 'ie') {
+  console.log(browser.name);
+  console.log(browser.version);
+  console.log(browser.os);
+  this.$router.push('/browser-support');
+}
+if (browser.name == 'chrome') {
+  console.log(browser.name);
+  console.log(browser.version);
+  console.log(browser.os);
+  // Vue.$router.push('/browser-support');
+}

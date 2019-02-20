@@ -10,6 +10,7 @@
 }
 .logo-404 {
     width: 250px;
+    height: 250px;
 }
 .title-404 {
     display: block;
@@ -21,6 +22,9 @@
     background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    @include phones() {
+        font-size: 36px;
+    }
 }
 .text-404 {
     margin-top: 5%; 
@@ -33,5 +37,8 @@
     .router-link-active {
         color: #fefefe;
         text-decoration: underline;
+    }
+    @include phones() {
+        font-size: 20px;
     }
 }

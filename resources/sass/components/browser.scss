@@ -1,0 +1,98 @@
+.browser-support {
+    padding: 3% 0;
+    width: 100%;
+    height: 100vh;
+    background: url('../img/page-1-bg.png') center no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.browser-top-text {
+    color: #ffffff;
+    font-size: 14px;
+    @include phones() {
+        font-size: 10px;
+    }
+    a {
+        color: #ffffff;
+    }
+}
+.logo-browser {
+    width: 150px;
+    height: 130px;
+    @include laptop() {
+        width: 110px;
+        height: 100px;
+    }
+    @include phones() {
+        width: 50px;
+        height: 50px;
+    }
+}
+.title-browser {
+    display: block;
+    // margin-top: 5%; 
+    font-family: $secondFont;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #d1a856;
+    // background-image: linear-gradient(to right, #e4c16e 0%, #e4c16e 2%, #d1a856 25%, #fde6b2 49%, #c7a150 77%, #e3c27a 100%);
+    // background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    @include laptop() {
+        font-size: 26px;
+    }
+    @include phones() {
+        font-size: 18px;
+    }
+}
+.text-browser {
+    margin-top: 5%; 
+    font-family: $secondFont;
+    font-size: 16px;
+    line-height: 1.15;
+    letter-spacing: 0.8px;
+    text-align: center;
+    color: #fefefe;
+    @include laptop() {
+        font-size: 14px;
+    }
+    @include phones() {
+        font-size: 10px;
+    }
+    a {
+        text-decoration: underline;
+        color: #ffffff;
+    }
+}
+.browsers-links {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    @include phones() {
+        width: 90%;
+    }
+}
+.browser-download-link {
+    width: auto;
+    text-align: center;
+}
+.browser-ico {
+    width: 60px;
+    height: 60px;
+    @include laptop() {
+        width: 40px;
+        height: 40px;
+    }
+    @include laptop() {
+        width: 30px;
+        height: 30px;
+    }
+}
+.browser-name {
+    margin-top: 15px;
+    color: #ffffff;
+}
