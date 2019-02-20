@@ -58,6 +58,8 @@
                 font-weight: 600 !important;
                 color: #591478 !important;
                 letter-spacing: 2px !important; 
+                font-family: $secondFont !important;
+                font-size: 16px !important;
             } 
         }
         .sg-clear {
@@ -356,6 +358,7 @@
     }
 }
 .popup-image-crop {
+    position: fixed;
     @include phones() {
         bottom: 0;
         position: fixed;
