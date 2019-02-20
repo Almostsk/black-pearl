@@ -38,6 +38,7 @@ return [
     | services the application utilizes. Set this in your ".env" file.
     |
     */
+    'https' => env('HTTPS', 0),
 
     'env' => env('APP_ENV', 'production'),
 
