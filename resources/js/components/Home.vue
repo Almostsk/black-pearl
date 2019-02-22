@@ -181,7 +181,7 @@
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
-                            <div class="page-5-star desktop-only" v-if="stars.length < 1" @click="goToStar()">
+                            <!-- <div class="page-5-star desktop-only" v-if="stars.length < 1" @click="goToStar()">
                                 <img class="page-5-star-photo" src="img/ladies/01.jpg"   alt="avatar">
                             </div>
                             <div class="page-5-star desktop-only" v-if="stars.length < 1" @click="goToStar()">
@@ -207,7 +207,7 @@
                                 </swiper-slide>
                             </swiper>
                             <div class="swiper-button-prev" slot="button-prev"></div>
-                            <div class="swiper-button-next" slot="button-next"></div>
+                            <div class="swiper-button-next" slot="button-next"></div> -->
                         </div>
                         <v-btn
                             text="До галереї"
