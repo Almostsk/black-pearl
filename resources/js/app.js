@@ -32,11 +32,6 @@ Vue.use(Vuelidate);
 // Vue.use(vSuggest);
 Vue.use(vSelectPage);
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
-if (browser.name != 'ie') {
-  Vue.use(VueAnalytics, {
-    id: 'UA-134826803-1'
-  })
-}
 
 const router = new VueRouter({
     mode: 'history',
@@ -71,4 +66,11 @@ if (browser.name == 'chrome') {
   console.log(browser.version);
   console.log(browser.os);
   // Vue.$router.push('/browser-support');
+}
+
+if (browser.name != 'ie') {
+  Vue.use(VueAnalytics, {
+    id: 'UA-134826803-1',
+    router
+  })
 }
