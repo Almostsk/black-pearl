@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        // 'App\Console\Commands\ChooseWinnerCommand',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('winner:identify')->dailyAt(14);
+        // $schedule->command('winner:identify')->dailyAt(14);
     }
 
     /**

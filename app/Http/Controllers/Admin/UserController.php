@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Services\Slack\Service\SlackService;
+use App\Http\Services\StartMobile\Service\SmsService;
 use Session;
 use App\Exports\UsersExport;
 use App\Exports\UsersStarsExport;
@@ -20,10 +22,21 @@ class UserController extends Controller
     /** @var StatusService */
     private $statusService;
 
-    public function __construct(UserService $userService, StatusService $statusService)
+    /** @var SmsService */
+    protected $smsService;
+
+    /** @var SlackService */
+    protected $slackService;
+
+    public function __construct(UserService $userService,
+                                StatusService $statusService,
+                                SmsService $smsService,
+                                SlackService $slackService)
     {
         $this->userService = $userService;
         $this->statusService = $statusService;
+        $this->smsService = $smsService;
+        $this->slackService = $slackService;
     }
 
     /**
@@ -71,7 +84,7 @@ class UserController extends Controller
      */
     public function winnersOfPrize($prizeId)
     {
-        return view('admin.users.index', [
+        return view('admin.users.winners', [
             'users' => $this->userService->getWinnersByPrizeId($prizeId)
         ]);
     }
@@ -153,5 +166,14 @@ class UserController extends Controller
         return view('admin.users.recent', [
             'users' => $this->userService->getRecentlyViewed()
         ]);
+    }
+
+    public function winnerIdentify()
+    {
+        $user = $this->userService->getRandomCodesWinner();
+
+        $this->userService->saveCodeWinner($user->id);
+        $this->smsService->sendMessage(config('response_message.congratulations_black_pearl'), $user->mobile_phone);
+        $this->slackService->sendNotificationAboutWinner($user->id, $user->name, $user->surname);
     }
 }
