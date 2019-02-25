@@ -272,4 +272,9 @@ class UserService
     {
         return $this->userRepository->userExistsWithNumber($mobilePhone);
     }
+
+    public function getRandomCodesWinner()
+    {
+        return $this->userRepository->getRandomCodesWinner();
+    }
 }

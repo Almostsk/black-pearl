@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('sms:remove')->twiceDaily(1, 13);
+        $schedule->command('winner:identify')->dailyAt(14);
     }
 
     /**

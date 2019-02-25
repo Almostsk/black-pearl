@@ -21,6 +21,7 @@ class UsersWithCodeExport implements FromCollection, WithHeadings, ShouldAutoSiz
                 $query->where('expires_at', '>', Carbon::now());
             })
             ->select('id', 'name', 'surname', 'mobile_phone', 'created_at')
+            ->where('can_be_brand_face', false)
             ->distinct()
             ->get();
     }
