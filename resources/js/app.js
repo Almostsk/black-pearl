@@ -68,15 +68,15 @@ if (browser.name == 'chrome') {
   // Vue.$router.push('/browser-support');
 }
 
-if (browser.name != 'ie') {
-  Vue.use(VueAnalytics, {
-    id: 'UA-134826803-1',
-    router,
-    checkDuplicatedScript: true
-    // debug: {
-    //   enabled: true,
-    //   trace: true,
-    //   sendHitTask: process.env.NODE_ENV === 'production'
-    // }
-  })
-}
+// if (browser.name != 'ie') {
+//   Vue.use(VueAnalytics, {
+//     id: 'UA-134826803-1',
+//     router,
+//     checkDuplicatedScript: true
+//     // debug: {
+//     //   enabled: true,
+//     //   trace: true,
+//     //   sendHitTask: process.env.NODE_ENV === 'production'
+//     // }
+//   })
+// }
