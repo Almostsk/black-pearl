@@ -18,8 +18,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('/users', 'UserController')->except(['create', 'store', 'show', 'destroy']);
     Route::get('/moderate', 'UserController@moderate');
     Route::get('/winners', 'UserController@winners');
-    Route::get('/winners/{id}', 'UserController@winnersOfPrize');
     Route::get('/winners/identify', 'UserController@winnerIdentify')->name('winner.identify');
+    Route::get('/winners/{id}', 'UserController@winnersOfPrize');
 
     Route::get('/feedbacks/active', 'FeedbackController@feedbackActive');
     Route::get('/feedbacks/inactive', 'FeedbackController@feedbackInActive');
