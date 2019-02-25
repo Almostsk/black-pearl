@@ -181,6 +181,7 @@
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
+                            <div class="home-slider mobile-only">
                             <swiper class="stars-slider mobile-only" :options="swiperOption">
                                 <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id" :data-name="star.surname">
                                     <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
@@ -190,6 +191,7 @@
                             </swiper>
                             <div class="swiper-button-prev" slot="button-prev"></div>
                             <div class="swiper-button-next" slot="button-next"></div>
+                            </div>
                         </div>
                         <v-btn
                             text="До галереї"
@@ -235,8 +237,8 @@
                     slidesPerView: 4,
                     spaceBetween: 30,
                     pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
+                        el: '.swiper-pagination',
+                        clickable: true
                     },
                     navigation: {
                         nextEl: '.swiper-button-next',
