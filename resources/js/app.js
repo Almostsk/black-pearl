@@ -71,6 +71,11 @@ if (browser.name == 'chrome') {
 if (browser.name != 'ie') {
   Vue.use(VueAnalytics, {
     id: 'UA-134826803-1',
-    router
+    router,
+    debug: {
+      enabled: false,
+      trace: false,
+      sendHitTask: process.env.NODE_ENV === 'production'
+    }
   })
 }
