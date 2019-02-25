@@ -277,4 +277,9 @@ class UserService
     {
         return $this->userRepository->getRandomCodesWinner();
     }
+
+    public function saveCodeWinner(int $id)
+    {
+        $this->userRepository->saveCodeWinner($id);
+    }
 }

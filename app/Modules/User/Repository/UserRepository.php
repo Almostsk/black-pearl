@@ -247,4 +247,9 @@ class UserRepository extends BaseRepository
             ->inRandomOrder()
             ->first();
     }
+
+    public function saveCodeWinner($id)
+    {
+        $this->model->find($id)->prizes()->sync(1);
+    }
 }
