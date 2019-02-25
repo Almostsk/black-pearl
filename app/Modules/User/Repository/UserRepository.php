@@ -148,6 +148,7 @@ class UserRepository extends BaseRepository
             ->whereHas('codes', function ($query){
                 $query->where('expires_at', '>', Carbon::now());
             })
+            ->where('can_be_brand_face', false)
             ->distinct()
             ->get();
     }
