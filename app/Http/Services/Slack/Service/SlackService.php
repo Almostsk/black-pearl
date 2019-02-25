@@ -27,4 +27,12 @@ class SlackService
 
         return $this->slackRepository->sendMessage();
     }
+
+    public function sendNotificationAboutWinner(int $id, string $name, string $surname)
+    {
+        $this->slackRepository
+            ->setText('We have a new Winner!! It is #' . $id . '. Full name: ' . $name . ' ' . $surname);
+
+        return $this->slackRepository->sendMessage();
+    }
 }

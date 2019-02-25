@@ -75,6 +75,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function prizes()
     {
-        return $this->belongsToMany(Prize::class, 'user_prize', 'user_id', 'prize_id');
+        return $this
+            ->belongsToMany(Prize::class, 'user_prize')
+            ->withTimestamps();
     }
 }

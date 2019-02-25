@@ -15,15 +15,15 @@ class SmsService
     }
 
     /**
-     * @param int $code
+     * @param string $message
      * @param string $number
      * @return Response
      */
-    public function sendMessage(int $code, string $number): Response
+    public function sendMessage(string $message, string $number): Response
     {
         $this->smsRepository
             ->setNumberTo($number)
-            ->setMessageBody($code);
+            ->setMessageBody($message);
 
         $response = $this->smsRepository->sendSms();
 
