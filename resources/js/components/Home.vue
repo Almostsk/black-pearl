@@ -181,8 +181,8 @@
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
-                            <div class="home-slider mobile-only">
-                            <swiper class="stars-slider mobile-only" :options="swiperOption">
+                            <div class="home-slider">
+                            <swiper class="stars-slider" :options="swiperOption">
                                 <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id" :data-name="star.surname">
                                     <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
                                     <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
