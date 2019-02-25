@@ -177,32 +177,24 @@
                         <h2 class="title">Наші зірки</h2>
                         <div class="page-5-stars">
                             <div class="page-5-star desktop-only" v-for="star in stars" :key="star.id" @click="goToStar()">
-                                <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
+                                <img class="page-5-star-photo" :src="'storage/' + star.avatar" alt="avatar">
                                 <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
                                 <span class="page-5-star-city">м. {{ star.city }}</span>
                             </div>
                             <div class="home-slider">
-                            <swiper class="stars-slider" :options="swiperOption">
-                                <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id" :data-name="star.surname">
-                                    <img class="page-5-star-photo" :src="'storage/' + star.avatar"   alt="avatar">
-                                    <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
-                                    <span class="page-5-star-city">м. {{ star.city }}</span>
-                                </swiper-slide>
-                            </swiper>
-                            <div class="swiper-button-prev" slot="button-prev"></div>
-                            <div class="swiper-button-next" slot="button-next"></div>
+                                <swiper class="stars-slider" :options="swiperOption">
+                                    <swiper-slide class="page-5-star" v-for="star in stars" :key="star.id" :data-name="star.surname">
+                                        <img class="page-5-star-photo" :src="'storage/' + star.avatar" alt="avatar">
+                                        <span class="page-5-star-name"> {{ star.name }} {{ star.surname }} </span>
+                                        <span class="page-5-star-city">м. {{ star.city }}</span>
+                                    </swiper-slide>
+                                </swiper>
+                                <div class="swiper-button-prev" slot="button-prev"></div>
+                                <div class="swiper-button-next" slot="button-next"></div>
                             </div>
                         </div>
-                        <v-btn
-                            text="До галереї"
-                            link="/gallery"
-                            color="gold"
-                        />
-                        <v-btn
-                            text="Правила акції"
-                            link="/rules"
-                            color="violet"
-                        />
+                        <v-btn text="До галереї" link="/gallery" color="gold" />
+                        <v-btn text="Правила акції" link="/rules" color="violet" />
                     </div>
                     <v-footer/>
                 </div>
