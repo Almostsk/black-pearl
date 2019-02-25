@@ -187,6 +187,7 @@ class UserRepository extends BaseRepository
             ->whereHas('prizes', function ($query) use ($prizeId) {
                 $query->where('prize_id', $prizeId);
             })
+            ->with('prizes')
             ->get();
     }
 
@@ -232,5 +233,17 @@ class UserRepository extends BaseRepository
         $user = $this->model->where('mobile_phone', '=', $mobilePhone)->first();
 
         return $user ? true : false;
+    }
+
+    public function getRandomCodesWinner()
+    {
+        return $this->model
+            ->whereHas('codes', function($query) {
+                $query->where('expires_at', '>', Carbon::now());
+            })
+            ->where('can_be_brand_face', false)
+            ->distinct()
+            ->inRandomOrder()
+            ->first();
     }
 }

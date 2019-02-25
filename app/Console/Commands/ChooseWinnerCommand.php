@@ -57,7 +57,7 @@ class ChooseWinnerCommand extends Command
      */
     public function handle()
     {
-        $user = $this->userService->getCodesWinner();
+        $user = $this->userService->getRandomCodesWinner();
 
         $this->smsService->sendMessage(config('response_message.congratulations_black_pearl'), $user->mobile_phone);
         $this->slackService->sendNotificationAboutWinner($user->id, $user->name, $user->surname);
