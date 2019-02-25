@@ -238,7 +238,7 @@
     import Footer from './Footer.vue';
     import Btn from './btn.vue';
     import Login from './Login.vue';
-    import { page } from 'vue-analytics';
+    // import { page } from 'vue-analytics';
 
     export default {
         components: {
@@ -285,9 +285,9 @@
             }
         },
         methods: {
-                track () {
-                 this.$ga.page('/')
-                },
+                // track () {
+                //  this.$ga.page('/')
+                // },
                 moveNext() {
                     this.$refs.fullpage.$fullpage.moveNext(); //Move to the next page
                 },
