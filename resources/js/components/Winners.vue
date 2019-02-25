@@ -9,7 +9,7 @@
                 <h3 class="winners-list-title">Прикраса з перлиною</h3>
                 <transition-group name="list" tag="ul" class="winners-list">
                         <li class="winner-item" v-for="winner in coulomb" :key="winner.Id">
-                            <span class="winner-name">{{winner.Name}} {{winner.Surname}}</span> 
+                            <span class="winner-name">{{winner.Name}} {{winner.Surname}}</span>
                             <!--<span class="winner-date">13/02/2019</span>-->
                         </li>
                 </transition-group>
@@ -19,7 +19,7 @@
                 <transition-group name="liste" tag="ul" class="winners-list">
                         <li class="winner-item" v-for="winner in journal" :key="winner.Id">
                             <span class="winner-name">{{winner.Name}} {{winner.Surname}}</span> 
-                            <span class="winner-date">13/02/2019</span>
+                            <!--<span class="winner-date">13/02/2019</span> -->
                         </li>
                 </transition-group>
             </div>
